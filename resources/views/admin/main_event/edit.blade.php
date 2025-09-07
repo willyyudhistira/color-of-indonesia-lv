@@ -1,0 +1,18 @@
+@extends('layouts.admin')
+
+@section('title', 'Edit Main Event')
+
+@section('content')
+    <div class="bg-white p-8 rounded-lg shadow-md">
+        <h2 class="text-2xl font-bold text-gray-800 mb-6">Edit Main Event</h2>
+        <form action="{{ route('admin.main-events.update', $mainEvent) }}" method="POST" enctype="multipart/form-data" class="space-y-6">
+            @csrf
+            @method('PUT')
+            @include('admin.main_event.partials.form', ['mainEvent' => $mainEvent])
+            <div class="flex justify-end gap-4 pt-4">
+                <a href="{{ route('admin.main-events.index') }}" class="py-2 px-6 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300">Batal</a>
+                <button type="submit" class="py-2 px-6 bg-purple-700 text-white font-bold rounded-lg hover:bg-purple-800">Update Event</button>
+            </div>
+        </form>
+    </div>
+@endsection
