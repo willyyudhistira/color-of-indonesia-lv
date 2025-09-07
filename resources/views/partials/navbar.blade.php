@@ -10,7 +10,7 @@
     ];
 @endphp
 
-<nav x-data="{ isOpen: false }" class="fixed top-0 left-0 right-0 z-50 bg-white shadow-md">
+<nav x-data="{ isOpen: false }" class="fixed px-20 top-0 left-0 right-0 z-50 bg-white shadow-md">
     <div class="container mx-auto px-6 flex justify-between items-center h-20">
         <a href="{{ url('/') }}" class="flex-shrink-0">
             <img src="{{ asset('assets/images/logo_coi.png') }}" alt="Color Of Indonesia Logo" class="h-12" />

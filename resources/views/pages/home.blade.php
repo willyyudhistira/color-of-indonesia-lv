@@ -24,7 +24,7 @@
 @endif
 
 {{-- 2. Tentang Kami --}}
-<section class="py-24 px-8">
+<section class="py-24 px-20">
     <div class="container mx-auto grid md:grid-cols-2 gap-8 md:gap-16 items-center">
         <div class="text-center md:text-left">
             <h2 class="text-4xl font-bold text-purple-700 mb-6">Tentang Kami</h2>
@@ -47,7 +47,7 @@
 
 {{-- 3. Iklan Sponsor --}}
 @if (!empty($homeData['sponsorBanners']))
-<section class="py-12 px-8">
+<section class="py-12 px-20">
     <div class="container mx-auto text-center">
         <h2 class="text-4xl font-bold text-purple-700 mb-8">Highlight</h2>
         <swiper-container slides-per-view="1" navigation="true" loop="true" class="w-full max-w-5xl mx-auto rounded-lg overflow-hidden">
@@ -65,7 +65,7 @@
 
 {{-- 4. Mulai Petualanganmu (Events) --}}
 @if (!empty($homeData['mainEvents']))
-<section class="py-24 px-8">
+<section class="py-24 px-20">
     <div class="container mx-auto text-center">
         <h2 class="text-4xl font-bold text-purple-700 mb-4">Mulai Petualanganmu</h2>
         <p class="text-gray-600 mb-12 max-w-2xl mx-auto">Kami membuka pintu bagi Anda untuk menjelajah, belajar, dan terhubung dengan komunitas global.</p>
@@ -110,7 +110,7 @@
 @if (!empty($homeData['sponsors']))
 <section class="py-20">
     <div class="container mx-auto text-center">
-        <h3 class="text-3xl font-bold text-gray-500 mb-12">LOGO-LOGO SPONSOR</h3>
+        <h3 class="text-3xl font-bold text-purple-700 mb-12">SPONSORSHIP</h3>
         <div class="flex justify-center items-center gap-x-16 gap-y-8 flex-wrap">
             @foreach ($homeData['sponsors'] as $sponsor)
             <img src="{{ asset($sponsor['logo_url']) }}" alt="{{ $sponsor['name'] }}" class="h-12 opacity-60 hover:opacity-100 transition" />

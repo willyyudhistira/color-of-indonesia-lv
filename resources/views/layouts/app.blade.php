@@ -26,6 +26,6 @@
         {{-- Footer akan otomatis terdorong ke bawah --}}
         @include('partials.footer')
     </div>
-
+    @include('partials.whatsapp-fab')
 </body>
 </html>

@@ -1,6 +1,10 @@
 <?php
 
 use App\Http\Controllers\Web\HomeController;
+use App\Http\Controllers\Web\AboutController;
+use App\Http\Controllers\Web\EventController;
+use App\Http\Controllers\Web\GalleryController;
+use App\Http\Controllers\Web\SponsorshipController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,4 +18,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//VISITORS PAGES
 Route::get('/', [HomeController::class, 'index']);
+Route::get('/about', [AboutController::class, 'index'])->name('about');
+Route::get('/events', [EventController::class, 'index'])->name('events');
+Route::get('/events/{event:slug}', [EventController::class, 'show'])->name('events.show');
+Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery');
+Route::get('/sponsorship', [SponsorshipController::class, 'index'])->name('sponsorship');
