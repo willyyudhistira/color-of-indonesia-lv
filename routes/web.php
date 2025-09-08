@@ -55,6 +55,7 @@ Route::get('/news/{news:slug}', [NewsController::class, 'show'])->name('news.sho
 Route::get('/contact', [ContactPageController::class, 'index'])->name('contact.index');
 Route::post('/contact', [ContactPageController::class, 'store'])->name('contact.store');
 
+
 // ===============================================
 // GRUP RUTE UNTUK ADMIN DASHBOARD
 // ===============================================

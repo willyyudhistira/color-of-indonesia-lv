@@ -115,3 +115,66 @@ document.addEventListener('DOMContentLoaded', function() {
     setupImagePreview('image_url_upload', 'carousel-upload-preview-container', 'carousel-upload-preview');
     setupImagePreview('image_url_edit', 'carousel-edit-preview-container', 'carousel-edit-preview');
 });
+
+// Impor SwiperJS
+import Swiper from 'swiper/bundle';
+import 'swiper/css/bundle'; // Impor CSS utama Swiper
+
+// Inisialisasi Swiper untuk section Program Kami
+const programSwiper = new Swiper('.program-swiper', {
+    // Opsi dasar
+    slidesPerView: 1, // Tampilan default di mobile
+    spaceBetween: 30, // Jarak antar slide
+    loop: true,       // Agar bisa berputar terus
+
+    // Autoplay sesuai permintaan
+    autoplay: {
+        delay: 3000, // Geser setiap 3 detik
+        disableOnInteraction: false, // Lanjutkan autoplay setelah interaksi manual
+        pauseOnMouseEnter: true, // Berhenti saat di-hover
+    },
+
+    // Tombol Navigasi
+    navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+    },
+
+    // Breakpoints untuk tampilan responsif
+    breakpoints: {
+        // Layar tablet
+        768: {
+            slidesPerView: 2,
+            spaceBetween: 30,
+        },
+        // Layar desktop kecil
+        1024: {
+            slidesPerView: 3,
+            spaceBetween: 30,
+        },
+        // Layar desktop besar
+        1280: {
+            slidesPerView: 4,
+            spaceBetween: 30,
+        },
+    }
+});
+
+// TAMBAHKAN INI: Inisialisasi Swiper untuk Event Mendatang
+const upcomingEventsSwiper = new Swiper('.upcoming-events-swiper', {
+    slidesPerView: 1, // Hanya tampilkan 1 slide besar
+    spaceBetween: 30,
+    loop: true,
+    
+    // Autoplay agar otomatis bergeser
+    autoplay: {
+        delay: 5000, // Geser setiap 5 detik
+        disableOnInteraction: false,
+    },
+
+    // Tombol Navigasi
+    navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+    },
+});

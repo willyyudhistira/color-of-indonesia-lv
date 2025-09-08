@@ -66,7 +66,7 @@
                     <button type="submit" class="bg-white text-purple-700 font-bold px-4 py-2 rounded-r-full hover:bg-purple-700 hover:text-white transition-colors">Subscribe</button>
                 </div>
                 <div class="inline-block bg-white bg-opacity-30 backdrop-blur-sm rounded-full px-6 py-2">
-                    <p class="font-bold text-xl text-center">2,1K</p>
+                    <p class="font-numeric font-bold text-xl text-center">2,1K</p>
                     <p class="text-sm">visitor</p>
                 </div>
             </div>

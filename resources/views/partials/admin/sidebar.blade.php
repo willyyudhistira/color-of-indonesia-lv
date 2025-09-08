@@ -15,7 +15,7 @@
     {{-- Logo --}}
     <div class="h-20 flex items-center justify-center px-4 border-b border-purple-900">
         <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-3">
-            <img src="{{ asset('assets/images/logo_coi_white.png') }}" alt="Logo" class="h-10" />
+            <img src="{{ asset('assets/images/logo_coi.png') }}" alt="Logo" class="h-10" />
             <span class="text-xl font-bold">Admin Panel</span>
         </a>
     </div>
