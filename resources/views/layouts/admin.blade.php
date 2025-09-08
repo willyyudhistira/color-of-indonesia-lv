@@ -32,5 +32,9 @@
         </div>
     </div>
     <script src="https://code.iconify.design/3/3.1.1/iconify.min.js"></script>
+
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <x-admin.toast-notification />
 </body>
 </html>

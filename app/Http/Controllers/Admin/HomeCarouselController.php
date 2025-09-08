@@ -71,7 +71,7 @@ class HomeCarouselController extends Controller
         ]);
 
         $validated = $request->validate([
-            'image_url' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image_url' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120',
             'alt_text' => 'nullable|string|max:150',
             'link_url' => 'nullable|url|max:255',
             'is_published' => 'required|boolean', // Diubah menjadi required
@@ -89,7 +89,7 @@ class HomeCarouselController extends Controller
         
         $this->reorderItems($item, $validated['sort_order']);
         
-        return redirect()->route('admin.dashboard')->with('success', 'Item carousel berhasil diperbarui.');
+        return redirect()->route('admin.dashboard')->with('info', 'Item carousel berhasil diperbarui.');
     }
 
     /**
@@ -105,7 +105,7 @@ class HomeCarouselController extends Controller
         // Atur ulang sort_order setelah item dihapus
         $this->reorderAllItems();
 
-        return redirect()->route('admin.dashboard')->with('success', 'Item carousel berhasil dihapus.');
+        return redirect()->route('admin.dashboard')->with('error', 'Item carousel berhasil dihapus.');
     }
     
     /**

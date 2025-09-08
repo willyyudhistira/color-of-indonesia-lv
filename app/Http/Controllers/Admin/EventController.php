@@ -40,7 +40,7 @@ class EventController extends Controller
         ]);
 
         $validated = $request->validate([
-            'title' => 'required|string|max:150',
+            'title' => 'required|string|max:150|unique:event_scheduled,title',
             'description' => 'nullable|string',
             'start_date' => 'required|date',
             'end_date' => 'nullable|date|after_or_equal:start_date',
@@ -50,6 +50,8 @@ class EventController extends Controller
             'hero_image_url' => 'nullable|image|max:4096',
             'is_featured' => 'required|boolean', // Diubah menjadi required
             'is_published' => 'required|boolean', // Diubah menjadi required
+        ], [
+            'title.unique' => 'Judul event ini sudah pernah digunakan. Silakan gunakan judul lain.'
         ]);
 
         // Buat slug secara otomatis

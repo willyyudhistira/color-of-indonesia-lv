@@ -28,17 +28,14 @@
         {{-- Bagian Upload --}}
         <div class="bg-white p-6 rounded-lg shadow-md">
             <h3 class="text-xl font-bold text-gray-700 mb-4">Upload Foto Baru ke Album "{{ $album->title }}"</h3>
-            <form action="{{ route('admin.gallery.photos.upload', ['gallery' => $album]) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('admin.gallery.photos.upload', $album) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="grid md:grid-cols-2 gap-6 items-center">
-                    {{-- Elemen Pratinjau Gambar --}}
                     <div id="photo-preview-container" class="w-full h-48 border-2 border-dashed rounded-lg flex items-center justify-center bg-gray-50 hidden">
-                        <img id="photo-preview" src="#" alt="Image Preview" class="w-full h-full object-contain p-2">
+                        <img id="photo-preview" src="#" class="w-full h-full object-contain p-2">
                     </div>
-
                     <div class="space-y-4">
-                        {{-- ID unik untuk input file --}}
-                        <input id="photo-upload-input" name="photo" type="file" accept="image/*" required class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 ...">
+                        <input id="photo-upload-input" name="photo" type="file" accept="image/*" required class="block w-full text-sm text-gray-500 file:mr-4 ...">
                         <input name="caption" type="text" placeholder="Keterangan foto (opsional)" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
                         <button type="submit" class="w-full flex items-center justify-center gap-2 bg-purple-700 text-white font-bold ...">
                             <span class="iconify" data-icon="solar:upload-bold"></span>

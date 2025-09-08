@@ -1,60 +1,78 @@
 <?php
 
-namespace App\Http\Controllers\Web; // <-- Diperbaiki: Menggunakan backslash (\)
+namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
-use App\Services\HomeService; // <-- Diperbaiki: Menggunakan backslash (\)
+// Import semua model yang dibutuhkan untuk halaman utama
+use App\Models\HomeCarouselItem;
+use App\Models\SponsorBanner;
+use App\Models\MainEvent;
+use App\Models\Testimonial;
+use App\Models\Sponsor;
+use App\Models\Photo;
 
 class HomeController extends Controller
 {
-    // Menggunakan property promotion (fitur PHP 8+) untuk dependency injection
-    public function __construct(private HomeService $homeService)
-    {
-    }
-
+    /**
+     * Menampilkan halaman utama (homepage).
+     * Semua data diambil langsung dari database.
+     */
     public function index()
     {
-        // ===================================================================
-        // DATA STATIS SEMENTARA (PENGGANTI DATA DARI ADMIN)
-        // ===================================================================
-        // Path gambar mengarah ke folder public/assets/images
-        
-        $homeData = [
-            'carousel' => [
-                ['id' => 1, 'image_url' => 'assets/images/hero-bg.png', 'alt_text' => 'Color Of Indonesia', 'subtitle' => 'Through the culture, We become One'],
-                ['id' => 2, 'image_url' => 'assets/images/hero-bg.png', 'alt_text' => 'Keragaman Budaya', 'subtitle' => 'Menyatukan Nusantara dalam Seni'],
-            ],
-            'sponsorBanners' => [
-                ['id' => 1, 'image_url' => 'assets/images/hero-bg.png'],
-            ],
-            'mainEvents' => [
-                ['id' => 1, 'hero_image_url' => 'assets/images/eventhome.png', 'title' => 'Event IICF', 'subtitle' => 'Jakarta', 'description' => 'Deskripsi singkat tentang event IICF.'],
-                ['id' => 2, 'hero_image_url' => 'assets/images/eventhome.png', 'title' => 'Event BIFF', 'subtitle' => 'Yogyakarta', 'description' => 'Deskripsi singkat tentang event BIFF.'],
-                ['id' => 3, 'hero_image_url' => 'assets/images/eventhome.png', 'title' => 'Event APIFF', 'subtitle' => 'Solo', 'description' => 'Deskripsi singkat tentang event APIFF.'],
-                ['id' => 4, 'hero_image_url' => 'assets/images/eventhome.png', 'title' => 'Event YIDC', 'subtitle' => 'Bandung', 'description' => 'Deskripsi singkat tentang event YIDC.'],
-            ],
-            'testimonials' => [
-                ['id' => 1, 'avatar_url' => 'assets/images/EventsImg (1).png', 'quote' => 'Setiap event membawa Anda untuk menjelajah, belajar, dan terhubung dengan komunitas global.', 'author_name' => 'Sangat Penggiat'],
-            ],
-            'sponsors' => [
-                ['id' => 1, 'name' => 'Sponsor A', 'logo_url' => 'assets/images/logo-sponsor.png'],
-                ['id' => 2, 'name' => 'Sponsor B', 'logo_url' => 'assets/images/logo-sponsor.png'],
-                ['id' => 3, 'name' => 'Sponsor C', 'logo_url' => 'assets/images/logo-sponsor.png'],
-            ],
-        ];
+        // 1. Ambil data Hero Carousel
+        // Hanya yang berstatus 'published', diurutkan berdasarkan 'sort_order'
+        $carouselItems = HomeCarouselItem::where('is_published', true)
+            ->orderBy('sort_order', 'asc')
+            ->get();
 
-        // Data statis untuk gambar "Tentang Kami"
-        $aboutImages = [
-            ['id' => 1, 'img' => 'assets/images/EventsImg (2).png', 'type' => 'large'],
-            ['id' => 2, 'img' => 'assets/images/EventsImg (2).png', 'type' => 'large'],
-            ['id' => 3, 'img' => 'assets/images/EventsImg (2).png', 'type' => 'small'],
-            ['id' => 4, 'img' => 'assets/images/EventsImg (2).png', 'type' => 'small'],
+        // 2. Ambil data Sponsor Banner
+        $sponsorBanners = SponsorBanner::where('is_published', true)
+            ->orderBy('sort_order', 'asc')
+            ->get();
+
+        // 3. Ambil data Main Events (jika ada lebih dari satu, kita ambil semua)
+        $mainEvents = MainEvent::latest()->get();
+
+        // 4. Ambil data Testimonial
+        $testimonials = Testimonial::where('is_published', true)
+            ->orderBy('sort_order', 'asc')
+            ->get();
+
+        // 5. Ambil data Sponsor (logo)
+        $sponsors = Sponsor::where('is_published', true)
+            ->orderBy('sort_order', 'asc')
+            ->get();
+
+        // 6. Kumpulkan semua data dinamis menjadi satu array
+        $homeData = [
+            'carousel' => HomeCarouselItem::where('is_published', true)->orderBy('sort_order', 'asc')->get(),
+            'sponsorBanners' => SponsorBanner::where('is_published', true)->orderBy('sort_order', 'asc')->get(),
+            'mainEvents' => MainEvent::latest()->get(),
+            'testimonials' => Testimonial::where('is_published', true)->orderBy('sort_order', 'asc')->get(),
+            'sponsors' => Sponsor::where('is_published', true)->orderBy('sort_order', 'asc')->get(),
         ];
         
-        // Kirim data statis ini ke view
+        // 7. Kirim data yang sudah diambil dari database ke view
+        // return view('pages.home', [
+        //     'homeData' => $homeData,
+        //     // Anda bisa tetap menggunakan data statis untuk gambar 'Tentang Kami' jika belum ada di database
+        //     'aboutImages' => [
+        //         ['id' => 1, 'img' => 'assets/images/EventsImg (2).png', 'type' => 'large'],
+        //         ['id' => 2, 'img' => 'assets/images/EventsImg (2).png', 'type' => 'large'],
+        //         ['id' => 3, 'img' => 'assets/images/EventsImg (2).png', 'type' => 'small'],
+        //         ['id' => 4, 'img' => 'assets/images/EventsImg (2).png', 'type' => 'small'],
+        //     ]
+        // ]);
+
+        // ## LOGIKA BARU UNTUK GAMBAR "TENTANG KAMI" ##
+        
+        $aboutImages = Photo::where('is_published', true)
+                          ->whereHas('album', fn($query) => $query->where('is_published', true))
+                          ->get();
+        
         return view('pages.home', [
             'homeData' => $homeData,
-            'aboutImages' => $aboutImages,
+            'aboutImages' => $aboutImages, // Kirim semua foto ke view
         ]);
     }
 }

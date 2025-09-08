@@ -9,7 +9,7 @@
 <body class="bg-purple-25">
 
     <div 
-        class="fixed inset-0 z-0 bg-repeat-y opacity-25" 
+        class="fixed inset-0 z-0 bg-repeat-round opacity-25" 
         style="background-image: url('{{ asset('assets/images/backdropcoi.png') }}'); background-size: 1650px ;">
     </div>
 
@@ -27,5 +27,10 @@
         @include('partials.footer')
     </div>
     @include('partials.whatsapp-fab')
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script> {{-- <-- TAMBAHKAN BARIS INI --}}
+    <script src="https://code.iconify.design/3/3.1.1/iconify.min.js"></script>
+    
+
+    @stack('scripts')
 </body>
 </html>

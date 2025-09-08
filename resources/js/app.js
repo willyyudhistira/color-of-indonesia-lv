@@ -1,83 +1,35 @@
-// resources/js/app.js
-
 import './bootstrap';
 
-// Jalankan script setelah seluruh halaman dimuat
-document.addEventListener('DOMContentLoaded', function() {
-    
-    // --- Logika untuk Dropdown Profil (Desktop) ---
-    const profileButton = document.getElementById('profile-button');
-    const profileDropdown = document.getElementById('profile-dropdown');
+// Impor SwiperJS (jika Anda menginstalnya via npm)
+// import Swiper from 'swiper/bundle';
+// import 'swiper/css/bundle';
 
-    if (profileButton) {
-        profileButton.addEventListener('click', function(event) {
-            // Mencegah event 'click' menyebar ke window
-            event.stopPropagation(); 
-            // Toggle (tampilkan/sembunyikan) dropdown
-            profileDropdown.classList.toggle('hidden');
-        });
-    }
-
-    // --- Logika untuk Menutup Dropdown Saat Klik di Luar ---
-    window.addEventListener('click', function(event) {
-        if (profileDropdown && !profileDropdown.classList.contains('hidden')) {
-            // Sembunyikan dropdown jika klik terjadi di luar area dropdown dan tombolnya
-            if (!profileDropdown.contains(event.target) && !profileButton.contains(event.target)) {
-                profileDropdown.classList.add('hidden');
-            }
-        }
-    });
-
-    // --- Logika untuk Menu Hamburger (Mobile) ---
-    const mobileMenuButton = document.getElementById('mobile-menu-button');
-    const mobileMenu = document.getElementById('mobile-menu');
-    const hamburgerIcon = document.getElementById('hamburger-icon');
-    const closeIcon = document.getElementById('close-icon');
-
-    if (mobileMenuButton) {
-        mobileMenuButton.addEventListener('click', function() {
-            mobileMenu.classList.toggle('hidden');
-            hamburgerIcon.classList.toggle('hidden');
-            closeIcon.classList.toggle('hidden');
-        });
-    }
-});
+// =========================================================================
+//  FUNGSI-FUNGSI BANTUAN (HELPERS)
+// =========================================================================
 
 /**
  * Fungsi untuk mengatur toggle lihat/sembunyikan password.
- * @param {string} inputId - ID dari input field password.
- * @param {string} toggleId - ID dari tombol ikon mata.
  */
 function setupPasswordToggle(inputId, toggleId) {
     const passwordInput = document.getElementById(inputId);
     const toggleButton = document.getElementById(toggleId);
 
-    // Hanya jalankan jika kedua elemen ada di halaman
     if (passwordInput && toggleButton) {
         toggleButton.addEventListener('click', function() {
-            // Ubah tipe input dari 'password' ke 'text' atau sebaliknya
             const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
             passwordInput.setAttribute('type', type);
-
-            // Ganti ikon mata yang ditampilkan
-            const icons = toggleButton.querySelectorAll('.iconify');
-            icons.forEach(icon => icon.classList.toggle('hidden'));
+            
+            const eyeIcon = toggleButton.querySelector('.eye-icon');
+            const eyeSlashIcon = toggleButton.querySelector('.eye-slash-icon');
+            eyeIcon.classList.toggle('hidden');
+            eyeSlashIcon.classList.toggle('hidden');
         });
     }
 }
 
-// Jalankan fungsi setelah seluruh halaman dimuat
-document.addEventListener('DOMContentLoaded', function() {
-    // Terapkan fungsi ke semua input password yang kita punya
-    setupPasswordToggle('password', 'togglePassword');
-    setupPasswordToggle('password_confirmation', 'togglePasswordConfirmation');
-});
-
 /**
  * Fungsi untuk menampilkan pratinjau gambar pada input file.
- * @param {string} inputId - ID dari input file.
- * @param {string} previewContainerId - ID dari div pembungkus pratinjau.
- * @param {string} previewImgId - ID dari elemen img untuk pratinjau.
  */
 function setupImagePreview(inputId, previewContainerId, previewImgId) {
     const fileInput = document.getElementById(inputId);
@@ -91,7 +43,10 @@ function setupImagePreview(inputId, previewContainerId, previewImgId) {
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     previewImage.setAttribute('src', e.target.result);
+                    // Tampilkan kontainer (hilangkan class 'hidden')
+                    // dan pastikan ia terlihat (misal: flex atau block)
                     previewContainer.classList.remove('hidden');
+                    previewContainer.style.display = 'flex'; 
                 }
                 reader.readAsDataURL(file);
             }
@@ -99,82 +54,98 @@ function setupImagePreview(inputId, previewContainerId, previewImgId) {
     }
 }
 
-// Jalankan setelah halaman dimuat
+
+// =========================================================================
+//  BLOK UTAMA: DIJALANKAN SETELAH HALAMAN SIAP
+// =========================================================================
+
 document.addEventListener('DOMContentLoaded', function() {
+    
+    // --- 1. Logika untuk Dropdown Navbar ---
+    const profileButton = document.getElementById('profile-button');
+    const profileDropdown = document.getElementById('profile-dropdown');
+
+    if (profileButton && profileDropdown) {
+        profileButton.addEventListener('click', function(event) {
+            event.stopPropagation(); 
+            profileDropdown.classList.toggle('hidden');
+        });
+        
+        // Menutup dropdown saat klik di luar
+        window.addEventListener('click', function(event) {
+            if (!profileDropdown.classList.contains('hidden')) {
+                if (!profileDropdown.contains(event.target) && !profileButton.contains(event.target)) {
+                    profileDropdown.classList.add('hidden');
+                }
+            }
+        });
+    }
+
+    // --- 2. Logika untuk Menu Hamburger (Mobile) ---
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const hamburgerIcon = document.getElementById('hamburger-icon');
+    const closeIcon = document.getElementById('close-icon');
+
+    if (mobileMenuButton && mobileMenu && hamburgerIcon && closeIcon) {
+        mobileMenuButton.addEventListener('click', function() {
+            mobileMenu.classList.toggle('hidden');
+            hamburgerIcon.classList.toggle('hidden');
+            closeIcon.classList.toggle('hidden');
+        });
+    }
+
+    // --- 3. Inisialisasi Semua Toggle Password ---
+    setupPasswordToggle('password', 'togglePassword');
+    setupPasswordToggle('password_confirmation', 'togglePasswordConfirmation');
+
+    // --- 4. Inisialisasi Semua Pratinjau Gambar ---
+    // Halaman Auth
     setupImagePreview('avatar_url', 'image-preview-container', 'image-preview');
+    // Halaman News
     setupImagePreview('news_image_url', 'news-image-preview-container', 'news-image-preview');
+    // Halaman Sponsor
     setupImagePreview('logo_url_input', 'logo-preview-container', 'logo-preview');
     setupImagePreview('banner_image_input', 'banner-preview-container', 'banner-preview');
     setupImagePreview('edit_logo_url_input', 'edit-logo-preview-container', 'edit-logo-preview');
     setupImagePreview('edit_banner_image_input', 'edit-banner-preview-container', 'edit-banner-preview');
+    // Halaman Gallery
     setupImagePreview('cover_url_input', 'cover-preview-container', 'cover-preview');
     setupImagePreview('photo-upload-input', 'photo-preview-container', 'photo-preview');
+    // Halaman Events
     setupImagePreview('hero_image_url', 'hero-preview-container', 'hero-preview');
-    setupImagePreview('hero_image_url', 'hero-preview-container', 'hero-preview');
+    // Halaman Programs
     setupImagePreview('icon_url', 'icon-preview-container', 'icon-preview');
+    // Halaman Home Carousel
     setupImagePreview('image_url_upload', 'carousel-upload-preview-container', 'carousel-upload-preview');
     setupImagePreview('image_url_edit', 'carousel-edit-preview-container', 'carousel-edit-preview');
-});
 
-// Impor SwiperJS
-import Swiper from 'swiper/bundle';
-import 'swiper/css/bundle'; // Impor CSS utama Swiper
-
-// Inisialisasi Swiper untuk section Program Kami
-const programSwiper = new Swiper('.program-swiper', {
-    // Opsi dasar
-    slidesPerView: 1, // Tampilan default di mobile
-    spaceBetween: 30, // Jarak antar slide
-    loop: true,       // Agar bisa berputar terus
-
-    // Autoplay sesuai permintaan
-    autoplay: {
-        delay: 3000, // Geser setiap 3 detik
-        disableOnInteraction: false, // Lanjutkan autoplay setelah interaksi manual
-        pauseOnMouseEnter: true, // Berhenti saat di-hover
-    },
-
-    // Tombol Navigasi
-    navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-    },
-
-    // Breakpoints untuk tampilan responsif
-    breakpoints: {
-        // Layar tablet
-        768: {
-            slidesPerView: 2,
+    // --- 5. Inisialisasi Swiper untuk "Program Kami" ---
+    // Cek jika elemennya ada di halaman
+    if (document.querySelector('.program-swiper')) {
+        new Swiper('.program-swiper', {
+            slidesPerView: 1,
             spaceBetween: 30,
-        },
-        // Layar desktop kecil
-        1024: {
-            slidesPerView: 3,
-            spaceBetween: 30,
-        },
-        // Layar desktop besar
-        1280: {
-            slidesPerView: 4,
-            spaceBetween: 30,
-        },
+            loop: true,
+            autoplay: { delay: 3000, disableOnInteraction: false, pauseOnMouseEnter: true },
+            navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+            breakpoints: {
+                768: { slidesPerView: 2 },
+                1024: { slidesPerView: 3 },
+                1280: { slidesPerView: 4 },
+            }
+        });
     }
-});
 
-// TAMBAHKAN INI: Inisialisasi Swiper untuk Event Mendatang
-const upcomingEventsSwiper = new Swiper('.upcoming-events-swiper', {
-    slidesPerView: 1, // Hanya tampilkan 1 slide besar
-    spaceBetween: 30,
-    loop: true,
-    
-    // Autoplay agar otomatis bergeser
-    autoplay: {
-        delay: 5000, // Geser setiap 5 detik
-        disableOnInteraction: false,
-    },
-
-    // Tombol Navigasi
-    navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-    },
+    // --- 6. Inisialisasi Swiper untuk "Event Mendatang" ---
+    // Cek jika elemennya ada di halaman
+    if (document.querySelector('.upcoming-events-swiper')) {
+        new Swiper('.upcoming-events-swiper', {
+            slidesPerView: 1,
+            spaceBetween: 30,
+            loop: true,
+            autoplay: { delay: 5000, disableOnInteraction: false },
+            navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+        });
+    }
 });

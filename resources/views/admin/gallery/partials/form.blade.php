@@ -1,20 +1,14 @@
 {{-- Menampilkan semua error validasi di bagian atas --}}
 @if ($errors->any())
-    <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-6" role="alert">
-        <strong class="font-bold">Oops! Ada beberapa kesalahan:</strong>
-        <ul class="list-disc list-inside mt-2">
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
+<div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-6" role="alert">
+    <ul>@foreach ($errors->all() as $error)<li>{{ $error }}</li>@endforeach</ul>
+</div>
 @endif
 
 {{-- Judul Album --}}
 <div>
     <label for="title" class="block text-sm font-medium text-gray-700">Judul Album</label>
-    <input type="text" id="title" name="title" value="{{ old('title', $album->title ?? '') }}" required
-           class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-purple-500 focus:border-purple-500">
+    <input type="text" id="title" name="title" value="{{ old('title', $album->title ?? '') }}" required class="mt-1 block w-full ...">
 </div>
 
 {{-- Deskripsi Album --}}

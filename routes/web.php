@@ -12,7 +12,8 @@ use App\Http\Controllers\Admin\EventController as AdminEventController;
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Web\ContactPageController;
-use App\Http\Controllers\Web\GalleryController;
+use App\Http\Controllers\Web\GalleryController as WebGalleryController; // <-- Beri alias
+use App\Http\Controllers\Web\EventController as WebEventController;
 use App\Http\Controllers\Web\NewsController;
 use App\Http\Controllers\Web\HomeController;
 use App\Http\Controllers\Web\AboutController;
@@ -48,7 +49,7 @@ Route::get('/', [HomeController::class, 'index']);
 Route::get('/about', [AboutController::class, 'index'])->name('about');
 Route::get('/events', [EventController::class, 'index'])->name('events.index');
 Route::get('/events/{slug}', [EventController::class, 'show'])->name('events.show');
-Route::get('/gallery/{album:slug?}', [GalleryController::class, 'index'])->name('gallery');
+Route::get('/gallery/{album:slug?}', [WebGalleryController::class, 'index'])->name('gallery');
 Route::get('/sponsorship', [SponsorshipController::class, 'index'])->name('sponsorship');
 Route::get('/news', [NewsController::class, 'index'])->name('news');
 Route::get('/news/{news:slug}', [NewsController::class, 'show'])->name('news.show');
@@ -85,6 +86,8 @@ Route::prefix('admin')
     Route::delete('gallery/photos/{photo}', [AdminGalleryController::class, 'destroyPhoto'])->name('gallery.photos.destroy');
 
     // Rute resource untuk Album
+    Route::post('gallery/{gallery}/photos', [AdminGalleryController::class, 'uploadPhoto'])->name('gallery.photos.upload');
+    Route::delete('gallery/photos/{photo}', [AdminGalleryController::class, 'destroyPhoto'])->name('gallery.photos.destroy');
     Route::resource('gallery', AdminGalleryController::class);
 
     // Rute untuk Sponsor Management (halaman utama)
