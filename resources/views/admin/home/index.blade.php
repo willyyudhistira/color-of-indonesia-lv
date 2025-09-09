@@ -4,7 +4,7 @@
 
 @section('content')
     {{-- Notifikasi --}}
-    @if(session('success'))
+    <!-- @if(session('success'))
         <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 rounded-lg mb-6" role="alert">
             <p class="font-bold">Success!</p>
             <p>{{ session('success') }}</p>
@@ -15,7 +15,7 @@
             <p class="font-bold">Error!</p>
             <p>{{ session('error') }}</p>
         </div>
-    @endif
+    @endif -->
 
     {{-- Info Box --}}
     <div class="bg-blue-100 border-l-4 border-blue-500 text-blue-700 p-4 rounded-lg mb-8 flex items-start gap-4">
@@ -57,7 +57,7 @@
                             @csrf
                             @method('DELETE')
                             <button type="submit"
-                                class="p-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition-colors" title="Hapus">
+                                class="delete-confirm-button p-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition-colors" title="Hapus">
                                 <span class="iconify" data-icon="solar:trash-bin-trash-bold"></span>
                             </button>
                         </form>

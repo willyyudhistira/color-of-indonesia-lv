@@ -37,7 +37,7 @@ class MainEventController extends Controller
             'description' => 'nullable|string',
             'location_name' => 'nullable|string|max:150',
             'address' => 'nullable|string|max:255',
-            'hero_image_url' => 'required|image|mimes:jpeg,png,jpg,gif|max:4096',
+            'hero_image_url' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         $validated['hero_image_url'] = $request->file('hero_image_url')->store('main_event_hero', 'public');

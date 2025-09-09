@@ -65,6 +65,31 @@ document.addEventListener('DOMContentLoaded', function() {
     const profileButton = document.getElementById('profile-button');
     const profileDropdown = document.getElementById('profile-dropdown');
 
+    const sidebar = document.getElementById('admin-sidebar');
+    const openBtn = document.getElementById('sidebar-open-button');
+    const closeBtn = document.getElementById('sidebar-close-button');
+    const backdrop = document.getElementById('sidebar-backdrop');
+
+    const openSidebar = () => {
+        sidebar.classList.remove('-translate-x-full');
+        backdrop.classList.remove('hidden');
+    };
+
+    const closeSidebar = () => {
+        sidebar.classList.add('-translate-x-full');
+        backdrop.classList.add('hidden');
+    };
+
+    if (openBtn) {
+        openBtn.addEventListener('click', openSidebar);
+    }
+    if (closeBtn) {
+        closeBtn.addEventListener('click', closeSidebar);
+    }
+    if (backdrop) {
+        backdrop.addEventListener('click', closeSidebar);
+    }
+
     if (profileButton && profileDropdown) {
         profileButton.addEventListener('click', function(event) {
             event.stopPropagation(); 
@@ -148,4 +173,54 @@ document.addEventListener('DOMContentLoaded', function() {
             navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
         });
     }
+
+    const deleteButtons = document.querySelectorAll('.delete-confirm-button');
+
+
+    deleteButtons.forEach(button => {
+        button.addEventListener('click', function(event) {
+            event.preventDefault(); // Mencegah aksi default tombol
+
+            const form = this.closest('form'); // Cari form terdekat
+
+            Swal.fire({
+                title: 'Anda Yakin?',
+                text: "Data yang sudah dihapus tidak dapat dikembalikan!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, Hapus!',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit(); // Jika dikonfirmasi, kirim form
+                }
+            });
+        });
+    });
+
+    const logoutButtons = document.querySelectorAll('.logout-confirm-button');
+
+    logoutButtons.forEach(button => {
+        button.addEventListener('click', function(event) {
+            event.preventDefault();
+            const form = this.closest('form');
+
+            Swal.fire({
+                title: 'Anda Yakin Ingin Logout?',
+                text: "Sesi Anda akan diakhiri.",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, Logout!',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            });
+        });
+    });
 });

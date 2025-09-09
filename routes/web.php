@@ -45,7 +45,7 @@ Route::post('/register', [AuthController::class, 'register'])->name('register.st
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
 
 //VISITORS PAGES
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/about', [AboutController::class, 'index'])->name('about');
 Route::get('/events', [EventController::class, 'index'])->name('events.index');
 Route::get('/events/{slug}', [EventController::class, 'show'])->name('events.show');

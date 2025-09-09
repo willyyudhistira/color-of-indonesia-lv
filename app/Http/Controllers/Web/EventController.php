@@ -22,7 +22,7 @@ class EventController extends Controller
         $pastEvents = Event::where('is_published', true)
                            ->whereDate('start_date', '<', $today)
                            ->orderBy('start_date', 'desc')
-                           ->get(); // <-- Diubah dari paginate() menjadi get()
+                           ->paginate(6); // <-- Diubah dari paginate() menjadi get()
 
         return view('pages.events', [
             'upcomingEvents' => $upcomingEvents, // Kirim seluruh koleksi upcoming events

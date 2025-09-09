@@ -5,20 +5,20 @@
 @section('content')
 
     {{-- Hero Section --}}
-    <section class="relative h-96 flex items-center justify-center text-white"
-        style="background-image: url('{{ asset('assets/images/hero-news.png') }}'); background-size: cover; background-position: center;">
+    <section class="relative h-96 flex items-center justify-center text-white" style="background-image: url('{{ asset('assets/images/hero-news.png') }}'); background-size: cover; background-position: center;">
         <div class="absolute inset-0 bg-gradient-to-t from-purple-900/60 to-black/50"></div>
-        <h1 class="relative z-10 text-5xl md:text-6xl font-serif font-extrabold text-center px-4 tracking-tight">
+        <h1 class="relative z-10 text-4xl md:text-6xl font-serif font-extrabold text-center px-4 tracking-tight">
             Update Budaya
         </h1>
     </section>
 
     {{-- News List Section --}}
     <section class="py-20">
+        {{-- Container utama untuk semua konten di bawah hero --}}
         <div class="container mx-auto px-6 md:px-20">
-
+            
             {{-- Judul dan Garis Dekoratif --}}
-            <div class="text-left mb-16"> {{-- PERBAIKAN: Lebar maksimum menjadi max-w-3xl --}}
+            <div class="max-w-3xl mx-auto text-left mb-16">
                 <h2 class="text-4xl font-bold text-purple-800 mb-3">Latest News</h2>
                 <div class="flex items-center my-6">
                     <div class="w-2 h-2 bg-purple-700 rounded-full"></div>
@@ -28,59 +28,47 @@
             </div>
 
             {{-- Daftar Berita --}}
-            <div class="max-w-4xl mx-auto space-y-8"> {{-- PERBAIKAN: Lebar maksimum menjadi max-w-3xl --}}
+            <div class="max-w-3xl mx-auto space-y-8">
                 @forelse ($newsItems as $item)
-                    <div
-                        class="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 flex flex-col md:flex-row overflow-hidden">
+                    <div class="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 flex flex-col md:flex-row overflow-hidden">
                         {{-- Gambar Berita --}}
-                        <div class="md:w-1/2 lg:w-1/3 flex-shrink-0"> {{-- PERBAIKAN: Gambar mengambil 1/2 atau 1/3 lebar --}}
-                            <img src="{{ asset('storage/' . $item->image_url) }}" alt="{{ $item->title }}"
-                                class="h-full w-full object-cover aspect-square"> {{-- PERBAIKAN: Rasio aspek square --}}
+                        <div class="md:w-1/2 lg:w-1/3 flex-shrink-0">
+                            <img src="{{ $item->image_url ? asset('storage/' . $item->image_url) : 'https://via.placeholder.com/400x400' }}" alt="{{ $item->title }}" class="h-full w-full object-cover aspect-square">
                         </div>
                         {{-- Konten Teks Berita --}}
-                        <div class="md:w-1/2 lg:w-2/3 p-6 md:p-8 flex flex-col"> {{-- PERBAIKAN: Teks mengambil sisa lebar --}}
-                            <h3 class="text-xl font-bold text-gray-800 mb-2 leading-tight line-clamp-2"> {{-- PERBAIKAN: Font
-                                lebih kecil, leading, line-clamp --}}
+                        <div class="md:w-1/2 lg:w-2/3 p-6 flex flex-col">
+                            <h3 class="text-xl font-bold text-gray-800 mb-2 leading-tight line-clamp-2">
                                 {{ $item->title }}
                             </h3>
-                            <p class="text-gray-600 text-sm mb-4 flex-grow line-clamp-3"> {{-- PERBAIKAN: Font lebih kecil,
-                                line-clamp --}}
+                            <p class="text-gray-600 text-sm mb-4 flex-grow line-clamp-3">
                                 {{ $item->excerpt }}
                             </p>
-                            <div class="flex justify-between items-center mt-auto"> {{-- PERBAIKAN: mt-auto untuk push ke bawah
-                                --}}
-                                <span class="text-xs text-gray-500">{{ $item->published_at->format('l, d F Y') }}</span> {{--
-                                PERBAIKAN: Font lebih kecil --}}
-                                <a href="{{ $item->source_url }}" target="_blank"
-                                    class="bg-gradient-to-r from-[#CD75FF] to-[#8949FF] text-white font-semibold text-sm py-2 px-6 rounded-full hover:opacity-90 transition-opacity">
-                                    {{-- PERBAIKAN: Ukuran tombol lebih kecil --}}
+                            <div class="flex justify-between items-center mt-auto">
+                                <span class="text-xs text-gray-500">{{ $item->published_at->format('l, d F Y') }}</span>
+                                <a href="{{ $item->source_url }}" target="_blank" rel="noopener noreferrer"
+                                   class="bg-gradient-to-r from-[#CD75FF] to-[#8949FF] text-white font-semibold text-sm py-2 px-6 rounded-full hover:opacity-90 transition-opacity">
                                     Read More
                                 </a>
                             </div>
                         </div>
                     </div>
                 @empty
-                    <div class="border-2 border-dashed border-gray-300 rounded-xl p-12 text-center">
-    <div class="flex flex-col items-center">
-        {{-- Ikon --}}
-        <svg class="w-16 h-16 text-gray-400 mb-4" xmlns="http://www.w.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
-        </svg>
-
-        {{-- Judul --}}
-        <h3 class="text-2xl font-bold text-gray-700">Belum Ada Berita Terbaru</h3>
-
-        {{-- Deskripsi --}}
-        <p class="text-gray-500 mt-2 max-w-sm">
-            Saat ini belum ada artikel berita yang dipublikasikan. Silakan periksa kembali nanti untuk pembaruan terbaru dari kami.
-        </p>
-    </div>
-</div>
+                    <div class="border-2 border-dashed border-gray-300 rounded-xl p-12 text-center max-w-3xl mx-auto">
+                        <div class="flex flex-col items-center">
+                            <svg class="w-16 h-16 text-gray-400 mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                            </svg>
+                            <h3 class="text-2xl font-bold text-gray-700">Belum Ada Berita Terbaru</h3>
+                            <p class="text-gray-500 mt-2 max-w-sm">
+                                Saat ini belum ada artikel berita yang dipublikasikan. Silakan periksa kembali nanti untuk pembaruan terbaru dari kami.
+                            </p>
+                        </div>
+                    </div>
                 @endforelse
             </div>
 
             {{-- Link Paginasi --}}
-            <div class="max-w-3xl mx-auto mt-16"> {{-- PERBAIKAN: Lebar maksimum menjadi max-w-3xl --}}
+            <div class="max-w-3xl mx-auto mt-16">
                 {{ $newsItems->links() }}
             </div>
         </div>

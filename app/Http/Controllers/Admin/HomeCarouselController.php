@@ -71,7 +71,7 @@ class HomeCarouselController extends Controller
         ]);
 
         $validated = $request->validate([
-            'image_url' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120',
+            'image_url' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:4096',
             'alt_text' => 'nullable|string|max:150',
             'link_url' => 'nullable|url|max:255',
             'is_published' => 'required|boolean', // Diubah menjadi required

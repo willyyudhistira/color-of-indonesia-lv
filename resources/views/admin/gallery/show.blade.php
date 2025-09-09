@@ -56,7 +56,7 @@
                         <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
                             <form action="{{ route('admin.gallery.photos.destroy', $photo) }}" method="POST" onsubmit="return confirm('Hapus foto ini?');">
                                 @csrf @method('DELETE')
-                                <button type="submit" class="p-2 bg-red-500 text-white rounded-full"><span class="iconify" data-icon="solar:trash-bin-trash-bold"></span></button>
+                                <button type="submit" class="delete-confirm-button p-2 bg-red-500 text-white rounded-full"><span class="iconify" data-icon="solar:trash-bin-trash-bold"></span></button>
                             </form>
                         </div>
                     </div>

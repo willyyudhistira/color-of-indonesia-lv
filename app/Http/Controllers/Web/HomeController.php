@@ -14,43 +14,36 @@ class HomeController extends Controller
 {
     public function index()
     {
-        // 1. Ambil data Hero Carousel dari database
+        // 1. Ambil data carousel dari database
         $carouselItems = HomeCarouselItem::where('is_published', true)
             ->orderBy('sort_order', 'asc')
             ->get();
-
-        // 2. Buat objek untuk slide default
+            
+        // 2. Buat slide default dan gabungkan. Ini opsional, bisa Anda hapus jika tidak perlu.
         $defaultSlide = (object) [
             'image_url'  => 'assets/images/home-hero.png',
-            'alt_text'   => 'Color Of Indonesia',
-            'subtitle'   => 'Through the culture we become one',
+            'alt_text'   => 'Color Of Indonesia<br><span class="font-light text-2xl md:text-3xl tracking-normal">Through the culture we become one</span>',
+            'subtitle'   => '', // Subtitle sudah digabung di alt_text
             'is_default' => true
         ];
-        
-        // 3. Tambahkan slide default ke AWAL koleksi carousel
         $carouselItems->prepend($defaultSlide);
 
-        // 4. Kumpulkan semua data dinamis menjadi satu array
+        // 3. Ambil sisa data untuk halaman utama
         $homeData = [
             'carousel'       => $carouselItems, 
             'sponsorBanners' => SponsorBanner::where('is_published', true)->orderBy('sort_order', 'asc')->get(),
-            
-          
             'mainEvents'     => MainEvent::latest()->take(4)->get(),
-
             'testimonials'   => Testimonial::where('is_published', true)->orderBy('sort_order', 'asc')->get(),
             'sponsors'       => Sponsor::where('is_published', true)->orderBy('sort_order', 'asc')->get(),
         ];
         
-        // 5. Ambil gambar untuk section "Tentang Kami"
-        $aboutImages = Photo::whereHas('album', function ($query) {
-                $query->where('slug', 'tentang-kami');
-            })
-            ->where('is_published', true)
-            ->inRandomOrder()
-            ->get();
+        // 4. Ambil SEMUA foto yang tersedia untuk animasi "Tentang Kami"
+        $aboutImages = Photo::where('is_published', true)
+                          ->whereHas('album', fn($query) => $query->where('is_published', true))
+                          ->inRandomOrder() // Acak urutannya dari database
+                          ->get();
         
-        // 6. Kirim semua data yang dibutuhkan ke view
+        // 5. Kirim semua data ke view
         return view('pages.home', compact('homeData', 'aboutImages'));
     }
 }

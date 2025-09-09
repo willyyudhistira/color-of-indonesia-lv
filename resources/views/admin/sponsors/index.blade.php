@@ -1,28 +1,10 @@
 @extends('layouts.admin')
-
 @section('title', 'Sponsor Management')
 
 @section('content')
-    {{-- Notifikasi --}}
-    @if(session('success'))
-        <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 rounded-lg mb-6" role="alert">
-            <p>{{ session('success') }}</p>
-        </div>
-    @endif
-    @if ($errors->any())
-        <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded-lg mb-6" role="alert">
-            <p class="font-bold">Oops! Terjadi kesalahan:</p>
-            <ul class="list-disc list-inside">
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-
     <div class="space-y-8">
         {{-- BAGIAN SPONSOR LOGO --}}
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
             {{-- Form Tambah Sponsor Logo --}}
             <div class="bg-white p-6 rounded-lg shadow-md">
                 <h2 class="text-xl font-bold text-gray-700 mb-6 border-b pb-4">Tambah Sponsor (Logo)</h2>
@@ -41,8 +23,7 @@
                         <div id="logo-preview-container" class="mt-2 w-full h-32 hidden items-center justify-center bg-gray-100 rounded-lg overflow-hidden border border-dashed">
                             <img id="logo-preview" src="#" alt="Logo Preview" class="h-full object-contain p-2">
                         </div>
-                        {{-- ID unik untuk input file --}}
-                        <input id="logo_url_input" type="file" name="logo_url" accept="image/*" class="mt-2 block w-full text-sm ..." required>
+                        <input id="logo_url_input" type="file" name="logo_url" accept="image/*" class="mt-2 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0" required>
                     </div>
                     <div class="flex justify-end">
                         <button type="submit" class="flex items-center gap-2 bg-purple-700 text-white font-bold py-2 px-6 rounded-lg hover:bg-purple-800">
@@ -57,16 +38,16 @@
                 <h3 class="text-xl font-bold text-gray-700 mb-6 border-b pb-4">Daftar Sponsor (Logo)</h3>
                 <div class="space-y-3 max-h-[500px] overflow-y-auto pr-2">
                     @forelse ($sponsors as $sponsor)
-                        <div class="grid grid-cols-3 items-center gap-4 p-3 rounded-md even:bg-gray-50">
-                            <div class="col-span-2 flex items-center gap-4">
-                                <img src="{{ asset('storage/' . $sponsor->logo_url) }}" alt="{{ $sponsor->name }}" class="h-10 object-contain">
-                                <span class="font-semibold">{{ $sponsor->name }}</span>
+                        <div class="flex items-center gap-4 p-3 rounded-md even:bg-gray-50">
+                            <div class="flex-grow flex items-center gap-4">
+                                <img src="{{ asset('storage/' . $sponsor->logo_url) }}" alt="{{ $sponsor->name }}" class="h-10 object-contain flex-shrink-0">
+                                <span class="font-semibold break-all">{{ $sponsor->name }}</span>
                             </div>
-                            <div class="flex justify-end items-center gap-2">
+                            <div class="flex justify-end items-center gap-2 flex-shrink-0">
                                 <a href="{{ route('admin.sponsors.edit', $sponsor) }}" class="p-2 bg-yellow-500 text-white rounded-md"><span class="iconify" data-icon="solar:pen-bold"></span></a>
-                                <form action="{{ route('admin.sponsors.destroy', $sponsor) }}" method="POST" onsubmit="return confirm('Hapus sponsor ini?');">
+                                <form action="{{ route('admin.sponsors.destroy', $sponsor) }}" method="POST">
                                     @csrf @method('DELETE')
-                                    <button type="submit" class="p-2 bg-red-500 text-white rounded-md"><span class="iconify" data-icon="solar:trash-bin-trash-bold"></span></button>
+                                    <button type="button" class="delete-confirm-button p-2 bg-red-500 text-white rounded-md"><span class="iconify" data-icon="solar:trash-bin-trash-bold"></span></button>
                                 </form>
                             </div>
                         </div>
@@ -78,7 +59,7 @@
         </div>
 
         {{-- BAGIAN SPONSOR BANNER --}}
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
             {{-- Form Tambah Sponsor Banner --}}
             <div class="bg-white p-6 rounded-lg shadow-md">
                 <h2 class="text-xl font-bold text-gray-700 mb-6 border-b pb-4">Tambah Sponsor (Banner)</h2>
@@ -97,7 +78,6 @@
                         <div id="banner-preview-container" class="mt-2 w-full h-32 hidden items-center justify-center bg-gray-100 rounded-lg overflow-hidden border border-dashed">
                             <img id="banner-preview" src="#" alt="Banner Preview" class="h-full object-contain p-2">
                         </div>
-                        {{-- ID unik untuk input file --}}
                         <input id="banner_image_input" type="file" name="image_url" accept="image/*" class="mt-2 block w-full text-sm ..." required>
                     </div>
                     <div class="flex justify-end">
@@ -113,16 +93,16 @@
                 <h3 class="text-xl font-bold text-gray-700 mb-6 border-b pb-4">Daftar Sponsor (Banner)</h3>
                 <div class="space-y-3 max-h-[500px] overflow-y-auto pr-2">
                     @forelse ($sponsorBanners as $banner)
-                         <div class="grid grid-cols-3 items-center gap-4 p-3 rounded-md even:bg-gray-50">
-                            <div class="col-span-2 flex items-center gap-4">
-                                <img src="{{ asset('storage/' . $banner->image_url) }}" alt="{{ $banner->name }}" class="h-10 object-contain">
-                                <span class="font-semibold">{{ $banner->name }}</span>
+                         <div class="flex items-center gap-4 p-3 rounded-md even:bg-gray-50">
+                            <div class="flex-grow flex items-center gap-4">
+                                <img src="{{ asset('storage/' . $banner->image_url) }}" alt="{{ $banner->name }}" class="h-10 object-contain flex-shrink-0">
+                                <span class="font-semibold break-all">{{ $banner->name }}</span>
                             </div>
-                            <div class="flex justify-end items-center gap-2">
+                            <div class="flex justify-end items-center gap-2 flex-shrink-0">
                                 <a href="{{ route('admin.sponsor-banners.edit', $banner) }}" class="p-2 bg-yellow-500 text-white rounded-md"><span class="iconify" data-icon="solar:pen-bold"></span></a>
-                                <form action="{{ route('admin.sponsor-banners.destroy', $banner) }}" method="POST" onsubmit="return confirm('Hapus banner ini?');">
+                                <form action="{{ route('admin.sponsor-banners.destroy', $banner) }}" method="POST">
                                     @csrf @method('DELETE')
-                                    <button type="submit" class="p-2 bg-red-500 text-white rounded-md"><span class="iconify" data-icon="solar:trash-bin-trash-bold"></span></button>
+                                    <button type="button" class="delete-confirm-button p-2 bg-red-500 text-white rounded-md"><span class="iconify" data-icon="solar:trash-bin-trash-bold"></span></button>
                                 </form>
                             </div>
                         </div>
