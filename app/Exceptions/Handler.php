@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
+use Illuminate\Http\Exceptions\PostTooLargeException;
 
 class Handler extends ExceptionHandler
 {
@@ -43,6 +44,15 @@ class Handler extends ExceptionHandler
     {
         $this->reportable(function (Throwable $e) {
             //
+        });
+        // 2. TAMBAHKAN BLOK KODE INI
+        // Blok ini akan dijalankan khusus ketika terjadi error PostTooLargeException
+        $this->renderable(function (PostTooLargeException $e, $request) {
+            // Ambil batas ukuran file dari konfigurasi PHP Anda untuk pesan yang dinamis
+            $maxSize = ini_get('post_max_size');
+
+            // Redirect pengguna kembali ke halaman sebelumnya dengan pesan error
+            return back()->with('error', "Ukuran file terlalu besar! Batas unggah maksimal adalah {$maxSize}.");
         });
     }
 }

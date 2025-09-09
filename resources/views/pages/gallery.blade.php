@@ -11,39 +11,46 @@
         </h1>
     </section>
     
-    <div class="py-20 bg-gray-50">
+    <div class="py-20">
         <div class="relative z-10 container mx-auto px-6 md:px-20">
 
             {{-- Judul dan Filter Dropdown --}}
-            <div class="flex flex-col md:flex-row justify-between items-center mb-12">
-                <div class="text-center md:text-left">
-                    <h2 class="text-4xl font-bold text-purple-800 mb-3">Gallery</h2>
-                    <div class="inline-block w-24 h-1 bg-purple-600"></div>
-                </div>
-                
-                {{-- Dropdown Filter (menggunakan ID untuk JavaScript) --}}
-                <div class="relative mt-8 md:mt-0">
-                    <button id="album-filter-button" class="flex items-center space-x-2 px-6 py-2 rounded-full text-md font-semibold bg-gradient-to-r from-[#CD75FF] to-[#8949FF] text-white shadow-md hover:opacity-90 transition-opacity">
-                        <span>{{ $selectedAlbumName }}</span>
-                        <svg id="album-filter-arrow" class="w-4 h-4 transform transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
-                    </button>
-                    <div id="album-filter-menu" class="hidden absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-xl z-20">
-                        <a href="{{ route('gallery') }}" class="block px-4 py-2 text-gray-700 hover:bg-purple-50">Semua Album</a>
-                        @foreach($albums as $album)
-                            <a href="{{ route('gallery', ['album' => $album->slug]) }}"
-                               class="block px-4 py-2 text-gray-700 hover:bg-purple-50 hover:text-purple-700 {{ $selectedAlbumName == $album->title ? 'font-bold text-purple-700' : '' }}">
-                                {{ $album->title }}
-                            </a>
-                        @endforeach
-                    </div>
-                </div>
+<div>
+    <div class="flex flex-col md:flex-row justify-between items-center">
+        <div class="text-center md:text-left">
+            <h2 class="text-4xl font-bold text-purple-800">Gallery</h2>
+        </div>
+        
+        {{-- Dropdown Filter --}}
+        <div class="relative mt-8 md:mt-0">
+            <button id="album-filter-button" class="flex items-center space-x-2 px-6 py-2 rounded-full text-md font-semibold bg-gradient-to-r from-[#CD75FF] to-[#8949FF] text-white shadow-md hover:opacity-90 transition-opacity">
+                <span>{{ $selectedAlbumName }}</span>
+                <svg id="album-filter-arrow" class="w-4 h-4 transform transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+            </button>
+            <div id="album-filter-menu" class="hidden absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-xl z-20">
+                <a href="{{ route('gallery') }}" class="block px-4 py-2 text-gray-700 hover:bg-purple-50">Semua Album</a>
+                @foreach($albums as $album)
+                    <a href="{{ route('gallery', ['album' => $album->slug]) }}"
+                       class="block px-4 py-2 text-gray-700 hover:bg-purple-50 hover:text-purple-700 {{ $selectedAlbumName == $album->title ? 'font-bold text-purple-700' : '' }}">
+                        {{ $album->title }}
+                    </a>
+                @endforeach
             </div>
+        </div>
+    </div>
+     {{-- KODE BARU ANDA DITEMPATKAN DI SINI --}}
+    <div class="flex items-center my-6">
+        <div class="w-2 h-2 bg-purple-700 rounded-full"></div>
+        <div class="flex-grow h-0.5 bg-purple-700 w-full"></div>
+        <div class="w-2 h-2 bg-purple-700 rounded-full"></div>
+    </div>
+</div>
 
             {{-- Grid Foto --}}
-            <div id="gallery-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            <div id="gallery-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1">
                 @forelse ($photos as $photo)
                     {{-- ## KODE BARU DENGAN ATRIBUT data-* ## --}}
-                    <div class="group cursor-pointer aspect-square rounded-lg overflow-hidden gallery-photo"
+                    <div class="group cursor-pointer aspect-square overflow-hidden gallery-photo"
                         data-full-src="{{ asset('storage/' . $photo->image_url) }}"
                         data-caption="{{ $photo->caption ?: 'Tidak ada keterangan.' }}">
                         <img src="{{ asset('storage/' . $photo->image_url) }}" alt="{{ $photo->caption }}" 

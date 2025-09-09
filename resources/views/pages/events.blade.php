@@ -57,7 +57,7 @@
             <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-xl mb-20 flex flex-col items-center justify-center text-center p-8">
                 <h3 class="text-2xl font-bold text-gray-800 mb-4">Belum Ada Acara Mendatang</h3>
                 <p class="text-gray-600 max-w-md mx-auto mb-6">Nantikan informasi acara kami selanjutnya di sini!</p>
-                <a href="{{ route('contact.index') }}" class="bg-purple-600 text-white font-bold py-3 px-8 rounded-full transition-transform hover:scale-105">Hubungi Kami</a>
+                <a href="{{ route('contact.index') }}" class="bg-gradient-to-r from-[#CD75FF] to-[#8949FF] text-white font-bold py-3 px-8 rounded-full transition-transform hover:scale-105">Hubungi Kami</a>
             </div>
         @endif
 

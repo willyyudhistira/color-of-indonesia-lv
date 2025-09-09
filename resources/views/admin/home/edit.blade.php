@@ -51,7 +51,7 @@
                 <button type="submit" class="bg-purple-700 text-white font-bold py-2 px-6 rounded-lg hover:bg-purple-800 transition-colors">
                     Simpan Perubahan
                 </button>
-                <a href="{{ route('admin.home.index') }}" class="text-gray-600 hover:underline">Batal</a>
+               <a href="{{ route('admin.dashboard') }}" class="text-gray-600 hover:underline">Batal</a>
             </div>
         </form>
     </div>

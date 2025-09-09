@@ -5,24 +5,46 @@
 @section('content')
 
 {{-- 1. Hero Carousel --}}
-@if ($homeData['carousel']->isNotEmpty())
 <div class="relative font-serif">
     <swiper-container slides-per-view="1" navigation="true" pagination="true" loop="true" effect="fade" autoplay-delay="2700" class="h-96">
         @foreach ($homeData['carousel'] as $slide)
         <swiper-slide>
-            {{-- Menggunakan path gambar dari storage dan akses objek --}}
-            <div class="relative h-96 flex items-center justify-center text-white" style="background-image: url('{{ asset('storage/' . $slide->image_url) }}'); background-size: cover; background-position: center;">
-                <div class="absolute inset-0 bg-black/50"></div>
+            {{-- Logika untuk menentukan path gambar (default atau dari database) --}}
+            @php
+                $imageUrl = isset($slide->is_default) 
+                    ? asset($slide->image_url) 
+                    : asset('storage/' . $slide->image_url);
+            @endphp
+
+            <div class="relative h-96 flex items-center justify-center text-white" style="background-image: url('{{ $imageUrl }}'); background-size: cover; background-position: center;">
+                @if(isset($slide->is_default))
+            {{-- Overlay ungu untuk slide default --}}
+            <div class="absolute inset-0 bg-gradient-to-t from-purple-900/60 to-black/50"></div>
+        @else
+            {{-- Overlay hitam untuk slide dari admin --}}
+            <div class="absolute inset-0 bg-black/50"></div>
+        @endif
                 <div class="relative z-10 text-center px-4">
-                    <h1 class="font-serif text-5xl md:text-7xl font-extrabold tracking-tight">{{ $slide->alt_text }}</h1>
-                    <p class="mt-4 text-xl md:text-2xl font-light">{{ $slide->subtitle }}</p>
+                    <h1 class="font-serif text-5xl md:text-7xl font-extrabold tracking-tight">
+                        {!! $slide->alt_text !!}
+                        
+                        {{-- Logika untuk menampilkan subtitle dengan format yang benar --}}
+                        @if(isset($slide->is_default))
+                            <br>
+                            <span class="font-light text-2xl md:text-3xl tracking-normal">{{ $slide->subtitle }}</span>
+                        @else
+                            {{-- Hanya tampilkan subtitle jika ada dari admin --}}
+                            @if(!empty($slide->subtitle))
+                                <p class="mt-4 text-xl md:text-2xl font-light">{{ $slide->subtitle }}</p>
+                            @endif
+                        @endif
+                    </h1>
                 </div>
             </div>
         </swiper-slide>
         @endforeach
     </swiper-container>
 </div>
-@endif
 
 {{-- ## 2. Iklan Sponsor (Sekarang menjadi "Highlight" di bawah Hero) ## --}}
 @if ($homeData['sponsorBanners']->isNotEmpty())
@@ -55,7 +77,7 @@
             <p class="text-gray-600 mb-8 leading-relaxed text-3xl">
                 Color of Indonesia bertujuan memperkenalkan keragaman budaya nusantara ke tingkat global melalui festival, pertukaran seni, dan kolaborasi internasional. Sebagai jembatan budaya, inisiatif ini menampilkan Indonesia yang inklusif, kreatif, dan berwarna.
             </p>
-            <a href="#" class="inline-block bg-pink-600 text-white italic font-semibold py-3 px-8 rounded-full hover:bg-pink-700 transition-transform hover:scale-105">
+            <a href="{{ route('about') }}" class="inline-block bg-gradient-to-r from-[#CD75FF] to-[#8949FF] text-white font-semibold py-3 px-8 rounded-full hover:bg-pink-700 transition-transform hover:scale-105">
                 Baca Cerita Kami
             </a>
         </div>
@@ -78,18 +100,23 @@
         @endif
     </div>
 </section>
+<div class="flex items-center px-20">
+        <div class="w-2 h-2 bg-purple-700 rounded-full"></div>
+        <div class="flex-grow h-0.5 bg-purple-700 w-full"></div>
+        <div class="w-2 h-2 bg-purple-700 rounded-full"></div>
+    </div>
 
 {{-- 4. Mulai Petualanganmu (Main Events) --}}
 @if ($homeData['mainEvents']->isNotEmpty())
 <section class="py-24 px-8 md:px-20 text-center">
     <div class="container mx-auto">
-        <h2 class="text-4xl font-bold text-purple-700 mb-4">Mulai Petualanganmu</h2>
-        <p class="text-gray-600 mb-12 max-w-2xl mx-auto">Kami membuka pintu bagi Anda untuk menjelajah, belajar, dan terhubung dengan komunitas global.</p>
+        <h2 class="text-4xl font-bold text-purple-700 mb-4">Spesial Untuk Anda</h2>
+        <p class="text-gray-600 mb-12 max-w-2xl mx-auto">“Setiap event membawa Anda lebih dekat ke impian Anda untuk menjelajah, belajar, dan terhubung dengan komunitas global.”</p>
         
         {{-- ## BAGIAN YANG DIPERBARUI DENGAN HOVER EFFECT ## --}}
         <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
             @foreach ($homeData['mainEvents'] as $event)
-            <div class="relative group h-96 overflow-hidden shadow-lg rounded-lg">
+            <div class="relative group aspect-[9/16] overflow-hidden shadow-lg">
                 {{-- Gambar Latar --}}
                 <img src="{{ asset('storage/' . $event->hero_image_url) }}" alt="{{ $event->title }}" class="w-full h-full object-cover transition-transform duration-500 transform group-hover:scale-110" />
                 
@@ -101,18 +128,23 @@
                 {{-- Tampilan Saat Hover --}}
                 <div class="absolute inset-0 bg-gradient-to-t from-purple-800 to-pink-500/80 p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-start text-left">
                     <h3 class="text-white text-2xl font-bold font-serif mb-2">{{ $event->title }}</h3>
-                    <p class="text-white/90 text-sm leading-relaxed">{{ Str::limit($event->description, 120) }}</p>
+                    <p class="text-white/90 text-l leading-relaxed">{{ $event->description }}</p>
                 </div>
             </div>
             @endforeach
         </div>
         
-        <a href="{{ route('events.index') }}" class="inline-block mt-16 bg-purple-600 text-white font-bold py-3 px-10 rounded-full hover:bg-purple-700 transition-transform hover:scale-105 shadow-lg">
+        <a href="{{ route('events.index') }}" class="inline-block mt-16 bg-gradient-to-r from-[#CD75FF] to-[#8949FF] text-white font-bold py-3 px-10 rounded-full hover:bg-purple-700 transition-transform hover:scale-105 shadow-lg">
             Selengkapnya
         </a>
     </div>
 </section>
 @endif
+<div class="flex items-center px-20">
+        <div class="w-2 h-2 bg-purple-700 rounded-full"></div>
+        <div class="flex-grow h-0.5 bg-purple-700 w-full"></div>
+        <div class="w-2 h-2 bg-purple-700 rounded-full"></div>
+    </div>
 
 {{-- 5. Apa Kata Mereka (Testimonials) --}}
 @if ($homeData['testimonials']->isNotEmpty())
@@ -148,7 +180,7 @@
             </a>
             @endforeach
         </div>
-         <a href="#" class="inline-block mt-16 bg-red-600 text-white font-bold py-3 px-10 rounded-full hover:bg-red-700 transition">
+         <a href="#" class="inline-block mt-16 bg-gradient-to-r from-[#CD75FF] to-[#8949FF] text-white font-bold py-3 px-10 rounded-full hover:bg-red-700 transition">
             Selengkapnya
         </a>
     </div>
