@@ -11,7 +11,7 @@ return new class extends Migration
         Schema::create('news', function (Blueprint $table) {
             $table->id();
             $table->string('title', 160);
-            $table->string('excerpt', 220)->nullable();
+            $table->string('excerpt', 500)->nullable();
             $table->string('source_name', 120)->nullable();
             $table->string('source_url');
             $table->string('image_url')->nullable();

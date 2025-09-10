@@ -63,7 +63,7 @@
         <div class="container mx-auto grid md:grid-cols-2 gap-12 items-start">
             <div class="text-center md:text-left">
                 <h2 class="text-4xl font-bold text-purple-700 mb-6">Tentang Kami</h2>
-                <p class="text-gray-600 mb-8 leading-relaxed text-2xl">
+                <p class="text-gray-600 mb-8 leading-relaxed text-lg lg:text-2xl">
                     Color of Indonesia bertujuan memperkenalkan keragaman budaya nusantara ke tingkat global melalui
                     festival, pertukaran seni, dan kolaborasi internasional. Sebagai jembatan budaya, inisiatif ini
                     menampilkan Indonesia yang inklusif, kreatif, dan berwarna.
@@ -87,10 +87,10 @@
                         <img id="about-img-{{ $loop->index }}" src="{{ asset('storage/' . $image->image_url) }}"
                             alt="{{ $image->caption ?? 'Tentang Kami' }}"
                             class="absolute rounded-lg shadow-xl object-cover transition-opacity duration-1000
-                                                                                                                        @if($loop->index == 0) top-0 left-0 w-[248px] h-[310px] @endif
-                                                                                                                        @if($loop->index == 1) top-0 left-[260px] w-[248px] h-[248px] @endif
-                                                                                                                        @if($loop->index == 2) top-[320px] left-0 w-[248px] h-[248px] @endif
-                                                                                                                        @if($loop->index == 3) top-[260px] left-[260px] w-[248px] h-[310px] @endif">
+                                                                                                                                                            @if($loop->index == 0) top-0 left-0 w-[248px] h-[310px] @endif
+                                                                                                                                                            @if($loop->index == 1) top-0 left-[260px] w-[248px] h-[248px] @endif
+                                                                                                                                                            @if($loop->index == 2) top-[320px] left-0 w-[248px] h-[248px] @endif
+                                                                                                                                                            @if($loop->index == 3) top-[260px] left-[260px] w-[248px] h-[310px] @endif">
                     @endforeach
                 </div>
             @endif
@@ -111,23 +111,32 @@
                 <p class="text-gray-600 mb-12 max-w-2xl mx-auto">“Setiap event membawa Anda lebih dekat ke impian Anda untuk
                     menjelajah, belajar, dan terhubung dengan komunitas global.”</p>
 
-                <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                    @foreach ($homeData['mainEvents'] as $event)
-                        <div class="relative group aspect-[9/16] overflow-hidden shadow-lg rounded-lg">
-                            <img src="{{ asset('storage/' . $event->hero_image_url) }}" alt="{{ $event->title }}"
-                                class="w-full h-full object-cover transition-transform duration-500 transform group-hover:scale-110" />
-                            <div
-                                class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-6 transition-opacity duration-500 group-hover:opacity-0">
-                                <h3 class="text-white text-3xl font-bold font-serif">{{ $event->title }}</h3>
-                            </div>
-                            <div
-                                class="absolute inset-0 bg-gradient-to-t from-purple-800 to-pink-500/80 p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-start text-left">
-                                <h3 class="text-white text-2xl font-bold font-serif mb-2">{{ $event->title }}</h3>
-                                <p class="text-white/90 text-sm leading-relaxed">{{ Str::limit($event->description, 120) }}</p>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
+                @if ($homeData['mainEvents']->count() > 4)
+
+                    {{-- Tampilan Slider --}}
+                    <div class="relative">
+                        <swiper-container slides-per-view="1" space-between="30" loop="true" autoplay-delay="3000" navigation="true"
+                            breakpoints='{"768": {"slidesPerView": 2}, "1024": {"slidesPerView": 3}, "1280": {"slidesPerView": 4}}'>
+                            @foreach ($homeData['mainEvents'] as $event)
+                                <swiper-slide class="pb-8">
+                                    {{-- Memanggil partial card --}}
+                                    @include('partials.components.main-event-card', ['event' => $event])
+                                </swiper-slide>
+                            @endforeach
+                        </swiper-container>
+                    </div>
+
+                @else
+
+                    {{-- Tampilan Grid Statis --}}
+                    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                        @foreach ($homeData['mainEvents'] as $event)
+                            {{-- Memanggil partial card --}}
+                            @include('partials.components.main-event-card', ['event' => $event])
+                        @endforeach
+                    </div>
+
+                @endif
 
                 <a href="{{ route('events.index') }}"
                     class="inline-block mt-16 bg-gradient-to-r from-[#CD75FF] to-[#8949FF] text-white font-bold py-3 px-10 rounded-full hover:opacity-90 transition-shadow shadow-lg">

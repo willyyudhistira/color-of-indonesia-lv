@@ -14,7 +14,7 @@ return new class extends Migration
             $table->text('subtitle');
             $table->text('description')->nullable();
             $table->string('location_name', 150)->nullable();
-            $table->string('address')->nullable();
+            $table->string('link_url')->nullable();
             $table->string('hero_image_url')->nullable();
             $table->timestamps();
         });

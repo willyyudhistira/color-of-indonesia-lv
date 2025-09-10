@@ -16,10 +16,10 @@ function setupPasswordToggle(inputId, toggleId) {
     const toggleButton = document.getElementById(toggleId);
 
     if (passwordInput && toggleButton) {
-        toggleButton.addEventListener('click', function() {
+        toggleButton.addEventListener('click', function () {
             const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
             passwordInput.setAttribute('type', type);
-            
+
             const eyeIcon = toggleButton.querySelector('.eye-icon');
             const eyeSlashIcon = toggleButton.querySelector('.eye-slash-icon');
             eyeIcon.classList.toggle('hidden');
@@ -37,16 +37,16 @@ function setupImagePreview(inputId, previewContainerId, previewImgId) {
     const previewImage = document.getElementById(previewImgId);
 
     if (fileInput && previewContainer && previewImage) {
-        fileInput.addEventListener('change', function(event) {
+        fileInput.addEventListener('change', function (event) {
             const file = event.target.files[0];
             if (file) {
                 const reader = new FileReader();
-                reader.onload = function(e) {
+                reader.onload = function (e) {
                     previewImage.setAttribute('src', e.target.result);
                     // Tampilkan kontainer (hilangkan class 'hidden')
                     // dan pastikan ia terlihat (misal: flex atau block)
                     previewContainer.classList.remove('hidden');
-                    previewContainer.style.display = 'flex'; 
+                    previewContainer.style.display = 'flex';
                 }
                 reader.readAsDataURL(file);
             }
@@ -59,8 +59,8 @@ function setupImagePreview(inputId, previewContainerId, previewImgId) {
 //  BLOK UTAMA: DIJALANKAN SETELAH HALAMAN SIAP
 // =========================================================================
 
-document.addEventListener('DOMContentLoaded', function() {
-    
+document.addEventListener('DOMContentLoaded', function () {
+
     // --- 1. Logika untuk Dropdown Navbar ---
     const profileButton = document.getElementById('profile-button');
     const profileDropdown = document.getElementById('profile-dropdown');
@@ -91,13 +91,13 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     if (profileButton && profileDropdown) {
-        profileButton.addEventListener('click', function(event) {
-            event.stopPropagation(); 
+        profileButton.addEventListener('click', function (event) {
+            event.stopPropagation();
             profileDropdown.classList.toggle('hidden');
         });
-        
+
         // Menutup dropdown saat klik di luar
-        window.addEventListener('click', function(event) {
+        window.addEventListener('click', function (event) {
             if (!profileDropdown.classList.contains('hidden')) {
                 if (!profileDropdown.contains(event.target) && !profileButton.contains(event.target)) {
                     profileDropdown.classList.add('hidden');
@@ -113,7 +113,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const closeIcon = document.getElementById('close-icon');
 
     if (mobileMenuButton && mobileMenu && hamburgerIcon && closeIcon) {
-        mobileMenuButton.addEventListener('click', function() {
+        mobileMenuButton.addEventListener('click', function () {
             mobileMenu.classList.toggle('hidden');
             hamburgerIcon.classList.toggle('hidden');
             closeIcon.classList.toggle('hidden');
@@ -178,7 +178,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
     deleteButtons.forEach(button => {
-        button.addEventListener('click', function(event) {
+        button.addEventListener('click', function (event) {
             event.preventDefault(); // Mencegah aksi default tombol
 
             const form = this.closest('form'); // Cari form terdekat
@@ -203,7 +203,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const logoutButtons = document.querySelectorAll('.logout-confirm-button');
 
     logoutButtons.forEach(button => {
-        button.addEventListener('click', function(event) {
+        button.addEventListener('click', function (event) {
             event.preventDefault();
             const form = this.closest('form');
 
@@ -223,4 +223,22 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     });
+
+    // --- LOGIKA BARU UNTUK DROPDOWN GALLERY ---
+    const galleryButton = document.getElementById('gallery-dropdown-button');
+    const galleryMenu = document.getElementById('gallery-dropdown-menu');
+
+    if (galleryButton && galleryMenu) {
+        galleryButton.addEventListener('click', function(event) {
+            event.stopPropagation();
+            galleryMenu.classList.toggle('hidden');
+        });
+        
+        // Menutup dropdown saat klik di luar
+        window.addEventListener('click', function(event) {
+            if (!galleryMenu.classList.contains('hidden') && !galleryButton.contains(event.target)) {
+                galleryMenu.classList.add('hidden');
+            }
+        });
+    }
 });

@@ -32,7 +32,7 @@ class HomeController extends Controller
         $homeData = [
             'carousel'       => $carouselItems, 
             'sponsorBanners' => SponsorBanner::where('is_published', true)->orderBy('sort_order', 'asc')->get(),
-            'mainEvents'     => MainEvent::latest()->take(4)->get(),
+            'mainEvents'     => MainEvent::latest()->get(),
             'testimonials'   => Testimonial::where('is_published', true)->orderBy('sort_order', 'asc')->get(),
             'sponsors'       => Sponsor::where('is_published', true)->orderBy('sort_order', 'asc')->get(),
         ];

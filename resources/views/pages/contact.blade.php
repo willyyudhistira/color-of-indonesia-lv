@@ -32,10 +32,10 @@
             </div>
 
             {{-- Grid utama: 1 kolom di mobile, 2 kolom di desktop --}}
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items">
                 
                 {{-- Kolom Formulir --}}
-                <form action="{{ route('contact.store') }}" method="POST" class="space-y-6 bg-white rounded-xl shadow-2xl p-6 md:p-10">
+                <form action="{{ route('contact.store') }}" method="POST" class="flex flex-col space-y-6 bg-white rounded-xl shadow-2xl p-8 h-full">
                     @csrf 
                     @if (session('success'))
                         <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 rounded-md" role="alert">
@@ -46,70 +46,77 @@
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         <div>
                             <label for="name" class="block text-sm font-semibold text-gray-700 mb-1">Nama Anda</label>
-                            <input type="text" id="name" name="name" placeholder="John Doe" value="{{ old('name') }}" required
-                                   class="w-full bg-gray-100 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition">
+                            <input type="text" id="name" name="name" placeholder="Masukkan Nama Lengkap Anda" value="{{ old('name') }}" required
+                                   class="w-full bg-gray-100 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
                         </div>
                         <div>
                             <label for="email" class="block text-sm font-semibold text-gray-700 mb-1">Alamat Email</label>
                             <input type="email" id="email" name="email" placeholder="anda@email.com" value="{{ old('email') }}" required
-                                   class="w-full bg-gray-100 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition">
+                                   class="w-full bg-gray-100 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
                         </div>
                     </div>
                     <div>
                         <label for="subject" class="block text-sm font-semibold text-gray-700 mb-1">Subjek</label>
                         <input type="text" id="subject" name="subject" placeholder="Tujuan pesan Anda" value="{{ old('subject') }}" required
-                               class="w-full bg-gray-100 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition">
+                               class="w-full bg-gray-100 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
                     </div>
-                    <div>
+                    <div class="flex-grow">
                         <label for="message" class="block text-sm font-semibold text-gray-700 mb-1">Pesan</label>
                         <textarea id="message" name="message" placeholder="Tuliskan pesan Anda di sini..." rows="5" required
-                                  class="w-full bg-gray-100 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition resize-none">{{ old('message') }}</textarea>
+                                  class="w-full h-full bg-gray-100 px-4 py-3 mb-12 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 resize-none">{{ old('message') }}</textarea>
                     </div>
                     <div>
-                        <button type="submit" class="w-full bg-gradient-to-r from-[#CD75FF] to-[#8949FF] text-white font-bold py-3 px-10 rounded-lg hover:opacity-90 transition-opacity shadow-lg">
+                        <button type="submit" class="w-full bg-gradient-to-r from-[#CD75FF] to-[#8949FF] text-white font-bold py-3 px-10 mt-12 rounded-lg hover:opacity-90 transition-opacity shadow-lg">
                             Kirim Pesan
                         </button>
                     </div>
                 </form>
 
                 {{-- Kolom Quick Contact --}}
-                <div class="relative bg-purple-100/50 text-gray-800 p-8 rounded-xl shadow-xl">
-                    <h2 class="text-3xl md:text-4xl font-bold font-serif text-center mb-10">Quick Contact</h2>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-10">
-                        {{-- 1. Call Us --}}
-                        <div class="flex items-start space-x-4">
-                            <div class="bg-purple-100 p-3 rounded-full flex-shrink-0"><span class="iconify w-6 h-6 text-purple-700" data-icon="solar:phone-bold-duotone"></span></div>
-                            <div>
-                                <h4 class="text-xl font-bold mb-1">Call Us</h4>
-                                <p class="text-sm">+6281211603309 (Head Office)</p>
-                            </div>
-                        </div>
-                        {{-- 2. Email Us --}}
-                        <div class="flex items-start space-x-4">
-                            <div class="bg-purple-100 p-3 rounded-full flex-shrink-0"><span class="iconify w-6 h-6 text-purple-700" data-icon="solar:letter-bold-duotone"></span></div>
-                            <div>
-                                <h4 class="text-xl font-bold mb-1">Email Us</h4>
-                                <p class="text-sm">info@colorofindonesia.com</p>
-                            </div>
-                        </div>
-                        {{-- 3. Visit Us --}}
-                        <div class="flex items-start space-x-4">
-                            <div class="bg-purple-100 p-3 rounded-full flex-shrink-0"><span class="iconify w-6 h-6 text-purple-700" data-icon="solar:map-point-bold-duotone"></span></div>
-                            <div>
-                                <h4 class="text-xl font-bold mb-1">Visit Us</h4>
-                                <p class="text-sm">Graha Fadillah, Jl. Raya BSD Bintaro 5, Pondok Aren, Tangerang Selatan</p>
-                            </div>
-                        </div>
-                        {{-- 4. Follow Us --}}
-                        <div class="flex items-start space-x-4">
-                            <div class="bg-purple-100 p-3 rounded-full flex-shrink-0"><span class="iconify w-6 h-6 text-purple-700" data-icon="solar:users-group-rounded-bold-duotone"></span></div>
-                            <div>
-                                <h4 class="text-xl font-bold mb-1">Follow Us</h4>
-                                <div class="flex space-x-3 text-gray-600">
-                                    <a href="#" title="Instagram"><span class="iconify w-6 h-6 hover:text-purple-700"></span></a>
-                                    <a href="#" title="Facebook"><span class="iconify w-6 h-6 hover:text-purple-700"></span></a>
+                <div class="relative bg-purple-100/60 text-gray-800 p-8 rounded-xl shadow-xl flex flex-col justify-between backdrop-blur-sm">
+                    <div> {{-- Konten atas: Quick Contact info --}}
+                        <h2 class="text-3xl md:text-4xl font-bold font-serif text-center mb-10">Quick Contact</h2>
+                        <div class="space-y-8">
+                            {{-- 1. Call Us --}}
+                            <div class="flex items-start space-x-4">
+                                <div class="bg-purple-100 p-3 rounded-full flex-shrink-0"><span class="iconify w-6 h-6 text-purple-700" data-icon="solar:phone-bold-duotone"></span></div>
+                                <div>
+                                    <h4 class="text-xl font-bold mb-1">Call Us</h4>
+                                    <p class="text-sm">+6281211603309 (Head Office)</p>
                                 </div>
                             </div>
+                            {{-- 2. Email Us --}}
+                            <div class="flex items-start space-x-4">
+                                <div class="bg-purple-100 p-3 rounded-full flex-shrink-0"><span class="iconify w-6 h-6 text-purple-700" data-icon="solar:letter-bold-duotone"></span></div>
+                                <div>
+                                    <h4 class="text-xl font-bold mb-1">Email Us</h4>
+                                    <p class="text-sm">info@colorofindonesia.com</p>
+                                </div>
+                            </div>
+                            {{-- 3. Visit Us --}}
+                            <div class="flex items-start space-x-4">
+                                <div class="bg-purple-100 p-3 rounded-full flex-shrink-0"><span class="iconify w-6 h-6 text-purple-700" data-icon="solar:map-point-bold-duotone"></span></div>
+                                <div>
+                                    <h4 class="text-xl font-bold mb-1">Visit Us</h4>
+                                    <ul class="lg:ml-6 list-disc">
+                                        <li class="text-sm">Graha Fadillah, Jl. Raya BSD Bintaro 5, Pondok Aren, Tangerang Selatan</li>
+                                        <li class="text-sm">Jl. M. Husni Thamrin No. 49A, Kec. Watang Sawitti, Pinrang, Sulawesi Selatan</li>
+                                        <li class="text-sm">Taman Sri Wedari, BR Cepaka, Munggu Bali</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    {{-- PETA --}}
+                    <div class="mt-10 pt-6 border-t border-purple-200">
+                        <h3 class="text-xl font-bold mb-4 text-gray-800">Lokasi Kami (Head Office)</h3>
+                        <div class="overflow-hidden rounded-lg shadow-lg">
+                            <iframe class="w-full h-64"
+                                src="https://www.openstreetmap.org/export/embed.html?bbox=106.69174%2C-6.28255%2C106.69605%2C-6.28055&layer=mapnik&marker=-6.28155%2C106.69390"
+                                style="border: 0;" allowfullscreen="" loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade">
+                            </iframe>
                         </div>
                     </div>
                 </div>

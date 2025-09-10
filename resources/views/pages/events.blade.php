@@ -48,7 +48,7 @@
                                     <div class="flex items-center"><span class="iconify w-5 h-5 mr-2 text-purple-600" data-icon="solar:map-point-bold"></span><span>{{ $event->location_name }}</span></div>
                                     <div class="flex items-center"><span class="iconify w-5 h-5 mr-2 text-purple-600" data-icon="solar:calendar-bold"></span><span>{{ $event->start_date->format('d F Y') }}</span></div>
                                 </div>
-                                <a href="{{ route('events.show', ['slug' => $event->slug]) }}" class="inline-block bg-purple-600 text-white font-bold py-2 px-6 rounded-full hover:bg-purple-700 transition-colors self-start">More Information</a>
+                                <a href="{{ route('events.show', ['slug' => $event->slug]) }}" class="inline-block bg-gradient-to-r from-[#CD75FF] to-[#8949FF] text-white font-bold py-2 px-6 rounded-full hover:opacity-90 transition-colors self-start">Selengkapnya</a>
                             </div>
                         </div>
                     </swiper-slide>
@@ -83,7 +83,7 @@
                             <div class="flex items-center"><span class="iconify w-5 h-5 mr-2 text-purple-600 flex-shrink-0" data-icon="solar:map-point-bold"></span><span>{{ $event->location_name }}</span></div>
                             <div class="flex items-center"><span class="iconify w-5 h-5 mr-2 text-purple-600 flex-shrink-0" data-icon="solar:calendar-bold"></span><span>{{ $event->start_date->format('d F Y') }}</span></div>
                         </div>
-                        <a href="{{ route('events.show', ['slug' => $event->slug]) }}" class="inline-block bg-purple-100 text-purple-700 font-bold py-2 px-5 rounded-full hover:bg-purple-200 transition-colors text-sm mt-auto self-start">More Information</a>
+                        <a href="{{ route('events.show', ['slug' => $event->slug]) }}" class="inline-block bg-gradient-to-r from-[#CD75FF] to-[#8949FF] text-white font-bold py-2 px-5 rounded-full hover:opacity-90 transition-colors text-sm mt-auto self-start">Selengkapnya</a>
                     </div>
                 </div>
             @empty

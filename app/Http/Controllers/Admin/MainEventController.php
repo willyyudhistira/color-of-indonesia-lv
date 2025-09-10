@@ -9,26 +9,17 @@ use Illuminate\Support\Facades\Storage;
 
 class MainEventController extends Controller
 {
-    /**
-     * Menampilkan daftar semua main event.
-     */
     public function index()
     {
         $mainEvents = MainEvent::latest()->get();
-        return view('admin.main_event.index', ['mainEvents' => $mainEvents]);
+        return view('admin.main_event.index', compact('mainEvents'));
     }
 
-    /**
-     * Menampilkan form untuk membuat main event baru.
-     */
     public function create()
     {
         return view('admin.main_event.create');
     }
 
-    /**
-     * Menyimpan main event baru.
-     */
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -36,8 +27,8 @@ class MainEventController extends Controller
             'subtitle' => 'required|string',
             'description' => 'nullable|string',
             'location_name' => 'nullable|string|max:150',
-            'address' => 'nullable|string|max:255',
-            'hero_image_url' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'link_url' => 'nullable|url', // <-- UBAH DI SINI
+            'hero_image_url' => 'required|image|max:4096',
         ]);
 
         $validated['hero_image_url'] = $request->file('hero_image_url')->store('main_event_hero', 'public');
@@ -46,17 +37,11 @@ class MainEventController extends Controller
         return redirect()->route('admin.main-events.index')->with('success', 'Main Event berhasil ditambahkan.');
     }
 
-    /**
-     * Menampilkan form untuk mengedit main event.
-     */
     public function edit(MainEvent $mainEvent)
     {
-        return view('admin.main_event.edit', ['mainEvent' => $mainEvent]);
+        return view('admin.main_event.edit', compact('mainEvent'));
     }
 
-    /**
-     * Memperbarui main event yang ada.
-     */
     public function update(Request $request, MainEvent $mainEvent)
     {
         $validated = $request->validate([
@@ -64,8 +49,8 @@ class MainEventController extends Controller
             'subtitle' => 'required|string',
             'description' => 'nullable|string',
             'location_name' => 'nullable|string|max:150',
-            'address' => 'nullable|string|max:255',
-            'hero_image_url' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:4096',
+            'link_url' => 'nullable|url', // <-- UBAH DI SINI
+            'hero_image_url' => 'nullable|image|max:4096',
         ]);
 
         if ($request->hasFile('hero_image_url')) {
@@ -74,15 +59,12 @@ class MainEventController extends Controller
             }
             $validated['hero_image_url'] = $request->file('hero_image_url')->store('main_event_hero', 'public');
         }
-        
+
         $mainEvent->update($validated);
 
         return redirect()->route('admin.main-events.index')->with('success', 'Main Event berhasil diperbarui.');
     }
 
-    /**
-     * Menghapus main event.
-     */
     public function destroy(MainEvent $mainEvent)
     {
         if ($mainEvent->hero_image_url) {

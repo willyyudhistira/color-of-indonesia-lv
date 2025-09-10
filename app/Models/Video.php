@@ -5,18 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class MainEvent extends Model
+class Video extends Model
 {
     use HasFactory;
 
-    protected $table = 'main_event';
-
     protected $fillable = [
         'title',
-        'subtitle',
         'description',
-        'location_name',
-        'link_url',
-        'hero_image_url',
+        'embed_code',
+        'sort_order',
+        'is_published',
+    ];
+
+    protected $casts = [
+        'is_published' => 'boolean',
+        'sort_order' => 'integer',
     ];
 }

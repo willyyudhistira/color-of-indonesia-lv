@@ -9,11 +9,12 @@ use App\Http\Controllers\Admin\SponsorController;
 use App\Http\Controllers\Admin\NewsController as AdminNewsController;
 use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\Admin\EventController as AdminEventController;
+use App\Http\Controllers\Admin\VideoController as AdminVideoController;
 
+use App\Http\Controllers\Web\VideoController as WebVideoController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Web\ContactPageController;
 use App\Http\Controllers\Web\GalleryController as WebGalleryController; // <-- Beri alias
-use App\Http\Controllers\Web\EventController as WebEventController;
 use App\Http\Controllers\Web\NewsController;
 use App\Http\Controllers\Web\HomeController;
 use App\Http\Controllers\Web\AboutController;
@@ -49,13 +50,14 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/about', [AboutController::class, 'index'])->name('about');
 Route::get('/events', [EventController::class, 'index'])->name('events.index');
 Route::get('/events/{slug}', [EventController::class, 'show'])->name('events.show');
-Route::get('/gallery/{album:slug?}', [WebGalleryController::class, 'index'])->name('gallery');
+Route::get('/gallery', [WebGalleryController::class, 'index'])->name('gallery.index');
+Route::get('/gallery/{album:slug}', [WebGalleryController::class, 'show'])->name('gallery.show');
 Route::get('/sponsorship', [SponsorshipController::class, 'index'])->name('sponsorship');
-Route::get('/news', [NewsController::class, 'index'])->name('news');
+Route::get('/news', [NewsController::class, 'index'])->name('news.index');
 Route::get('/news/{news:slug}', [NewsController::class, 'show'])->name('news.show');
 Route::get('/contact', [ContactPageController::class, 'index'])->name('contact.index');
 Route::post('/contact', [ContactPageController::class, 'store'])->name('contact.store');
-
+Route::get('/videos', [WebVideoController::class, 'index'])->name('videos.index');
 
 // ===============================================
 // GRUP RUTE UNTUK ADMIN DASHBOARD
@@ -89,6 +91,8 @@ Route::prefix('admin')
     Route::post('gallery/{gallery}/photos', [AdminGalleryController::class, 'uploadPhoto'])->name('gallery.photos.upload');
     Route::delete('gallery/photos/{photo}', [AdminGalleryController::class, 'destroyPhoto'])->name('gallery.photos.destroy');
     Route::resource('gallery', AdminGalleryController::class);
+
+    Route::resource('videos', AdminVideoController::class);
 
     // Rute untuk Sponsor Management (halaman utama)
     Route::get('/sponsors', [SponsorController::class, 'index'])->name('sponsors.index');

@@ -4,41 +4,37 @@ namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
 use App\Models\Album;
-use App\Models\Photo;
 
 class GalleryController extends Controller
 {
     /**
-     * Menampilkan halaman galeri, secara otomatis memfilter berdasarkan album dari URL.
+     * Menampilkan HALAMAN DAFTAR ALBUM.
      */
-    public function index(Album $album = null)
+    public function index()
     {
-        // 1. Ambil SEMUA album yang published untuk ditampilkan di dropdown filter
-        $allAlbums = Album::where('is_published', true)->orderBy('sort_order', 'asc')->get();
+        $albums = Album::where('is_published', true)
+                       ->withCount('photos') // Menghitung jumlah foto
+                       ->orderBy('sort_order', 'asc')
+                       ->paginate(9); // 9 album per halaman
 
-        // 2. Tentukan judul yang dipilih berdasarkan ada atau tidaknya $album dari URL
-        $selectedAlbumName = $album ? $album->title : 'Semua Album';
+        return view('pages.gallery.index', ['albums' => $albums]);
+    }
 
-        // 3. Ambil foto berdasarkan kondisi
-        if ($album) {
-            // Jika $album ada (ditemukan dari URL), ambil foto HANYA dari album tersebut
-            $photos = $album->photos()
-                            ->where('is_published', true)
-                            ->latest()
-                            ->paginate(12);
-        } else {
-            // Jika tidak ada album di URL, ambil semua foto dari semua album yang published
-            $photos = Photo::where('is_published', true)
-                           ->whereHas('album', fn($query) => $query->where('is_published', true))
-                           ->latest()
-                           ->paginate(12);
-        }
+    /**
+     * Menampilkan HALAMAN DETAIL ALBUM (berisi foto-foto).
+     */
+    public function show(Album $album) // Menggunakan Route-Model Binding
+    {
+        abort_if(!$album->is_published, 404);
 
-        // 4. Kirim semua data yang diperlukan ke view
-        return view('pages.gallery', [
-            'photos' => $photos,
-            'albums' => $allAlbums,
-            'selectedAlbumName' => $selectedAlbumName,
+        $photos = $album->photos()
+                        ->where('is_published', true)
+                        ->orderBy('sort_order', 'asc')
+                        ->paginate(12); // 12 foto per halaman
+
+        return view('pages.gallery.show', [
+            'album' => $album,
+            'photos' => $photos
         ]);
     }
 }
