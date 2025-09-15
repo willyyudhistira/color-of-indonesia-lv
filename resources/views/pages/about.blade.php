@@ -37,7 +37,7 @@
             </div>
             <div class="max-w-4xl mx-auto bg-purple-100/50 border border-purple-300 rounded-xl p-8">
                 <h3 class="text-3xl font-bold text-purple-800 mb-6 text-center">MISI</h3>
-                <ul class="list-disc list-inside text-black space-y-3 text-lg">
+                <ul class="list-disc text-black space-y-3 text-lg">
                     <li>Memperkenalkan keberagaman budaya Indonesia ke tingkat nasional dan internasional melalui festival dan program pertukaran budaya.</li>
                     <li>Mendorong diplomasi budaya Indonesia sebagai bagian dari promosi citra bangsa di mata dunia.</li>
                     <li>Menciptakan jembatan antarkomunitas, dan generasi muda agar aktif melestarikan dan mengembangkan budaya bangsa.</li>
@@ -50,7 +50,7 @@
         <section>
             <div class="text-center mb-16">
                 <h2 class="text-4xl font-bold text-purple-700">Program Kami</h2>
-                <div class="flex items-center my-6 max-w-lg mx-auto"><div class="w-2 h-2 bg-purple-700 rounded-full"></div><div class="flex-grow h-0.5 bg-purple-700 w-full"></div><div class="w-2 h-2 bg-purple-700 rounded-full"></div></div>
+                <div class="flex items-center my-6  mx-auto"><div class="w-2 h-2 bg-purple-700 rounded-full"></div><div class="flex-grow h-0.5 bg-purple-700 w-full"></div><div class="w-2 h-2 bg-purple-700 rounded-full"></div></div>
             </div>
 
             @if ($programs->isNotEmpty())

@@ -8,16 +8,47 @@ use App\Models\Event; // Pastikan model Event sudah ada
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str; // Import Str facade untuk membuat slug
+use Carbon\Carbon;
+use App\Exports\EventsReportExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class EventController extends Controller
 {
     /**
      * Menampilkan daftar event dengan paginasi.
      */
-    public function index()
+    public function index(Request $request) // 2. Tambahkan Request $request
     {
-        $events = Event::latest('start_date')->paginate(10); // Urutkan & paginasi
-        return view('admin.events.index', ['events' => $events]);
+        // Logika untuk kartu ringkasan (tidak berubah)
+        $pastEventsCount = Event::where('start_date', '<', Carbon::now())->count();
+        $upcomingEventsCount = Event::where('start_date', '>=', Carbon::now())->count();
+
+        // 3. Siapkan query dasar untuk daftar event
+        $eventsQuery = Event::query();
+
+        // 4. Terapkan filter bulan jika ada di URL
+        if ($request->has('month') && $request->filled('month')) {
+            try {
+                $filterDate = Carbon::createFromFormat('Y-m', $request->month);
+                $eventsQuery->whereMonth('start_date', $filterDate->month)
+                    ->whereYear('start_date', $filterDate->year);
+            } catch (\Exception $e) {
+                // Abaikan jika format bulan tidak valid
+            }
+        }
+
+        // 5. Eksekusi query dengan urutan dan paginasi
+        $events = $eventsQuery->latest('start_date')->paginate(10);
+
+        // 6. Tambahkan filter ke link pagination
+        $events->appends($request->query());
+
+        // Kirim semua data ke view
+        return view('admin.events.index', [
+            'events' => $events,
+            'pastEventsCount' => $pastEventsCount,
+            'upcomingEventsCount' => $upcomingEventsCount,
+        ]);
     }
 
     /**
@@ -56,7 +87,7 @@ class EventController extends Controller
 
         // Buat slug secara otomatis
         $validated['slug'] = Str::slug($validated['title']);
-        
+
         if ($request->hasFile('hero_image_url')) {
             $validated['hero_image_url'] = $request->file('hero_image_url')->store('event_heroes', 'public');
         }
@@ -98,16 +129,16 @@ class EventController extends Controller
             'is_featured' => 'required|boolean', // Diubah menjadi required
             'is_published' => 'required|boolean', // Diubah menjadi required
         ]);
-        
+
         if ($request->hasFile('hero_image_url')) {
             if ($event->hero_image_url) {
                 Storage::disk('public')->delete($event->hero_image_url);
             }
             $validated['hero_image_url'] = $request->file('hero_image_url')->store('event_heroes', 'public');
         }
-        
+
         $event->update($validated);
-        
+
         return redirect()->route('admin.events.index')->with('success', 'Event berhasil diperbarui.');
     }
 
@@ -122,5 +153,15 @@ class EventController extends Controller
         $event->delete();
 
         return redirect()->route('admin.events.index')->with('success', 'Event berhasil dihapus.');
+    }
+
+    // Eksport report
+    public function export()
+    {
+        // Menentukan nama file yang akan diunduh
+        $fileName = 'events_report_' . date('Y-m-d') . '.xlsx';
+
+        // Memulai proses download
+        return Excel::download(new EventsReportExport, $fileName);
     }
 }
