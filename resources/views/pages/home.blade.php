@@ -24,7 +24,7 @@
                         @endphp
                         <div class="relative h-full w-full flex items-center justify-center text-white"
                             style="background-image: url('{{ $imageUrl }}'); background-size: cover; background-position: center;">
-                            <div class="absolute inset-0 bg-black/60"></div>
+                            <div class="absolute inset-0 bg-gradient-to-t from-purple-900/60 to-black/50"></div>
                             <div class="relative z-10 text-center px-4">
                                 <h1 class="font-serif text-5xl md:text-7xl font-extrabold tracking-tight">{!! $slide->alt_text !!}
                                 </h1>

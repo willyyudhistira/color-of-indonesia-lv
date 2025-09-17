@@ -16,6 +16,37 @@
     <!-- @vite(['resources/css/app.css', 'resources/js/app.js']) -->
     <link rel="stylesheet" href="{{ $css }}" id="css">
     <script src="{{ $js }}" id="js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/plugins/monthSelect/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/plugins/monthSelect/index.js"></script>
+
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+    const monthpickerInput = document.getElementById('monthpicker');
+    const form = document.getElementById('month-filter-form');
+
+    if (monthpickerInput && form) {
+        flatpickr(monthpickerInput, {
+            // Aktifkan plugin untuk memilih bulan
+            plugins: [
+                new monthSelectPlugin({
+                    shorthand: true, // "Sep" bukan "September"
+                    dateFormat: "Y-m", // Format untuk backend (2025-09)
+                    altFormat: "F Y", // Format untuk pengguna (September 2025)
+                })
+            ],
+            // Otomatis submit form saat bulan dipilih
+            onChange: function(selectedDates, dateStr, instance) {
+                // Cek jika input tidak kosong, lalu submit
+                if(dateStr) {
+                   form.submit();
+                }
+            },
+        });
+    }
+});
+</script>
 </head>
 <body class="bg-purple-25">
 

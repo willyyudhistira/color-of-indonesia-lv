@@ -8,16 +8,16 @@
 <section class="relative h-96 flex items-center justify-center text-white text-center">
     <div class="absolute inset-0 z-0">
         <img src="https://images.unsplash.com/photo-1528605248644-14dd04022da1?w=1200" class="w-full h-full object-cover" alt="Event Audience">
-        <div class="absolute inset-0 bg-purple-900 opacity-60"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-purple-900/60 to-black/50"></div>
     </div>
     <div class="relative z-10 px-4">
         <h1 class="text-4xl md:text-6xl font-extrabold font-serif">Jadilah Bagian dari Perayaan Budaya Terbesar</h1>
-        <p class="mt-4 text-lg md:text-xl max-w-2xl mx-auto">Berpartner dengan kami untuk menjangkau ribuan audiens yang antusias dan tunjukkan komitmen Anda pada pelestarian budaya Indonesia.</p>
+        <p class="mt-4 text-lg md:text-xl max-w-2xl mx-auto">Jalin kerja sama dengan kami untuk menyemarakkan festival budaya lintas bangsa dan wujudkan komitmen Anda dalam menjaga serta merayakan keberagaman.</p>
     </div>
 </section>
 
 {{-- Wrapper untuk sisa konten --}}
-<div class="bg-gray-50">
+<div>
     <div class="container mx-auto px-6 py-20 space-y-20">
 
         {{-- 2. "Mengapa Berpartner dengan Kami?" Section --}}
@@ -86,7 +86,6 @@
                 <h2 class="text-3xl font-bold text-gray-800 mb-2">Dokumen & Legalitas</h2>
                 <p class="text-gray-600 mb-6">Unduh proposal sponsorship dan dokumen legalitas kami untuk informasi lebih lanjut.</p>
                 <a href="#" class="inline-block bg-gradient-to-r from-[#CD75FF] to-[#8949FF] text-white font-bold py-3 px-10 rounded-full hover:opacity-90 transition-shadow shadow-lg flex items-center gap-3 mx-auto w-fit">
-                    <span class="iconify" data-icon="solar:document-add-bold-duotone"></span>
                     Download Legalitas
                 </a>
             </div>
@@ -94,9 +93,9 @@
 
         {{-- 5. Final Call to Action Section --}}
         <section class="text-center">
-             <h2 class="text-3xl font-bold text-gray-800 max-w-3xl mx-auto mb-6">Siap Berkolaborasi dan Memberi Warna bagi Indonesia?</h2>
+             <h2 class="text-3xl font-bold text-gray-800 max-w-3xl mx-auto mb-6">Siap Berkolaborasi dan Memberi Warna?</h2>
              <a href="{{ route('contact.index') }}"
-                class="inline-block bg-pink-500 text-white font-bold py-3 px-8 rounded-full text-lg hover:bg-pink-600 transition-transform hover:scale-105">
+                class="inline-block bg-gradient-to-r from-[#CD75FF] to-[#8949FF] text-white font-bold py-3 px-8 rounded-full text-lg hover:bg-pink-600 transition-transform hover:scale-105">
                  Hubungi Tim Kami
              </a>
         </section>

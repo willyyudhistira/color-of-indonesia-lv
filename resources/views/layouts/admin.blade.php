@@ -15,6 +15,12 @@
     <!-- @vite(['resources/css/app.css', 'resources/js/app.js']) -->
     <link rel="stylesheet" href="{{ $css }}" id="css">
     <script src="{{ $js }}" id="js"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/plugins/monthSelect/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/plugins/monthSelect/index.js"></script>
+
 </head>
 <body class="bg-gray-100 font-sans">
 
@@ -37,9 +43,14 @@
         </main>
     </div>
 
-    {{-- Script-script penting --}}
+     {{-- Script-script penting --}}
     <script src="https://code.iconify.design/3/3.1.1/iconify.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <x-admin.toast-notification />
+
+    {{-- ========================================================== --}}
+    {{-- == 2. TAMBAHKAN SLOT SCRIPT SEBELUM PENUTUP </body> == --}}
+    {{-- ========================================================== --}}
+    @stack('scripts')
 </body>
 </html>

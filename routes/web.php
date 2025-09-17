@@ -47,6 +47,8 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middl
 
 //VISITORS PAGES
 Route::get('/', [HomeController::class, 'index'])->name('home');
+// Route::get('/', [HomeController::class, 'showUnderConstruction'])->name('under-construction');
+// Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/about', [AboutController::class, 'index'])->name('about');
 Route::get('/events', [EventController::class, 'index'])->name('events.index');
 Route::get('/events/{slug}', [EventController::class, 'show'])->name('events.show');
@@ -78,7 +80,8 @@ Route::prefix('admin')
         Route::put('/{item}', [HomeCarouselController::class, 'update'])->name('update');
         Route::delete('/{item}', [HomeCarouselController::class, 'destroy'])->name('destroy');
     });
-
+    //Export report
+    Route::get('/events/export', [AdminEventController::class, 'export'])->name('events.export');
     Route::resource('programs', ProgramController::class);
     Route::resource('main-events', MainEventController::class);
     Route::resource('events', AdminEventController::class);
@@ -107,5 +110,7 @@ Route::prefix('admin')
 
     // Nanti tambahkan rute-rute admin lain di sini
     // Contoh: Route::resource('programs', ProgramAdminController::class);
+
+
 });
 

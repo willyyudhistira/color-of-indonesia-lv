@@ -16,7 +16,7 @@
     <section class="py-20">
         <div class="container mx-auto px-6 md:px-20">
             
-            <div class="max-w-3xl mx-auto text-left mb-16">
+            <div class="text-left mb-16">
                 <h2 class="text-4xl font-bold text-purple-800 mb-3">Latest News</h2>
                 <div class="flex items-center my-6">
                     <div class="w-2 h-2 bg-purple-700 rounded-full"></div>

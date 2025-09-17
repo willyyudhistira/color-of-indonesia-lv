@@ -12,6 +12,10 @@ use App\Models\Photo;
 
 class HomeController extends Controller
 {
+    public function showUnderConstruction()
+    {
+        return view('pages.under-construction');
+    }
     public function index()
     {
         // 1. Ambil data carousel dari database
