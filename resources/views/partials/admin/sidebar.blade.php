@@ -9,6 +9,7 @@
         ['name' => 'Sponsor', 'route' => 'admin.sponsors.index', 'icon' => 'solar:star-bold'],
         ['name' => 'News', 'route' => 'admin.news.index', 'icon' => 'solar:document-text-bold'],
         ['name' => 'Testimonials', 'route' => 'admin.testimonials.index', 'icon' => 'solar:chat-round-like-bold'],
+        ['name' => 'E-Certificate', 'route' => 'admin.participants.index', 'icon' => 'solar:medal-star-bold'],
     ];
 @endphp
 

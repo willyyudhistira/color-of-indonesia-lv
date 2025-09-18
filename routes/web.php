@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\HomeCarouselController;
 use App\Http\Controllers\Admin\MainEventController;
+use App\Http\Controllers\Admin\ParticipantController;
 use App\Http\Controllers\Admin\ProgramController;
 use App\Http\Controllers\Admin\GalleryController as AdminGalleryController;
 use App\Http\Controllers\Admin\SponsorBannerController;
@@ -11,6 +12,7 @@ use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\Admin\EventController as AdminEventController;
 use App\Http\Controllers\Admin\VideoController as AdminVideoController;
 
+use App\Http\Controllers\Web\ECertificateController;
 use App\Http\Controllers\Web\VideoController as WebVideoController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Web\ContactPageController;
@@ -61,6 +63,11 @@ Route::get('/contact', [ContactPageController::class, 'index'])->name('contact.i
 Route::post('/contact', [ContactPageController::class, 'store'])->name('contact.store');
 Route::get('/videos', [WebVideoController::class, 'index'])->name('videos.index');
 
+Route::get('/e-certificate', [ECertificateController::class, 'index'])->name('e-certificate.index');
+Route::post('/e-certificate', [ECertificateController::class, 'generate'])->name('e-certificate.generate');
+Route::get('/certificate-preview', [ECertificateController::class, 'preview']);
+Route::get('/verify-certificate/{certificate_number}', [ECertificateController::class, 'verify'])->name('certificate.verify');
+
 // ===============================================
 // GRUP RUTE UNTUK ADMIN DASHBOARD
 // ===============================================
@@ -107,6 +114,9 @@ Route::prefix('admin')
     Route::resource('news', AdminNewsController::class);
 
     Route::resource('testimonials', TestimonialController::class);
+
+    Route::resource('participants', ParticipantController::class);
+    Route::post('/participants/import', [ParticipantController::class, 'import'])->name('participants.import');
 
     // Nanti tambahkan rute-rute admin lain di sini
     // Contoh: Route::resource('programs', ProgramAdminController::class);

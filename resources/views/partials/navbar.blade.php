@@ -8,7 +8,7 @@
             ['title' => 'Photo', 'route' => 'gallery.index'],
             ['title' => 'Video', 'route' => 'videos.index'],
         ]],
-        ['title' => 'E-Certificate', 'route' => '#'], // Menggunakan # sebagai placeholder
+        ['title' => 'E-Certificate', 'route' => 'e-certificate.index'], // Menggunakan # sebagai placeholder
         // ## AKHIR BAGIAN ##
         ['title' => 'News', 'route' => 'news.index'],
         ['title' => 'Sponsorship', 'route' => 'sponsorship'],

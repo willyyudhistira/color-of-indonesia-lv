@@ -112,9 +112,13 @@
                     <div class="mt-10 pt-6 border-t border-purple-200">
                         <h3 class="text-xl font-bold mb-4 text-gray-800">Lokasi Kami (Head Office)</h3>
                         <div class="overflow-hidden rounded-lg shadow-lg">
-                            <iframe class="w-full h-64"
-                                src="https://www.openstreetmap.org/export/embed.html?bbox=106.69174%2C-6.28255%2C106.69605%2C-6.28055&layer=mapnik&marker=-6.28155%2C106.69390"
-                                style="border: 0;" allowfullscreen="" loading="lazy"
+                            <iframe 
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3169.8737064965358!2d106.6914078385558!3d-6.2816019945318535!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69fbc886388563%3A0x168df6b07524424c!2sGraha%20Fadilah!5e1!3m2!1sid!2sid!4v1758120615120!5m2!1sid!2sid" 
+                                width="600" 
+                                height="300" 
+                                style="border:0;" 
+                                allowfullscreen="" 
+                                loading="lazy" 
                                 referrerpolicy="no-referrer-when-downgrade">
                             </iframe>
                         </div>
