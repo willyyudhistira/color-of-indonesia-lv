@@ -20,7 +20,7 @@ class SponsorBannerController extends Controller
         $validated['image_url'] = $request->file('image_url')->store('sponsor_banners', 'public');
         SponsorBanner::create($validated);
 
-        return back()->with('success', 'Sponsor (Banner) berhasil ditambahkan.');
+        return back()->with('success', 'Sponsor (Banner) has been successfully added.');
     }
 
     public function destroy(SponsorBanner $sponsorBanner)
@@ -30,7 +30,7 @@ class SponsorBannerController extends Controller
         }
         $sponsorBanner->delete();
 
-        return back()->with('success', 'Sponsor (Banner) berhasil dihapus.');
+        return back()->with('success', 'Sponsor (Banner) has been successfully deleted.');
     }
 
     public function edit(SponsorBanner $sponsorBanner)
@@ -58,6 +58,6 @@ class SponsorBannerController extends Controller
         // Sama seperti di atas, jika tidak ada file baru diunggah, jangan timpa.
 
         $sponsorBanner->update($validated);
-        return redirect()->route('admin.sponsors.index')->with('success', 'Sponsor (Banner) berhasil diperbarui.');
+        return redirect()->route('admin.sponsors.index')->with('success', 'Sponsor (Banner) has been successfully updated.');
     }
 }

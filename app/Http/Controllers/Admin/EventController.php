@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 
 use App\Http\Controllers\Controller;
+use App\Models\CertificateTemplate;
 use App\Models\Event; // Pastikan model Event sudah ada
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -11,6 +12,8 @@ use Illuminate\Support\Str; // Import Str facade untuk membuat slug
 use Carbon\Carbon;
 use App\Exports\EventsReportExport;
 use Maatwebsite\Excel\Facades\Excel;
+use Barryvdh\DomPDF\Facade\Pdf;
+use App\Models\Participant;
 
 class EventController extends Controller
 {
@@ -56,7 +59,8 @@ class EventController extends Controller
      */
     public function create()
     {
-        return view('admin.events.create');
+        $templates = CertificateTemplate::orderBy('template_name')->get();
+        return view('admin.events.create', compact('templates'));
     }
 
     /**
@@ -81,8 +85,9 @@ class EventController extends Controller
             'hero_image_url' => 'nullable|image|max:4096',
             'is_featured' => 'required|boolean', // Diubah menjadi required
             'is_published' => 'required|boolean', // Diubah menjadi required
+            'certificate_template_id' => 'nullable|exists:certificate_templates,id',
         ], [
-            'title.unique' => 'Judul event ini sudah pernah digunakan. Silakan gunakan judul lain.'
+            'title.unique' => 'This event title has already been used. Please use a different title.'
         ]);
 
         // Buat slug secara otomatis
@@ -94,7 +99,7 @@ class EventController extends Controller
 
         Event::create($validated);
 
-        return redirect()->route('admin.events.index')->with('success', 'Event berhasil ditambahkan.');
+        return redirect()->route('admin.events.index')->with('success', 'Event has been successfully added.');
     }
 
     /**
@@ -102,7 +107,8 @@ class EventController extends Controller
      */
     public function edit(Event $event)
     {
-        return view('admin.events.edit', ['event' => $event]);
+        $templates = CertificateTemplate::orderBy('template_name')->get();
+        return view('admin.events.edit', compact('event', 'templates'));
     }
 
     /**
@@ -128,6 +134,7 @@ class EventController extends Controller
             'hero_image_url' => 'nullable|image|max:4096',
             'is_featured' => 'required|boolean', // Diubah menjadi required
             'is_published' => 'required|boolean', // Diubah menjadi required
+            'certificate_template_id' => 'nullable|exists:certificate_templates,id',
         ]);
 
         if ($request->hasFile('hero_image_url')) {
@@ -139,7 +146,7 @@ class EventController extends Controller
 
         $event->update($validated);
 
-        return redirect()->route('admin.events.index')->with('success', 'Event berhasil diperbarui.');
+        return redirect()->route('admin.events.index')->with('success', 'Event has been successfully updated.');
     }
 
     /**
@@ -152,7 +159,7 @@ class EventController extends Controller
         }
         $event->delete();
 
-        return redirect()->route('admin.events.index')->with('success', 'Event berhasil dihapus.');
+        return redirect()->route('admin.events.index')->with('success', 'Event has been successfully deleted.');
     }
 
     // Eksport report

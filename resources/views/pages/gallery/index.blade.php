@@ -5,7 +5,7 @@
     {{-- Hero Section --}}
     <section class="relative h-96 flex items-center justify-center text-white" style="background-image: url('{{ asset('assets/images/hero-gallery.png') }}'); background-size: cover; background-position: center 70%;">
         <div class="absolute inset-0 bg-gradient-to-t from-purple-900/60 to-black/50"></div>
-        <h1 class="relative z-10 text-5xl md:text-6xl font-serif font-extrabold text-center px-4 tracking-tight">Abadikan Momen<br>Ciptakan Kenangan</h1>
+        <h1 class="relative z-10 text-5xl md:text-6xl font-serif font-extrabold text-center px-4 tracking-tight">Capture the Moment<br>Create Memories</h1>
     </section>
 
     <div class="container mx-auto px-6 md:px-20 py-20">
@@ -30,7 +30,7 @@
                     </div>
                 </div>
             @empty
-                <p class="col-span-full text-center text-gray-500 text-lg py-16">Belum ada album yang dipublikasikan.</p>
+                <p class="col-span-full text-center text-gray-500 text-lg py-16">No albums have been published yet.</p>
             @endforelse
         </div>
 

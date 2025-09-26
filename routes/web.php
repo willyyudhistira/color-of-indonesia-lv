@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CertificateTemplateController;
 use App\Http\Controllers\Admin\HomeCarouselController;
 use App\Http\Controllers\Admin\MainEventController;
 use App\Http\Controllers\Admin\ParticipantController;
@@ -65,8 +66,8 @@ Route::get('/videos', [WebVideoController::class, 'index'])->name('videos.index'
 
 Route::get('/e-certificate', [ECertificateController::class, 'index'])->name('e-certificate.index');
 Route::post('/e-certificate', [ECertificateController::class, 'generate'])->name('e-certificate.generate');
-Route::get('/certificate-preview', [ECertificateController::class, 'preview']);
 Route::get('/verify-certificate/{certificate_number}', [ECertificateController::class, 'verify'])->name('certificate.verify');
+// Route::get('/certificate-preview/{event}', [ECertificateController::class, 'preview'])->name('certificate.preview'); // <-- INI RUTE YANG BENAR
 
 // ===============================================
 // GRUP RUTE UNTUK ADMIN DASHBOARD
@@ -117,6 +118,38 @@ Route::prefix('admin')
 
     Route::resource('participants', ParticipantController::class);
     Route::post('/participants/import', [ParticipantController::class, 'import'])->name('participants.import');
+    Route::get('/participants/{participant}/download', [ParticipantController::class, 'downloadCertificate'])->name('participants.downloadCertificate');
+    Route::get('/participants/{participant}/print', [ParticipantController::class, 'printCertificate'])->name('participants.printCertificate');
+    Route::patch('/participants/{participant}/notes', [ParticipantController::class, 'updateNote'])->name('participants.updateNote');
+
+    Route::get('/certificate-template', [CertificateTemplateController::class, 'edit'])->name('certificate-template.edit');
+    Route::put('/certificate-template', [CertificateTemplateController::class, 'update'])->name('certificate-template.update');
+    Route::get('/certificate-templates/{certificate_template}/preview', [CertificateTemplateController::class, 'preview'])->name('certificate-templates.preview');
+    Route::get('/certificate-templates/{template}/download', [CertificateTemplateController::class, 'download'])->name('certificate-templates.download');
+    Route::resource('certificate-templates', CertificateTemplateController::class);
+
+    // Rute ini sekarang akan menerima event yang ingin dipratinjau
+    // Route::get('/e-certificate', [ECertificateController::class, 'index'])->name('e-certificate.index');
+    // Route::post('/e-certificate', [ECertificateController::class, 'generate'])->name('e-certificate.generate');
+    // Route::get('/verify-certificate/{certificate_number}', [ECertificateController::class, 'verify'])->name('certificate.verify');
+
+    // ## TAMBAHKAN BARIS INI ##
+    Route::get('/certificate-preview/{event}', [ECertificateController::class, 'preview'])->name('certificate.preview');
+
+    Route::get('/events/{event}/template', [AdminEventController::class, 'editTemplate'])->name('events.template.edit');
+    Route::put('/events/{event}/template', [AdminEventController::class, 'updateTemplate'])->name('events.template.update');
+    
+
+
+
+
+
+
+
+
+    // Route::resource('certificate-templates', CertificateTemplateController::class);
+
+
 
     // Nanti tambahkan rute-rute admin lain di sini
     // Contoh: Route::resource('programs', ProgramAdminController::class);

@@ -62,15 +62,15 @@
     <section class="py-24 px-8 md:px-20">
         <div class="container mx-auto grid md:grid-cols-2 gap-12 items-start">
             <div class="text-center md:text-left">
-                <h2 class="text-4xl font-bold text-purple-700 mb-6">Tentang Kami</h2>
+                <h2 class="text-4xl font-bold text-purple-700 mb-6">About Us</h2>
                 <p class="text-gray-600 mb-8 leading-relaxed text-lg lg:text-2xl">
-                    Color of Indonesia bertujuan memperkenalkan keragaman budaya nusantara ke tingkat global melalui
-                    festival, pertukaran seni, dan kolaborasi internasional. Sebagai jembatan budaya, inisiatif ini
-                    menampilkan Indonesia yang inklusif, kreatif, dan berwarna.
+                    Color of Indonesia aims to introduce the diversity of the archipelago's 
+                    culture to a global audience through festivals, art exchanges, and international collaborations. 
+                    As a cultural bridge, this initiative showcases an Indonesia that is inclusive, creative, and vibrant.
                 </p>
                 <a href="{{ route('about') }}"
                     class="inline-block bg-gradient-to-r from-[#CD75FF] to-[#8949FF] text-white font-semibold py-3 px-8 rounded-full hover:opacity-90 transition-opacity">
-                    Baca Cerita Kami
+                    Read Our Story
                 </a>
             </div>
 
@@ -107,9 +107,9 @@
     @if ($homeData['mainEvents']->isNotEmpty())
         <section class="py-24 px-8 md:px-20 text-center">
             <div class="container mx-auto">
-                <h2 class="text-4xl font-bold text-purple-700 mb-4">Spesial Untuk Anda</h2>
-                <p class="text-gray-600 mb-12 max-w-2xl mx-auto">“Setiap event membawa Anda lebih dekat ke impian Anda untuk
-                    menjelajah, belajar, dan terhubung dengan komunitas global.”</p>
+                <h2 class="text-4xl font-bold text-purple-700 mb-4">Special for You</h2>
+                <p class="text-gray-600 mb-12 max-w-2xl mx-auto">"Each event brings you closer to your dream of exploring, learning, 
+                    and connecting with the global community."</p>
 
                 @if ($homeData['mainEvents']->count() > 4)
 
@@ -140,7 +140,7 @@
 
                 <a href="{{ route('events.index') }}"
                     class="inline-block mt-16 bg-gradient-to-r from-[#CD75FF] to-[#8949FF] text-white font-bold py-3 px-10 rounded-full hover:opacity-90 transition-shadow shadow-lg">
-                    Selengkapnya
+                    Read More
                 </a>
             </div>
         </section>
@@ -156,7 +156,7 @@
     @if ($homeData['testimonials']->isNotEmpty())
         <section class="py-24 px-8">
             <div class="container mx-auto">
-                <h2 class="text-center text-4xl font-bold text-purple-700 mb-16">Apa Kata Mereka</h2>
+                <h2 class="text-center text-4xl font-bold text-purple-700 mb-16">Testimonials</h2>
                 <swiper-container slides-per-view="1" loop="true" autoplay-delay="5000" effect="fade">
                     @foreach ($homeData['testimonials'] as $testimonial)
                         <swiper-slide>
@@ -179,7 +179,7 @@
     @if ($homeData['sponsors']->isNotEmpty())
         <section class="py-20 bg-white">
             <div class="container mx-auto text-center">
-                <h3 class="text-3xl font-bold text-purple-700 mb-12">DIDUKUNG OLEH</h3>
+                <h3 class="text-3xl font-bold text-purple-700 mb-12">Supported By</h3>
                 <div class="flex justify-center items-center gap-x-16 gap-y-8 flex-wrap">
                     @foreach ($homeData['sponsors'] as $sponsor)
                         <a href="{{ $sponsor->website_url }}" target="_blank" rel="noopener noreferrer"
@@ -191,7 +191,7 @@
                 </div>
                 <a href="{{ route('sponsorship') }}"
                     class="inline-block mt-16 bg-gradient-to-r from-[#CD75FF] to-[#8949FF] text-white font-bold py-3 px-10 rounded-full hover:opacity-90 transition-shadow shadow-lg">
-                    Selengkapnya
+                    Discover More
                 </a>
             </div>
         </section>

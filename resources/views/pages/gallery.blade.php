@@ -8,7 +8,7 @@
         style="background-image: url('{{ asset('assets/images/hero-gallery.png') }}'); background-size: cover; background-position: center 70%;">
         <div class="absolute inset-0 bg-gradient-to-t from-purple-900/60 to-black/50"></div>
         <h1 class="relative z-10 text-5xl md:text-6xl font-serif font-extrabold text-center px-4 tracking-tight">
-            Abadikan Momen<br>Ciptakan Kenangan
+            Capture the Moment<br>Create Memories
         </h1>
     </section>
 
@@ -34,8 +34,7 @@
                         </button>
                         <div id="album-filter-menu"
                             class="hidden absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-xl z-20">
-                            <a href="{{ route('gallery') }}" class="block px-4 py-2 text-gray-700 hover:bg-purple-50">Semua
-                                Album</a>
+                            <a href="{{ route('gallery') }}" class="block px-4 py-2 text-gray-700 hover:bg-purple-50">Browse All Albums</a>
                             @foreach($albums as $album)
                                 <a href="{{ route('gallery', ['album' => $album->slug]) }}"
                                     class="block px-4 py-2 text-gray-700 hover:bg-purple-50 hover:text-purple-700 {{ $selectedAlbumName == $album->title ? 'font-bold text-purple-700' : '' }}">
@@ -64,7 +63,7 @@
                             class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
                     </div>
                 @empty
-                    <p class="col-span-full text-center text-gray-500 text-lg py-16">Tidak ada foto di album ini.</p>
+                    <p class="col-span-full text-center text-gray-500 text-lg py-16">No photos available in this album.</p>
                 @endforelse
             </div>
 
@@ -91,7 +90,7 @@
                         class="max-w-full max-h-[60vh] md:max-h-[90vh] object-contain">
                 </div>
                 <div class="w-full md:w-1/3 p-6 flex flex-col text-white">
-                    <h3 class="font-bold text-lg mb-4 border-b border-gray-700 pb-2">Detail Foto</h3>
+                    <h3 class="font-bold text-lg mb-4 border-b border-gray-700 pb-2">Photo Details</h3>
                     <p id="lightbox-caption" class="text-gray-300 text-sm flex-grow"></p>
                 </div>
             </div>

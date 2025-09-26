@@ -29,7 +29,7 @@ class HomeCarouselController extends Controller
     public function store(Request $request)
     {
         if (HomeCarouselItem::count() >= self::MAX_ITEMS) {
-            return back()->with('error', 'Jumlah item carousel sudah maksimal.');
+            return back()->with('error', 'The number of carousel items has reached the maximum.');
         }
 
         $request->validate([
@@ -49,7 +49,7 @@ class HomeCarouselController extends Controller
         ]);
 
         // ## UBAH BARIS INI ##
-        return redirect()->route('admin.dashboard')->with('success', 'Item carousel berhasil ditambahkan.');
+        return redirect()->route('admin.dashboard')->with('success', 'Carousel item has been successfully added.');
     }
 
     /**
@@ -89,7 +89,7 @@ class HomeCarouselController extends Controller
         
         $this->reorderItems($item, $validated['sort_order']);
         
-        return redirect()->route('admin.dashboard')->with('info', 'Item carousel berhasil diperbarui.');
+        return redirect()->route('admin.dashboard')->with('info', 'Carousel item has been successfully updated.');
     }
 
     /**
@@ -105,7 +105,7 @@ class HomeCarouselController extends Controller
         // Atur ulang sort_order setelah item dihapus
         $this->reorderAllItems();
 
-        return redirect()->route('admin.dashboard')->with('error', 'Item carousel berhasil dihapus.');
+        return redirect()->route('admin.dashboard')->with('error', 'Carousel item has been successfully deleted.');
     }
     
     /**

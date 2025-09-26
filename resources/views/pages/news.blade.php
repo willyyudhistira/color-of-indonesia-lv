@@ -8,7 +8,7 @@
     <section class="relative h-96 flex items-center justify-center text-white" style="background-image: url('{{ asset('assets/images/hero-news.png') }}'); background-size: cover; background-position: center;">
         <div class="absolute inset-0 bg-gradient-to-t from-purple-900/60 to-black/50"></div>
         <h1 class="relative z-10 text-4xl md:text-6xl font-serif font-extrabold text-center px-4 tracking-tight">
-            Update Budaya
+            Cultural Updates
         </h1>
     </section>
 
@@ -58,7 +58,7 @@
                                 </p>
                                 <a href="{{ $item->source_url }}" target="_blank" rel="noopener noreferrer"
                                    class="bg-gradient-to-r from-[#CD75FF] to-[#8949FF] text-white font-semibold text-sm py-2 px-6 rounded-full hover:opacity-90 transition-opacity self-start sm:self-center">
-                                    Baca Selengkapnya
+                                    Read More
                                 </a>
                             </div>
                         </div>
@@ -69,10 +69,9 @@
                             <svg class="w-16 h-16 text-gray-400 mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
                             </svg>
-                            <h3 class="text-2xl font-bold text-gray-700">Belum Ada Berita Terbaru</h3>
+                            <h3 class="text-2xl font-bold text-gray-700">No Latest News</h3>
                             <p class="text-gray-500 mt-2 max-w-sm">
-                                Saat ini belum ada artikel berita yang dipublikasikan. Silakan periksa kembali nanti untuk
-                                pembaruan terbaru dari kami.
+                                We haven't published any news articles yet. Stay tuned for upcoming updates from us!
                             </p>
                         </div>
                     </div>

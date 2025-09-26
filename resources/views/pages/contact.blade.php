@@ -12,7 +12,7 @@
         </div>
         <div class="relative z-10 text-center px-4">
             {{-- Ukuran font dibuat responsif --}}
-            <h1 class="text-4xl sm:text-5xl md:text-7xl font-extrabold font-serif">Tetap Terhubung</h1>
+            <h1 class="text-4xl sm:text-5xl md:text-7xl font-extrabold font-serif">Stay Connected</h1>
         </div>
     </section>
 
@@ -23,7 +23,7 @@
             
             {{-- Judul dan Garis Dekoratif --}}
             <div class="text-left mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold text-purple-800 mb-4">Hubungi Kami</h2>
+                <h2 class="text-3xl md:text-4xl font-bold text-purple-800 mb-4">Contact Us</h2>
                 <div class="flex items-center my-6">
                     <div class="w-2 h-2 bg-purple-700 rounded-full"></div>
                     <div class="flex-grow h-0.5 bg-purple-700 w-full"></div>
@@ -35,7 +35,7 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items">
                 
                 {{-- Kolom Formulir --}}
-                <form action="{{ route('contact.store') }}" method="POST" class="flex flex-col space-y-6 bg-white rounded-xl shadow-2xl p-8 h-full">
+                <!-- <form action="{{ route('contact.store') }}" method="POST" class="flex flex-col space-y-6 bg-white rounded-xl shadow-2xl p-8 h-full">
                     @csrf 
                     @if (session('success'))
                         <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 rounded-md" role="alert">
@@ -45,24 +45,24 @@
                     
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         <div>
-                            <label for="name" class="block text-sm font-semibold text-gray-700 mb-1">Nama Anda</label>
-                            <input type="text" id="name" name="name" placeholder="Masukkan Nama Lengkap Anda" value="{{ old('name') }}" required
+                            <label for="name" class="block text-sm font-semibold text-gray-700 mb-1">Your Name</label>
+                            <input type="text" id="name" name="name" placeholder="Enter Your Full Name" value="{{ old('name') }}" required
                                    class="w-full bg-gray-100 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
                         </div>
                         <div>
-                            <label for="email" class="block text-sm font-semibold text-gray-700 mb-1">Alamat Email</label>
-                            <input type="email" id="email" name="email" placeholder="anda@email.com" value="{{ old('email') }}" required
+                            <label for="email" class="block text-sm font-semibold text-gray-700 mb-1">Email Address</label>
+                            <input type="email" id="email" name="email" placeholder="example@email.com" value="{{ old('email') }}" required
                                    class="w-full bg-gray-100 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
                         </div>
                     </div>
                     <div>
-                        <label for="subject" class="block text-sm font-semibold text-gray-700 mb-1">Subjek</label>
-                        <input type="text" id="subject" name="subject" placeholder="Tujuan pesan Anda" value="{{ old('subject') }}" required
+                        <label for="subject" class="block text-sm font-semibold text-gray-700 mb-1">Subject</label>
+                        <input type="text" id="subject" name="subject" placeholder="Purpose of your message" value="{{ old('subject') }}" required
                                class="w-full bg-gray-100 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
                     </div>
                     <div class="flex-grow">
-                        <label for="message" class="block text-sm font-semibold text-gray-700 mb-1">Pesan</label>
-                        <textarea id="message" name="message" placeholder="Tuliskan pesan Anda di sini..." rows="5" required
+                        <label for="message" class="block text-sm font-semibold text-gray-700 mb-1">Message</label>
+                        <textarea id="message" name="message" placeholder="Write your message here..." rows="5" required
                                   class="w-full h-full bg-gray-100 px-4 py-3 mb-12 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 resize-none">{{ old('message') }}</textarea>
                     </div>
                     <div>
@@ -70,7 +70,7 @@
                             Kirim Pesan
                         </button>
                     </div>
-                </form>
+                </form> -->
 
                 {{-- Kolom Quick Contact --}}
                 <div class="relative bg-purple-100/60 text-gray-800 p-8 rounded-xl shadow-xl flex flex-col justify-between backdrop-blur-sm">
@@ -109,8 +109,8 @@
                     </div>
                     
                     {{-- PETA --}}
-                    <div class="mt-10 pt-6 border-t border-purple-200">
-                        <h3 class="text-xl font-bold mb-4 text-gray-800">Lokasi Kami (Head Office)</h3>
+                    <!-- <div class="mt-10 pt-6 border-t border-purple-200">
+                        <h3 class="text-xl font-bold mb-4 text-gray-800">Our Location (Head Office)</h3>
                         <div class="overflow-hidden rounded-lg shadow-lg">
                             <iframe 
                                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3169.8737064965358!2d106.6914078385558!3d-6.2816019945318535!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69fbc886388563%3A0x168df6b07524424c!2sGraha%20Fadilah!5e1!3m2!1sid!2sid!4v1758120615120!5m2!1sid!2sid" 
@@ -122,6 +122,20 @@
                                 referrerpolicy="no-referrer-when-downgrade">
                             </iframe>
                         </div>
+                    </div> -->
+                </div>
+                <div class="pt-6 border-purple-200">
+                    <h3 class="text-xl font-bold mb-4 text-gray-800">Our Location (Head Office)</h3>
+                    <div class="overflow-hidden rounded-lg shadow-lg">
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3169.8737064965358!2d106.6914078385558!3d-6.2816019945318535!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69fbc886388563%3A0x168df6b07524424c!2sGraha%20Fadilah!5e1!3m2!1sid!2sid!4v1758120615120!5m2!1sid!2sid" 
+                            width="600" 
+                            height="300" 
+                            style="border:0;" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
                     </div>
                 </div>
             </div>

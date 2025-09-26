@@ -30,7 +30,7 @@ class SponsorController extends Controller
         $validated['logo_url'] = $request->file('logo_url')->store('sponsor_logos', 'public');
         Sponsor::create($validated);
 
-        return back()->with('success', 'Sponsor (Logo) berhasil ditambahkan.');
+        return back()->with('success', 'Sponsor (Logo) has been successfully added.');
     }
 
     public function destroy(Sponsor $sponsor)
@@ -40,7 +40,7 @@ class SponsorController extends Controller
         }
         $sponsor->delete();
 
-        return back()->with('success', 'Sponsor (Logo) berhasil dihapus.');
+        return back()->with('success', 'Sponsor (Logo) has been successfully deleted.');
     }
 
     public function edit(Sponsor $sponsor)
@@ -70,6 +70,6 @@ class SponsorController extends Controller
         // Jika Anda ingin mengizinkan penghapusan gambar, Anda perlu logika terpisah.
 
         $sponsor->update($validated);
-        return redirect()->route('admin.sponsors.index')->with('success', 'Sponsor (Logo) berhasil diperbarui.');
+        return redirect()->route('admin.sponsors.index')->with('success', 'Sponsor (Logo) has been successfully updated.');
     }
 }

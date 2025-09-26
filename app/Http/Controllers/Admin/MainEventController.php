@@ -34,7 +34,7 @@ class MainEventController extends Controller
         $validated['hero_image_url'] = $request->file('hero_image_url')->store('main_event_hero', 'public');
         MainEvent::create($validated);
 
-        return redirect()->route('admin.main-events.index')->with('success', 'Main Event berhasil ditambahkan.');
+        return redirect()->route('admin.main-events.index')->with('success', 'Main Event has been successfully added.');
     }
 
     public function edit(MainEvent $mainEvent)
@@ -62,7 +62,7 @@ class MainEventController extends Controller
 
         $mainEvent->update($validated);
 
-        return redirect()->route('admin.main-events.index')->with('success', 'Main Event berhasil diperbarui.');
+        return redirect()->route('admin.main-events.index')->with('success', 'Main Event has been successfully updated.');
     }
 
     public function destroy(MainEvent $mainEvent)
@@ -72,6 +72,6 @@ class MainEventController extends Controller
         }
         $mainEvent->delete();
 
-        return redirect()->route('admin.main-events.index')->with('success', 'Main Event berhasil dihapus.');
+        return redirect()->route('admin.main-events.index')->with('success', 'Main Event has been successfully deleted.');
     }
 }

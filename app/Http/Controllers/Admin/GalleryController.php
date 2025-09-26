@@ -51,7 +51,7 @@ class GalleryController extends Controller
         }
         
         Album::create($validated);
-        return redirect()->route('admin.gallery.index')->with('success', 'Album berhasil dibuat.');
+        return redirect()->route('admin.gallery.index')->with('success', 'Album has been successfully added');
     }
 
     /**
@@ -104,7 +104,7 @@ class GalleryController extends Controller
         }
 
         $gallery->update($validated);
-        return redirect()->route('admin.gallery.index')->with('success', 'Album berhasil diperbarui.');
+        return redirect()->route('admin.gallery.index')->with('success', 'Album has been successfully updated.');
     }
     
     /**
@@ -121,7 +121,7 @@ class GalleryController extends Controller
             Storage::disk('public')->delete($gallery->cover_url);
         }
         $gallery->delete(); // Ini akan menghapus record album dan foto-fotonya karena relasi cascade
-        return redirect()->route('admin.gallery.index')->with('success', 'Album berhasil dihapus.');
+        return redirect()->route('admin.gallery.index')->with('success', 'Album has been successfully deleted.');
     }
     
     /**
@@ -142,7 +142,7 @@ class GalleryController extends Controller
             'sort_order' => $gallery->photos()->count() + 1,
         ]);
 
-        return back()->with('success', 'Foto berhasil di-upload.');
+        return back()->with('success', 'Photo has been successfully uploaded.');
     }
     
     /**
@@ -152,6 +152,6 @@ class GalleryController extends Controller
     {
         Storage::disk('public')->delete($photo->image_url);
         $photo->delete();
-        return back()->with('success', 'Foto berhasil dihapus.');
+        return back()->with('success', 'Photo has been successfully deleted.');
     }
 }

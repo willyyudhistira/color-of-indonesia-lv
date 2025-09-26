@@ -7,7 +7,7 @@
 
 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
     <div>
-        <label for="title" class="block text-sm font-medium text-gray-700">Judul Event</label>
+        <label for="title" class="block text-sm font-medium text-gray-700">Event Title</label>
         <input type="text" id="title" name="title" value="{{ old('title', $event->title ?? '') }}" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
     </div>
     <div>
@@ -16,35 +16,35 @@
     </div>
 </div>
 <div>
-    <label for="description" class="block text-sm font-medium text-gray-700">Deskripsi</label>
+    <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
     <textarea id="description" name="description" rows="5" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">{{ old('description', $event->description ?? '') }}</textarea>
 </div>
 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
     <div>
-        <label for="start_date" class="block text-sm font-medium text-gray-700">Tanggal Mulai</label>
+        <label for="start_date" class="block text-sm font-medium text-gray-700">Start Date</label>
         <input type="date" id="start_date" name="start_date" value="{{ old('start_date', isset($event) ? $event->start_date->format('Y-m-d') : '') }}" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
     </div>
     <div>
-        <label for="end_date" class="block text-sm font-medium text-gray-700">Tanggal Selesai (Opsional)</label>
+        <label for="end_date" class="block text-sm font-medium text-gray-700">Completion Date (Optional)</label>
         <input type="date" id="end_date" name="end_date" value="{{ old('end_date', isset($event) && $event->end_date ? $event->end_date->format('Y-m-d') : '') }}" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
     </div>
 </div>
 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
     <div>
-        <label for="location_name" class="block text-sm font-medium text-gray-700">Nama Lokasi</label>
+        <label for="location_name" class="block text-sm font-medium text-gray-700">Location Name</label>
         <input type="text" id="location_name" name="location_name" value="{{ old('location_name', $event->location_name ?? '') }}" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
     </div>
     <div>
-        <label for="address" class="block text-sm font-medium text-gray-700">Alamat</label>
+        <label for="address" class="block text-sm font-medium text-gray-700">Address</label>
         <input type="text" id="address" name="address" value="{{ old('address', $event->address ?? '') }}" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
     </div>
 </div>
 <div>
-    <label for="form_url" class="block text-sm font-medium text-gray-700">URL Form Pendaftaran</label>
+    <label for="form_url" class="block text-sm font-medium text-gray-700">Registration Form URL</label>
     <input type="url" id="form_url" name="form_url" value="{{ old('form_url', $event->form_url ?? '') }}" required placeholder="https://" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
 </div>
 <div>
-    <label class="block text-sm font-medium text-gray-700">Gambar Hero</label>
+    <label class="block text-sm font-medium text-gray-700">Hero Image</label>
     
     {{-- Elemen untuk pratinjau gambar --}}
     <div id="hero-preview-container" class="mt-2 w-full h-48 flex items-center justify-center bg-gray-100 rounded-md overflow-hidden border border-dashed {{ isset($event) && $event->hero_image_url ? '' : 'hidden' }}">
@@ -57,10 +57,21 @@
 <div class="flex gap-10 pt-2">
     <div class="flex items-center gap-3">
         <input type="checkbox" id="is_published" name="is_published" class="h-4 w-4 rounded" @checked(old('is_published', $event->is_published ?? true))>
-        <label for="is_published">Publikasikan</label>
+        <label for="is_published">Publish</label>
     </div>
     <div class="flex items-center gap-3">
         <input type="checkbox" id="is_featured" name="is_featured" class="h-4 w-4 rounded" @checked(old('is_featured', $event->is_featured ?? false))>
-        <label for="is_featured">Jadikan Featured</label>
+        <label for="is_featured">Make it Featured</label>
     </div>
+</div>
+<div>
+    <label for="certificate_template_id" class="block text-sm font-medium text-gray-700">Select Certificate Template (Optional)</label>
+    <select id="certificate_template_id" name="certificate_template_id" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+        <option value="">-- None / Default --</option>
+        @foreach($templates as $template)
+            <option value="{{ $template->id }}" @selected(old('certificate_template_id', $event->certificate_template_id ?? '') == $template->id)>
+                {{ $template->template_name }}
+            </option>
+        @endforeach
+    </select>
 </div>

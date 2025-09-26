@@ -53,7 +53,7 @@
             <!-- Kolom 2: Tautan -->
 
             <div class="lg:col-span-2">
-                <h3 class="font-bold text-lg mb-4">Tautan</h3>
+                <h3 class="font-bold text-lg mb-4">Link</h3>
                 <ul class="space-y-2">
                     <li><a href="#" class="hover:underline">Contact Us</a></li>
                     <li><a href="#" class="hover:underline">Sponsorship</a></li>
@@ -62,7 +62,7 @@
 
             <!-- Kolom 3: Kantor -->
             <div class="lg:col-span-3">
-                <h3 class="font-bold text-lg mb-4">Kantor</h3>
+                <h3 class="font-bold text-lg mb-4">Head Office</h3>
                 <div class="flex items-start space-x-2">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-7">
                         <path fill-rule="evenodd"

@@ -3,10 +3,10 @@
 
 @section('content')
     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6">
-        <h2 class="text-2xl font-semibold text-gray-700">Daftar Main Event</h2>
+        <h2 class="text-2xl font-semibold text-gray-700">List of Main Event</h2>
         <a href="{{ route('admin.main-events.create') }}" class="mt-4 sm:mt-0 bg-purple-700 text-white font-bold py-2 px-4 rounded-lg hover:bg-purple-800 transition-colors flex items-center gap-2">
             <span class="iconify" data-icon="solar:add-circle-bold"></span>
-            <span>Tambah Main Event</span>
+            <span>Add Main Event</span>
         </a>
     </div>
 
@@ -36,7 +36,7 @@
                 </div>
             @empty
                 <div class="text-center text-gray-500 py-8">
-                    <p>Belum ada main event yang ditambahkan.</p>
+                    <p>No main events have been added yet.</p>
                 </div>
             @endforelse
         </div>

@@ -58,12 +58,12 @@
                     </button>
                 </div>
             </form>
-            <p class="mt-8 text-center text-sm text-gray-600">
+            <!-- <p class="mt-8 text-center text-sm text-gray-600">
                 Don't have an account?
                 <a href="{{ route('register') }}" class="font-medium text-purple-600 hover:text-purple-500 hover:underline">
                     Register here
                 </a>
-            </p>
+            </p> -->
         </div>
     </div>
 @endsection

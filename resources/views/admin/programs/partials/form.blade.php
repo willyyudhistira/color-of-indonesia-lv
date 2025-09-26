@@ -7,7 +7,7 @@
 
 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
     <div>
-        <label for="title" class="block text-sm font-medium text-gray-700">Judul Program</label>
+        <label for="title" class="block text-sm font-medium text-gray-700">Program Title</label>
         <input type="text" id="title" name="title" value="{{ old('title', $program->title ?? '') }}" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
     </div>
     <div>
@@ -16,12 +16,12 @@
     </div>
 </div>
 <div>
-    <label for="description" class="block text-sm font-medium text-gray-700">Deskripsi</label>
+    <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
     <textarea id="description" name="description" rows="4" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">{{ old('description', $program->description ?? '') }}</textarea>
 </div>
 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
     <div>
-        <label class="block text-sm font-medium text-gray-700">Ikon Program</label>
+        <label class="block text-sm font-medium text-gray-700">Program Icon</label>
         
         {{-- Elemen untuk pratinjau gambar --}}
         <div id="icon-preview-container" class="mt-2 w-24 h-24 flex items-center justify-center bg-gray-100 rounded-md overflow-hidden border border-dashed {{ isset($program) && $program->icon_url ? '' : 'hidden' }}">
@@ -32,12 +32,12 @@
     </div>
     <div class="space-y-4">
         <div>
-            <label for="sort_order" class="block text-sm font-medium text-gray-700">Urutan</label>
+            <label for="sort_order" class="block text-sm font-medium text-gray-700">Order</label>
             <input type="number" id="sort_order" name="sort_order" value="{{ old('sort_order', $program->sort_order ?? 0) }}" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
         </div>
         <div class="flex items-center gap-3">
             <input type="checkbox" id="is_published" name="is_published" class="h-4 w-4 rounded text-purple-600 focus:ring-purple-500" @checked(old('is_published', $program->is_published ?? true))>
-            <label for="is_published" class="text-sm font-medium">Publikasikan</label>
+            <label for="is_published" class="text-sm font-medium">Publish</label>
         </div>
     </div>
 </div>

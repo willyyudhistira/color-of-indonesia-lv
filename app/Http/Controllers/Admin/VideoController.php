@@ -30,7 +30,7 @@ class VideoController extends Controller
             'is_published' => 'required|boolean',
         ]);
         Video::create($validated);
-        return redirect()->route('admin.videos.index')->with('success', 'Video berhasil ditambahkan.');
+        return redirect()->route('admin.videos.index')->with('success', 'Video has been successfully added.');
     }
 
     public function edit(Video $video)
@@ -49,12 +49,12 @@ class VideoController extends Controller
             'is_published' => 'required|boolean',
         ]);
         $video->update($validated);
-        return redirect()->route('admin.videos.index')->with('success', 'Video berhasil diperbarui.');
+        return redirect()->route('admin.videos.index')->with('success', 'Video has been successfully updated.');
     }
 
     public function destroy(Video $video)
     {
         $video->delete();
-        return redirect()->route('admin.videos.index')->with('success', 'Video berhasil dihapus.');
+        return redirect()->route('admin.videos.index')->with('success', 'Video has been successfully deleted.');
     }
 }

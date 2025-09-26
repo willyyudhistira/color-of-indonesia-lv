@@ -7,7 +7,7 @@
 
 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
     <div>
-        <label for="title" class="block text-sm font-medium text-gray-700">Judul Event</label>
+        <label for="title" class="block text-sm font-medium text-gray-700">Event Title</label>
         <input type="text" id="title" name="title" value="{{ old('title', $mainEvent->title ?? '') }}" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
     </div>
     <div>
@@ -16,12 +16,12 @@
     </div>
 </div>
 <div>
-    <label for="description" class="block text-sm font-medium text-gray-700">Deskripsi Lengkap</label>
+    <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
     <textarea id="description" name="description" rows="5" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">{{ old('description', $mainEvent->description ?? '') }}</textarea>
 </div>
 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
     <div>
-        <label for="location_name" class="block text-sm font-medium text-gray-700">Nama Lokasi</label>
+        <label for="location_name" class="block text-sm font-medium text-gray-700">Location Name</label>
         <input type="text" id="location_name" name="location_name" value="{{ old('location_name', $mainEvent->location_name ?? '') }}" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
     </div>
     <div>
@@ -30,7 +30,7 @@
     </div>
 </div>
 <div>
-    <label class="block text-sm font-medium text-gray-700">Gambar Hero</label>
+    <label class="block text-sm font-medium text-gray-700">Hero Image</label>
     <div id="hero-preview-container" class="mt-2 w-full h-48 hidden items-center justify-center bg-gray-100 rounded-lg overflow-hidden border border-dashed">
         <img id="hero-preview" src="#" alt="Image Preview" class="h-full object-contain p-2">
     </div>

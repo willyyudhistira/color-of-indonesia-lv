@@ -3,10 +3,10 @@
 
 @section('content')
     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6">
-        <h2 class="text-2xl font-semibold text-gray-700">Daftar Berita Eksternal</h2>
+        <h2 class="text-2xl font-semibold text-gray-700">External News List</h2>
         <a href="{{ route('admin.news.create') }}" class="mt-4 sm:mt-0 bg-purple-700 text-white font-bold py-2 px-4 rounded-lg hover:bg-purple-800 transition-colors flex items-center gap-2">
             <span class="iconify" data-icon="solar:add-circle-bold"></span>
-            <span>Tambah Berita Baru</span>
+            <span>Add New News</span>
         </a>
     </div>
 
@@ -34,7 +34,7 @@
                             {{-- Menggunakan SweetAlert2 untuk konfirmasi hapus --}}
                             <form action="{{ route('admin.news.destroy', $article) }}" method="POST">
                                 @csrf @method('DELETE')
-                                <button type="button" class="delete-confirm-button p-2 bg-red-500 text-white rounded-md" title="Hapus">
+                                <button type="button" class="delete-confirm-button p-2 bg-red-500 text-white rounded-md" title="Delete">
                                     <span class="iconify" data-icon="solar:trash-bin-trash-bold"></span>
                                 </button>
                             </form>
@@ -43,7 +43,7 @@
                 </div>
             @empty
                 <div class="text-center text-gray-500 py-8">
-                    <p>Belum ada berita yang ditambahkan.</p>
+                    <p>No news has been added yet.</p>
                 </div>
             @endforelse
         </div>

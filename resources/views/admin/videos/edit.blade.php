@@ -14,7 +14,7 @@
             @include('admin.videos.partials.form', ['video' => $video])
 
             <div class="flex justify-end gap-4 pt-4 border-t mt-6">
-                <a href="{{ route('admin.videos.index') }}" class="py-2 px-6 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors">Batal</a>
+                <a href="{{ route('admin.videos.index') }}" class="py-2 px-6 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors">Cancel</a>
                 <button type="submit" class="py-2 px-6 bg-purple-700 text-white font-bold rounded-lg hover:bg-purple-800 transition-colors">
                     Update Video
                 </button>

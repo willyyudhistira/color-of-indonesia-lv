@@ -10,7 +10,7 @@
 <a href="{{ $whatsappLink }}" 
    target="_blank" 
    rel="noopener noreferrer"
-   title="Hubungi kami di WhatsApp"
+   title="Contact us on WhatsApp"
    class="
         fixed bottom-6 left-6 z-40  {{-- Posisi di kiri bawah --}}
         w-16 h-16 bg-pink-500 rounded-full  {{-- Bentuk dan warna --}}

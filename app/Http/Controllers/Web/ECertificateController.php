@@ -14,22 +14,32 @@ class ECertificateController extends Controller
     public function generate(Request $request)
     {
         $request->validate(['certificate_number' => 'required|string']);
-        $participant = Participant::with('event')->where('certificate_number', $request->certificate_number)->first();
+        
+        // Memuat relasi event DAN relasi template di dalam event
+        $participant = Participant::with('event.certificateTemplate')
+            ->where('certificate_number', $request->certificate_number)
+            ->first();
 
-        if (!$participant) {
-            return back()->with('error', 'Nomor sertifikat tidak ditemukan.');
+        // Cek jika peserta tidak ditemukan ATAU event-nya tidak memiliki template
+        if (!$participant || !$participant->event->certificateTemplate) {
+            return back()->with('error', 'The certificate number is invalid or the template for this event has not been set.');
         }
 
-        $pdf = Pdf::loadView('certificate.template', compact('participant'))->setPaper('a4', 'landscape');
+        $pdf = Pdf::loadView('certificate.template', compact('participant'))
+              ->setPaper('a4', 'landscape');
         return $pdf->stream('sertifikat-' . Str::slug($participant->name) . '.pdf');
-        
     }
 
-    public function preview()
+    public function preview(Event $event)
     {
+        if (!$event->certificateTemplate) {
+            // Arahkan ke halaman edit template jika masih kosong
+            return redirect()->route('admin.events.template.edit', $event)
+                             ->with('warning', 'The template for this event has not been set. Please complete it first.');
+        }
         // 1. Buat data dummy untuk ditampilkan di pratinjau
         $dummyEvent = new Event([
-            'title' => 'International Ta\'aruf Kota Bogor 2025',
+            'title' => 'Indonesian Traditional Dance Competition',
             'start_date' => now(),
         ]);
 
@@ -40,14 +50,15 @@ class ECertificateController extends Controller
             'purpose' => 'Winner',
             'type' => 'Original Folklore Group Dance',
             'category' => 'Dewasa',
+            'subcategory' => 'Tari Tradisional',
             'group' => 'Universitas Pakuan',
         ]);
         
         // 2. Hubungkan event dummy ke peserta dummy
-        $dummyParticipant->setRelation('event', $dummyEvent);
+        $dummyParticipant->setRelation('event', $event);
 
         // 3. Tampilkan view Blade seperti halaman web biasa
-        return view('certificate.template', [
+        return view('pages.certificate-preview', [
             'participant' => $dummyParticipant,
             'is_preview' => true
         ]);
@@ -62,5 +73,19 @@ class ECertificateController extends Controller
 
         // Kirim data peserta (atau null jika tidak ditemukan) ke view verifikasi
         return view('pages.certificate-verify', compact('participant'));
+    }
+
+    public function downloadPreview($participantId)
+    {
+        $participant = Participant::with('event')->findOrFail($participantId);
+
+        $pdf = Pdf::loadView('certificate.template', [
+            'participant' => $participant,
+            'is_preview' => false
+        ])->setPaper('A4', 'landscape'); // bisa disesuaikan ukuran kertas
+
+        $fileName = 'Sertifikat_' . $participant->name . '.pdf';
+
+        return $pdf->download($fileName);
     }
 }

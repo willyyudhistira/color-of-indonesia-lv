@@ -51,7 +51,7 @@ class TestimonialController extends Controller
         
         Testimonial::create($validated);
 
-        return redirect()->route('admin.testimonials.index')->with('success', 'Testimoni berhasil ditambahkan.');
+        return redirect()->route('admin.testimonials.index')->with('success', 'Testimonial has been successfully added.');
     }
 
     /**
@@ -90,7 +90,7 @@ class TestimonialController extends Controller
         
         $testimonial->update($validated);
 
-        return redirect()->route('admin.testimonials.index')->with('success', 'Testimoni berhasil diperbarui.');
+        return redirect()->route('admin.testimonials.index')->with('success', 'Testimonial has been successfully updated.');
     }
 
     /**
@@ -103,6 +103,6 @@ class TestimonialController extends Controller
         }
         $testimonial->delete();
 
-        return redirect()->route('admin.testimonials.index')->with('success', 'Testimoni berhasil dihapus.');
+        return redirect()->route('admin.testimonials.index')->with('success', 'Testimonial has been successfully deleted.');
     }
 }

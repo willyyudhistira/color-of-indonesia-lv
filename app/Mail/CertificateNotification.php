@@ -17,7 +17,7 @@ class CertificateNotification extends Mailable
 
     public function build()
     {
-        return $this->subject('E-Sertifikat Anda dari Color of Indonesia')
+        return $this->subject('Your E-Certificate from Color of Indonesia')
                     ->view('emails.certificate');
     }
 }

@@ -1,10 +1,10 @@
 @extends('layouts.admin')
 
-@section('title', 'Tambah Program Baru')
+@section('title', 'Add New Program')
 
 @section('content')
     <div class="bg-white p-8 rounded-lg shadow-md">
-        <h2 class="text-2xl font-bold text-gray-800 mb-6">Tambah Program Baru</h2>
+        <h2 class="text-2xl font-bold text-gray-800 mb-6">Add New Program</h2>
         
         <form action="{{ route('admin.programs.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
             @csrf
@@ -13,9 +13,9 @@
             @include('admin.programs.partials.form')
 
             <div class="flex justify-end gap-4 pt-4">
-                <a href="{{ route('admin.programs.index') }}" class="py-2 px-6 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300">Batal</a>
+                <a href="{{ route('admin.programs.index') }}" class="py-2 px-6 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300">Cancel</a>
                 <button type="submit" class="py-2 px-6 bg-purple-700 text-white font-bold rounded-lg hover:bg-purple-800">
-                    Simpan Program
+                    Save Program
                 </button>
             </div>
         </form>

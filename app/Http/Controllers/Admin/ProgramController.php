@@ -50,7 +50,7 @@ class ProgramController extends Controller
         }
 
         Program::create($validated);
-        return redirect()->route('admin.programs.index')->with('success', 'Program berhasil ditambahkan.');
+        return redirect()->route('admin.programs.index')->with('success', 'Program has been successfully added.');
     }
 
     /**
@@ -88,7 +88,7 @@ class ProgramController extends Controller
         }
         
         $program->update($validated);
-        return redirect()->route('admin.programs.index')->with('success', 'Program berhasil diperbarui.');
+        return redirect()->route('admin.programs.index')->with('success', 'has been successfully updated.');
     }
 
     /**
@@ -101,6 +101,6 @@ class ProgramController extends Controller
         }
         $program->delete();
 
-        return redirect()->route('admin.programs.index')->with('success', 'Program berhasil dihapus.');
+        return redirect()->route('admin.programs.index')->with('success', 'Program has been successfully deleted.');
     }
 }

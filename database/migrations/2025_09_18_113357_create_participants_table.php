@@ -19,6 +19,7 @@ return new class extends Migration {
             $table->string('purpose')->nullable();
             $table->string('type')->nullable();
             $table->string('category')->nullable();
+            $table->string('subcategory')->nullable();
             $table->string('group')->nullable();
             $table->timestamps();
         });

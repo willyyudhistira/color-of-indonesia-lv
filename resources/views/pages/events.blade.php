@@ -12,7 +12,7 @@
         </div>
         <div class="relative z-10 text-center px-4">
             {{-- Ukuran font dibuat responsif --}}
-            <h1 class="text-4xl sm:text-5xl md:text-7xl font-extrabold font-serif">Rayakan Keberagaman<br>Bersama Kami</h1>
+            <h1 class="text-4xl sm:text-5xl md:text-7xl font-extrabold font-serif">Celebrate Diversity<br>With Us</h1>
         </div>
     </section>
 
@@ -20,7 +20,7 @@
     <div class="container mx-auto px-6 md:px-20 py-16">
 
         {{-- 2. Event Mendatang Section --}}
-        <h2 class="text-3xl md:text-4xl font-bold text-purple-700 mb-2 text-left">Event Mendatang</h2>
+        <h2 class="text-3xl md:text-4xl font-bold text-purple-700 mb-2 text-left">Upcoming Events</h2>
         <div class="flex items-center my-6">
             <div class="w-2 h-2 bg-purple-700 rounded-full"></div>
             <div class="flex-grow h-0.5 bg-purple-700 w-full"></div>
@@ -61,24 +61,25 @@
         @else
             <div
                 class="max-w-4xl mx-auto bg-white rounded-xl shadow-xl mb-20 flex flex-col items-center justify-center text-center p-8">
-                <h3 class="text-2xl font-bold text-gray-800 mb-4">Belum Ada Acara Mendatang</h3>
-                <p class="text-gray-600 max-w-md mx-auto mb-6">Nantikan informasi acara kami selanjutnya di sini!</p>
+                <h3 class="text-2xl font-bold text-gray-800 mb-4">No Upcoming Events</h3>
+                <p class="text-gray-600 max-w-md mx-auto mb-6">Stay tuned for our next event updates here!</p>
                 <a href="{{ route('contact.index') }}"
-                    class="bg-gradient-to-r from-[#CD75FF] to-[#8949FF] text-white font-bold py-3 px-8 rounded-full transition-transform hover:scale-105">Hubungi
-                    Kami</a>
+                    class="bg-gradient-to-r from-[#CD75FF] to-[#8949FF] text-white font-bold py-3 px-8 rounded-full transition-transform hover:scale-105">
+                    Contact Us
+                </a>
             </div>
         @endif
 
         <!-- SECTION SEMUA EVENTS -->
         <div class="flex flex-col md:flex-row justify-between items-center mt-16 mb-6">
-            <h2 class="text-3xl md:text-4xl font-bold text-purple-700 text-left">Semua Events</h2>
+            <h2 class="text-3xl md:text-4xl font-bold text-purple-700 text-left">All Events</h2>
             <form id="month-filter-form" action="{{ route('events.index') }}" method="GET" class="relative mt-4 md:mt-0">
     {{-- Input utama untuk Flatpickr --}}
     <input 
         type="text" 
         id="monthpicker" 
         name="month" 
-        placeholder="Cari Bulan & Tahun"
+        placeholder="Filter by Month & Year"
         value="{{ request('month') }}"
         class="w-64 cursor-pointer bg-white border border-purple-700 rounded-full py-2 pl-4 pr-10 text-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500"
     >
@@ -130,7 +131,7 @@
                     </div>
                 </div>
             @empty
-                <p class="col-span-full text-center text-gray-500">Tidak ada event lampau yang dapat ditampilkan.</p>
+                <p class="col-span-full text-center text-gray-500">No past events available to display.</p>
             @endforelse
         </div>
 

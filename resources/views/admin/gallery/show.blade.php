@@ -5,10 +5,10 @@
     <div class="space-y-8">
         {{-- Note Box --}}
         <div class="bg-blue-100 border-l-4 border-blue-500 text-blue-700 p-4 ...">
-            <p class="font-bold">Panduan Upload Foto Galeri</p>
+            <p class="font-bold">Gallery Photo Upload Guide</p>
             <ul class="list-disc list-inside text-sm mt-2">
-                <li>Upload Foto dengan rasio **1:1** (persegi) atau **4:5** (portrait).</li>
-                <li>Gunakan foto dengan resolusi tinggi (HD - 4K) untuk hasil terbaik.</li>
+                <li>Upload photos with a ratio of **1:1** (square) or **4:5** (portrait).</li>
+                <li>Use high resolution photos (HD - 4K) for best results.</li>
             </ul>
         </div>
 
@@ -17,7 +17,7 @@
             {{-- Total Foto --}}
             <div class="bg-white p-6 rounded-lg shadow-md flex items-center justify-between">
                 <div>
-                    <p class="text-sm font-medium text-gray-500">Total Foto</p>
+                    <p class="text-sm font-medium text-gray-500">Total Photos</p>
                     <p class="text-3xl font-bold text-purple-500">{{ $stats['total'] }}</p>
                 </div>
                 <div class="bg-gray-100 p-3 rounded-full"><span class="iconify text-purple-500 w-6 h-6" data-icon="solar:gallery-wide-bold"></span></div>
@@ -27,7 +27,7 @@
 
         {{-- Bagian Upload --}}
         <div class="bg-white p-6 rounded-lg shadow-md">
-            <h3 class="text-xl font-bold text-gray-700 mb-4">Upload Foto Baru ke Album "{{ $album->title }}"</h3>
+            <h3 class="text-xl font-bold text-gray-700 mb-4">Upload New Photos to Album "{{ $album->title }}"</h3>
             <form action="{{ route('admin.gallery.photos.upload', $album) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="grid md:grid-cols-2 gap-6 items-center">
@@ -36,7 +36,7 @@
                     </div>
                     <div class="space-y-4">
                         <input id="photo-upload-input" name="photo" type="file" accept="image/*" required class="block w-full text-sm text-gray-500 file:mr-4 ...">
-                        <input name="caption" type="text" placeholder="Keterangan foto (opsional)" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+                        <input name="caption" type="text" placeholder="Photo caption (optional)" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
                         <button type="submit" class="w-full flex items-center justify-center gap-2 bg-purple-700 text-white font-bold ...">
                             <span class="iconify" data-icon="solar:upload-bold"></span>
                             <span>Upload Foto</span>

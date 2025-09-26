@@ -12,7 +12,7 @@
 
     <div class="container mx-auto px-6 md:px-20 py-20">
         <div class="text-center md:text-left mb-12">
-            <h2 class="text-4xl font-bold text-purple-800 mb-3">Koleksi Video</h2>
+            <h2 class="text-4xl font-bold text-purple-800 mb-3">Video Collection</h2>
             <div class="inline-block w-24 h-1 bg-purple-600"></div>
         </div>
 
@@ -32,7 +32,7 @@
                     </div>
                 </div>
             @empty
-                <p class="col-span-full text-center text-gray-500 text-lg py-16">Belum ada video yang dipublikasikan.</p>
+                <p class="col-span-full text-center text-gray-500 text-lg py-16">No videos have been published yet.</p>
             @endforelse
         </div>
 

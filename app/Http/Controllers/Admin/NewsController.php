@@ -52,7 +52,7 @@ class NewsController extends Controller
 
         NewsLink::create($validated);
 
-        return redirect()->route('admin.news.index')->with('success', 'Artikel berita berhasil ditambahkan.');
+        return redirect()->route('admin.news.index')->with('success', 'News article has been successfully added.');
     }
 
     /**
@@ -92,7 +92,7 @@ class NewsController extends Controller
         
         $news->update($validated);
         
-        return redirect()->route('admin.news.index')->with('success', 'Artikel berita berhasil diperbarui.');
+        return redirect()->route('admin.news.index')->with('success', 'News article has been successfully updated.');
     }
 
     /**
@@ -105,6 +105,6 @@ class NewsController extends Controller
         }
         $news->delete();
 
-        return redirect()->route('admin.news.index')->with('success', 'Artikel berita berhasil dihapus.');
+        return redirect()->route('admin.news.index')->with('success', 'News article has been successfully deleted.');
     }
 }

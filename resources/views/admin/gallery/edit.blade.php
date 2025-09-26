@@ -9,7 +9,7 @@
             @method('PUT')
             @include('admin.gallery.partials.form', ['album' => $album])
             <div class="flex justify-end gap-4 pt-4 border-t mt-6">
-                <a href="{{ route('admin.gallery.index') }}" class="py-2 px-6 bg-gray-200 rounded-lg">Batal</a>
+                <a href="{{ route('admin.gallery.index') }}" class="py-2 px-6 bg-gray-200 rounded-lg">Cancel</a>
                 <button type="submit" class="py-2 px-6 bg-purple-700 text-white font-bold rounded-lg">Update Album</button>
             </div>
         </form>

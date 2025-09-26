@@ -26,6 +26,7 @@ class Event extends Model
         'form_url',
         'is_featured',
         'is_published',
+        'certificate_template_id',
     ];
 
     /**
@@ -37,4 +38,9 @@ class Event extends Model
         'is_featured' => 'boolean',
         'is_published' => 'boolean',
     ];
+
+    public function certificateTemplate()
+    {
+        return $this->belongsTo(CertificateTemplate::class);
+    }
 }

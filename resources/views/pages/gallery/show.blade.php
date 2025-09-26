@@ -18,7 +18,7 @@
         <div class="container mx-auto px-6 md:px-20">
             <a href="{{ route('gallery.index') }}" class="inline-flex items-center gap-2 text-purple-600 hover:text-purple-700 mb-8">
                 <span class="iconify w-5 h-5" data-icon="solar:arrow-left-bold"></span>
-                Kembali ke Daftar Album
+                Return to Album List
             </a>
             
             @if($album->description)
@@ -36,7 +36,7 @@
                         <img src="{{ asset('storage/' . $photo->image_url) }}" alt="{{ $photo->caption }}" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
                     </div>
                 @empty
-                    <p class="col-span-full text-center text-gray-500 text-lg py-16">Tidak ada foto di album ini.</p>
+                    <p class="col-span-full text-center text-gray-500 text-lg py-16">There are no photos in this album.</p>
                 @endforelse
             </div>
 
@@ -54,7 +54,7 @@
                     <img id="lightbox-img" src="" alt="Focused view" class="max-w-full max-h-[60vh] md:max-h-[90vh] object-contain">
                 </div>
                 <div class="w-full md:w-1/3 p-6 flex flex-col text-white">
-                    <h3 class="font-bold text-lg mb-4 border-b border-gray-700 pb-2">Detail Foto</h3>
+                    <h3 class="font-bold text-lg mb-4 border-b border-gray-700 pb-2">Photo Details</h3>
                     <p id="lightbox-caption" class="text-gray-300 text-sm flex-grow"></p>
                 </div>
             </div>

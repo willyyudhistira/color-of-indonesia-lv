@@ -10,7 +10,7 @@
             </div>
             <div>
                 <p class="text-3xl font-bold text-gray-800">{{ $pastEventsCount }}</p>
-                <p class="text-gray-500">Event Terlaksana</p>
+                <p class="text-gray-500">Event Done</p>
             </div>
         </div>
 
@@ -21,21 +21,21 @@
             </div>
             <div>
                 <p class="text-3xl font-bold text-gray-800">{{ $upcomingEventsCount }}</p>
-                <p class="text-gray-500">Event Mendatang</p>
+                <p class="text-gray-500">Upcoming Events</p>
             </div>
         </div>
     </div>
 
     {{-- Judul dan Tombol Tambah Event (kode ini sudah ada sebelumnya) --}}
     <div class="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
-        <h2 class="text-2xl font-semibold text-gray-700">Daftar Event</h2>
+        <h2 class="text-2xl font-semibold text-gray-700">Event List</h2>
         <div class="flex flex-col sm:flex-row items-center gap-4 w-full md:w-auto">
             {{-- Form Filter Bulan --}}
             <form id="month-filter-form-admin" action="{{ route('admin.events.index') }}" method="GET"
                 class="relative w-full sm:w-auto">
                 {{-- Input utama untuk Flatpickr --}}
                 <input type="text" id="monthpicker-admin" name="month" value="{{ request('month') }}"
-                    placeholder="Cari Bulan & Tahun"
+                    placeholder="Search Month & Year"
                     class="w-full sm:w-64 bg-white border border-purple-700 rounded-lg py-2 pl-4 pr-10 text-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500">
 
                 {{-- Wrapper untuk ikon-ikon di sebelah kanan --}}
@@ -46,7 +46,7 @@
                     {{-- =============================================== --}}
                     @if(request('month'))
                         <a href="{{ route('admin.events.index') }}" class="text-gray-500 hover:text-red-600"
-                            title="Hapus Filter">
+                            title="Delete Filter">
                             <span class="iconify" data-icon="solar:close-circle-bold"></span>
                         </a>
                     @endif
@@ -61,12 +61,13 @@
             <a href="{{ route('admin.events.create') }}"
                 class="w-full sm:w-auto bg-purple-700 text-white font-bold py-2 px-4 rounded-lg hover:bg-purple-800 transition-colors flex items-center justify-center gap-2">
                 <span class="iconify" data-icon="solar:add-circle-bold"></span>
-                <span>Tambah Event</span>
+                <span>Add Event</span>
             </a>
             <!-- Tombol Download Report -->
-            <a href="{{ route('admin.events.export') }}" class="w-full sm:w-auto bg-green-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-green-700 transition-colors flex items-center justify-center gap-2">
-            <span class="iconify" data-icon="solar:file-download-bold"></span>
-            <span>Report</span>
+            <a href="{{ route('admin.events.export') }}"
+                class="w-full sm:w-auto bg-green-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-green-700 transition-colors flex items-center justify-center gap-2">
+                <span class="iconify" data-icon="solar:file-download-bold"></span>
+                <span>Report</span>
             </a>
         </div>
     </div>

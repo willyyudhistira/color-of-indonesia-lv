@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="bg-white p-6 rounded-lg shadow-md">
-        <h3 class="text-xl font-bold text-gray-700 mb-6">Edit Konten Hero Carousel</h3>
+        <h3 class="text-xl font-bold text-gray-700 mb-6">Edit Hero Carousel Content</h3>
         
         <form action="{{ route('admin.home.update', $item->id) }}" method="POST" enctype="multipart/form-data" class="space-y-6">
             @csrf
@@ -24,18 +24,18 @@
             </div>
             
             <div>
-                <label for="alt_text" class="block text-sm font-medium text-gray-700">Teks Alternatif (Alt Text)</label>
+                <label for="alt_text" class="block text-sm font-medium text-gray-700">Alternative Text</label>
                 <input type="text" id="alt_text" name="alt_text" value="{{ old('alt_text', $item->alt_text) }}" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-purple-500 focus:border-purple-500">
             </div>
 
             <div>
-                <label for="link_url" class="block text-sm font-medium text-gray-700">Link URL (Opsional)</label>
+                <label for="link_url" class="block text-sm font-medium text-gray-700">URL Link (Optional)</label>
                 <input type="url" id="link_url" name="link_url" value="{{ old('link_url', $item->link_url) }}" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-purple-500 focus:border-purple-500">
             </div>
             
             <div class="grid grid-cols-2 gap-6">
                 <div>
-                    <label for="sort_order" class="block text-sm font-medium text-gray-700">Urutan</label>
+                    <label for="sort_order" class="block text-sm font-medium text-gray-700">Order</label>
                     <input type="number" id="sort_order" name="sort_order" value="{{ old('sort_order', $item->sort_order) }}" min="1" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-purple-500 focus:border-purple-500">
                 </div>
                 <div>
@@ -49,9 +49,9 @@
 
             <div class="flex items-center gap-4 pt-4">
                 <button type="submit" class="bg-purple-700 text-white font-bold py-2 px-6 rounded-lg hover:bg-purple-800 transition-colors">
-                    Simpan Perubahan
+                    Save Changes
                 </button>
-               <a href="{{ route('admin.dashboard') }}" class="text-gray-600 hover:underline">Batal</a>
+               <a href="{{ route('admin.dashboard') }}" class="text-gray-600 hover:underline">Cancel</a>
             </div>
         </form>
     </div>

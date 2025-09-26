@@ -8,10 +8,10 @@
         </div>
     @endif -->
     <div class="flex justify-between items-center mb-6">
-        <h2 class="text-2xl font-semibold text-gray-700">Album Galeri</h2>
+        <h2 class="text-2xl font-semibold text-gray-700">Gallery Album</h2>
         <a href="{{ route('admin.gallery.create') }}" class="bg-purple-700 text-white font-bold py-2 px-4 rounded-lg hover:bg-purple-800 transition-colors flex items-center gap-2">
             <span class="iconify" data-icon="solar:add-circle-bold"></span>
-            Tambah Album Baru
+            Add New Album
         </a>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -24,15 +24,15 @@
                     <div class="mt-4 flex justify-end gap-2">
                         <a href="{{ route('admin.gallery.show', $album) }}" class="text-sm bg-blue-500 text-white py-2 px-4 rounded-lg">Kelola Foto</a>
                         <a href="{{ route('admin.gallery.edit', $album) }}" class="text-sm bg-yellow-500 text-white py-2 px-4 rounded-lg">Edit</a>
-                        <form action="{{ route('admin.gallery.destroy', $album) }}" method="POST" onsubmit="return confirm('Hapus album ini akan menghapus SEMUA fotonya. Anda yakin?');">
+                        <form action="{{ route('admin.gallery.destroy', $album) }}" method="POST" onsubmit="return confirm('Deleting this album will delete ALL its photos. Are you sure??');">
                             @csrf @method('DELETE')
-                            <button type="submit" class="delete-confirm-button bg-red-500 text-white py-2 px-4 rounded-lg">Hapus</button>
+                            <button type="submit" class="delete-confirm-button bg-red-500 text-white py-2 px-4 rounded-lg">Delete</button>
                         </form>
                     </div>
                 </div>
             </div>
         @empty
-            <p class="col-span-full text-center text-gray-500">Belum ada album. Silakan buat album baru.</p>
+            <p class="col-span-full text-center text-gray-500">There are no albums yet. Please create a new album.</p>
         @endforelse
     </div>
 @endsection

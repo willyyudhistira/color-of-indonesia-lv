@@ -9,7 +9,7 @@
             @method('PUT')
             @include('admin.main_event.partials.form', ['mainEvent' => $mainEvent])
             <div class="flex justify-end gap-4 pt-4 border-t">
-                <a href="{{ route('admin.main-events.index') }}" class="py-2 px-6 bg-gray-200 rounded-lg">Batal</a>
+                <a href="{{ route('admin.main-events.index') }}" class="py-2 px-6 bg-gray-200 rounded-lg">Cancel</a>
                 <button type="submit" class="py-2 px-6 bg-purple-700 text-white font-bold rounded-lg">Update</button>
             </div>
         </form>

@@ -20,7 +20,7 @@
 
             {{-- 2. Kolom Kiri: Deskripsi Event --}}
             <div class="lg:col-span-2">
-                <h2 class="text-3xl font-bold text-purple-700 mb-6">Tentang Acara</h2>
+                <h2 class="text-3xl font-bold text-purple-700 mb-6">Event Overview</h2>
                 <div class="prose max-w-none text-gray-600 leading-relaxed">
                     {!! $event->description !!} 
                 </div>
@@ -29,7 +29,7 @@
             {{-- 3. Kolom Kanan: Info Penting --}}
             <div class="lg:col-span-1 mt-12 lg:mt-0">
                 <div class="sticky top-28 bg-gray-50 rounded-xl shadow-lg p-6">
-                    <h3 class="text-2xl font-bold text-gray-800 mb-6 border-b pb-4">Detail Event</h3>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-6 border-b pb-4">Event Information</h3>
                     <div class="space-y-4">
                         {{-- Info Tanggal --}}
                         <div class="flex items-start">
@@ -45,8 +45,8 @@
                                 </g>
                             </svg>
                             <div>
-                                <p class="font-semibold">Tanggal</p>
-                                <p class="text-gray-600">{{ $event->start_date->format('d M Y') }} - {{ $event->end_date ? $event->end_date->format('d M Y') : 'Selesai' }}</p>
+                                <p class="font-semibold">Date</p>
+                                <p class="text-gray-600">{{ $event->start_date->format('d M Y') }} - {{ $event->end_date ? $event->end_date->format('d M Y') : 'Done' }}</p>
                             </div>
                         </div>
                         {{-- Info Lokasi --}}
@@ -67,13 +67,13 @@
                         @if ($event->start_date->isFuture())
                             {{-- Jika event akan datang, tampilkan tombol Registrasi --}}
                             <a href="{{ $event->form_url }}" target="_blank" class="w-full block text-center bg-gradient-to-r from-[#CD75FF] to-[#8949FF] text-white font-bold py-3 px-6 rounded-lg transition-transform hover:scale-105">
-                                Registrasi Sekarang
+                                Register Now
                             </a>
                         @else
                             {{-- Jika event sudah lewat, tampilkan tombol Galeri --}}
                             {{-- PERBAIKAN: Typo 'rounded-l' dan kutip yang hilang (") diperbaiki --}}
                             <a href="{{ route('gallery') }}" class="w-full block text-center bg-gradient-to-r from-[#CD75FF] to-[#8949FF] text-white font-bold py-3 px-6 rounded-lg transition-transform hover:scale-105">
-                                Lihat Galeri Acara
+                                View Event Gallery
                             </a>
                         @endif
                     </div>

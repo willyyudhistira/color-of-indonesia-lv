@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Segera Hadir - Color of Indonesia</title>
+    <title>Coming Soon - Color of Indonesia</title>
 
     {{-- Memuat Vite untuk Tailwind CSS --}}
      <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
@@ -27,10 +27,10 @@
             </div>
 
             <h1 class="font-serif text-5xl md:text-7xl font-extrabold tracking-tight">
-                Segera Hadir
+                Coming Soon
             </h1>
             <p class="mt-4 text-xl md:text-2xl text-white/80 max-w-2xl mx-auto">
-                Sesuatu yang hebat sedang kami persiapkan. Website Color of Indonesia akan segera diluncurkan untuk membawa warna budaya nusantara ke panggung dunia.
+                Something great is in the making. The Color of Indonesia website will soon be launched to bring the colors of the archipelago's culture to the world stage.
             </p>
         </div>
     </div>
