@@ -203,7 +203,7 @@
         }
 
         .signature-section {
-            width: 340px;
+            width: 500px;
             /* lebar kotak tanda tangan; ubah sesuai kebutuhan */
             margin: 0 auto;
             /* center pada halaman */

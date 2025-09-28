@@ -167,10 +167,10 @@
     </div>
 </div>
 
-<div>
+<!-- <div>
     <label class="block text-lg font-medium text-gray-700">Center Logo (between signatures)</label>
     @if(isset($template) && $template->center_logo)
         <img src="{{ asset('storage/' . $template->center_logo) }}" class="h-16 object-contain my-1 border p-1 rounded">
     @endif
     <input type="file" name="center_logo" class="mt-2 block w-full text-sm ...">
-</div>
+</div> -->

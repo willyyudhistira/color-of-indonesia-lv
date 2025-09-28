@@ -22,7 +22,7 @@
             <div class="lg:col-span-2">
                 <h2 class="text-3xl font-bold text-purple-700 mb-6">Event Overview</h2>
                 <div class="prose max-w-none text-gray-600 leading-relaxed">
-                    {!! $event->description !!} 
+                    {!! $event->description !!}
                 </div>
             </div>
 
@@ -72,7 +72,7 @@
                         @else
                             {{-- Jika event sudah lewat, tampilkan tombol Galeri --}}
                             {{-- PERBAIKAN: Typo 'rounded-l' dan kutip yang hilang (") diperbaiki --}}
-                            <a href="{{ route('gallery') }}" class="w-full block text-center bg-gradient-to-r from-[#CD75FF] to-[#8949FF] text-white font-bold py-3 px-6 rounded-lg transition-transform hover:scale-105">
+                            <a href="{{ route('gallery.index') }}" class="w-full block text-center bg-gradient-to-r from-[#CD75FF] to-[#8949FF] text-white font-bold py-3 px-6 rounded-lg transition-transform hover:scale-105">
                                 View Event Gallery
                             </a>
                         @endif
