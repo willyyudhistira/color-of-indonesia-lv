@@ -148,7 +148,7 @@
                         <label class="block text-sm">Signature Image</label>
                         @if($template->signature3_image) <img src="{{ asset('storage/' . $template->signature3_image) }}"
                         class="h-16 object-contain my-1 border"> @endif
-                        <input type="file" name="signature2_image" class="block w-full text-sm ...">
+                        <input type="file" name="signature3_image" class="block w-full text-sm ...">
                     </div>
                 </div>
             </div>

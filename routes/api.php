@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\Webhook\FormIngestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,4 +13,4 @@ use Illuminate\Support\Facades\Route;
 | Semuanya secara otomatis memiliki prefix /api/.
 |
 */
-
+Route::post('/webhooks/certificate/muri', [FormIngestController::class, 'ingest']);
