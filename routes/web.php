@@ -36,6 +36,12 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::get('/generate', function(){
+    \Illuminate\Support\Facades\Artisan::call('storage:link');
+    echo 'ok';
+});
+
+// Route::get('/', [HomeController::class, 'showUnderConstruction'])->name('under-construction');
 
 // ===============================================
 // RUTE OTENTIKASI (LOGIN, REGISTER, LOGOUT)
@@ -50,7 +56,6 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middl
 
 //VISITORS PAGES
 Route::get('/', [HomeController::class, 'index'])->name('home');
-// Route::get('/', [HomeController::class, 'showUnderConstruction'])->name('under-construction');
 // Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/about', [AboutController::class, 'index'])->name('about');
 Route::get('/events', [EventController::class, 'index'])->name('events.index');
@@ -72,7 +77,7 @@ Route::get('/videos', [WebVideoController::class, 'index'])->name('videos.index'
 Route::get('/e-certificate', [ECertificateController::class, 'index'])->name('e-certificate.index');
 
 // Rute 'POST' (.generate) tidak diperlukan lagi karena pencarian sekarang menggunakan 'GET' di .index
-// Route::post('/e-certificate', [ECertificateController::class, 'generate'])->name('e-certificate.generate'); 
+// Route::post('/e-certificate', [ECertificateController::class, 'generate'])->name('e-certificate.generate');
 
 // TAMBAHKAN RUTE INI UNTUK TOMBOL DOWNLOAD
 Route::get('/e-certificate/download/{participant}', [ECertificateController::class, 'download'])->name('e-certificate.download');
@@ -85,7 +90,7 @@ Route::prefix('admin')
     ->middleware(['auth', 'admin'])
     ->name('admin.') // Menambahkan prefix nama rute
     ->group(function () {
-    
+
     // Rute utama '/admin/dashboard' sekarang menjadi halaman manajemen carousel
     Route::get('/dashboard', [HomeCarouselController::class, 'index'])->name('dashboard');
 
@@ -147,7 +152,7 @@ Route::prefix('admin')
 
     Route::get('/events/{event}/template', [AdminEventController::class, 'editTemplate'])->name('events.template.edit');
     Route::put('/events/{event}/template', [AdminEventController::class, 'updateTemplate'])->name('events.template.update');
-    
+
 
 
 
