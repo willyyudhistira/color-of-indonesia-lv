@@ -60,8 +60,10 @@
                 </div>
             </form>
 
-            {{-- Results Table --}}
-            <div class="max-w-4xl mx-auto bg-white shadow-md rounded-lg overflow-hidden">
+            {{-- ========================================================= --}}
+            {{-- Results Table (Hidden on Mobile) --}}
+            {{-- ========================================================= --}}
+            <div class="hidden md:block max-w-4xl mx-auto bg-white shadow-md rounded-lg overflow-hidden">
                 <table class="min-w-full divide-y divide-gray-200">
                     <thead class="bg-gray-50">
                         <tr>
@@ -85,14 +87,16 @@
                     <tbody class="bg-white divide-y divide-gray-200">
                         @forelse($participants as $participant)
                             <tr>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="text-sm font-medium text-gray-900">{{ $participant->name }}</div>
-                                    {{-- BARIS YANG DITAMBAHKAN --}}
+                                <td class="px-6 py-4">
+                                    {{-- PERUBAHAN DI SINI: Menambah 'break-words' --}}
+                                    <div class="text-sm font-medium text-gray-900 break-words">{{ $participant->name }}</div>
                                     <div class="text-xs text-gray-500">{{ $participant->phone_number }}</div>
                                 </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    {{-- Cek jika event ada (untuk keamanan) --}}
-                                    <div class="text-sm text-gray-700">{{ $participant->email }}</div>
+                                
+                                {{-- PERUBAHAN DI SINI: Menghapus 'whitespace-nowrap' --}}
+                                <td class="px-6 py-4">
+                                    {{-- PERUBAHAN DI SINI: Menambah 'break-words' --}}
+                                    <div class="text-sm text-gray-700 break-words">{{ $participant->email }}</div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <span
@@ -101,14 +105,12 @@
                                     </span>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                    {{-- TAMBAHKAN @if DISINI --}}
                                     @if($participant->event && $participant->event->certificateTemplate)
                                         <a href="{{ route('e-certificate.download', $participant->id) }}" target="_blank"
                                             class="inline-block bg-green-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-green-600 transition-colors text-xs">
                                             Download
                                         </a>
                                     @else
-                                        {{-- Jika template tidak ada, tampilkan teks atau tombol nonaktif --}}
                                         <span class="text-xs text-gray-400 italic">Not Ready</span>
                                     @endif
                                 </td>
@@ -122,6 +124,58 @@
                         @endforelse
                     </tbody>
                 </table>
+            </div>
+
+            {{-- ========================================================= --}}
+            {{-- Results Cards (Mobile View) --}}
+            {{-- ========================================================= --}}
+            <div class="block md:hidden max-w-4xl mx-auto space-y-4">
+                @forelse($participants as $participant)
+                    <div class="bg-white shadow-md rounded-lg p-5">
+                        
+                        {{-- Name, Phone, Email --}}
+                        <div>
+                            {{-- PERUBAHAN DI SINI: Menambah 'break-words' --}}
+                            <h3 class="text-lg font-semibold text-purple-800 break-words">{{ $participant->name }}</h3>
+                            @if($participant->phone_number)
+                                <p class="text-sm text-gray-600">{{ $participant->phone_number }}</p>
+                            @endif
+                            {{-- PERUBAHAN DI SINI: Menambah 'break-words' --}}
+                            <p class="text-sm text-gray-600 break-words">{{ $participant->email }}</p>
+                        </div>
+
+                        {{-- Divider --}}
+                        <hr class="my-3">
+
+                        {{-- Event and Cert Number --}}
+                        <div>
+                            <p class="text-sm text-gray-700">
+                                <span class="font-medium text-gray-500">Event:</span>
+                                {{ $participant->event->title ?? 'No Event' }}
+                            </p>
+                            <p class="text-sm text-gray-700 mt-1">
+                                <span class="font-medium text-gray-500">Number:</span>
+                                {{ $participant->certificate_number }}
+                            </p>
+                        </div>
+
+                        {{-- Download Button --}}
+                        <div class="mt-4 text-right">
+                            @if($participant->event && $participant->event->certificateTemplate)
+                                <a href="{{ route('e-certificate.download', $participant->id) }}" target="_blank"
+                                   class="inline-block bg-green-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-green-600 transition-colors text-xs">
+                                    Download
+                                </a>
+                            @else
+                                <span class="text-xs text-gray-400 italic">Not Ready</span>
+                            @endif
+                        </div>
+                    </div>
+                @empty
+                    <div class="bg-white shadow-md rounded-lg p-5 text-center text-gray-500">
+                        No participants found matching your criteria.
+                    </div>
+                @endforelse
             </div>
 
             {{-- Pagination Links --}}
