@@ -86,7 +86,7 @@
                     <label for="image_url_upload" class="block text-sm font-medium text-gray-700 mb-1">Image Files</label>
                     {{-- ID unik ditambahkan ke input file --}}
                     <input type="file" id="image_url_upload" name="image_url" accept="image/*" required
-                        class="block w-full ...">
+                        class="mt-2 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-purple-50 file:text-purple-700 hover:file:bg-purple-100">
                     @error('image_url') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                 </div>
                 <div>
@@ -99,11 +99,13 @@
                     <input type="url" id="link_url" name="link_url"
                         class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" placeholder="https://example.com">
                 </div>
-                <button type="submit"
-                    class="w-full flex items-center justify-center gap-2 bg-purple-700 text-white font-bold ...">
-                    <span class="iconify" data-icon="solar:upload-bold"></span>
-                    <span>Upload Content</span>
-                </button>
+                <div class="flex justify-end">
+                    <button type="submit"
+                        class="flex items-center gap-2 bg-purple-700 text-white font-bold py-2 px-6 rounded-lg hover:bg-purple-800">
+                        <span class="iconify" data-icon="solar:upload-bold"></span>
+                        <span>Upload Content</span>
+                    </button>
+                </div>
             </form>
         </div>
     @endif

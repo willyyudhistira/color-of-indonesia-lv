@@ -64,9 +64,14 @@
             <div class="text-center md:text-left">
                 <h2 class="text-4xl font-bold text-purple-700 mb-6">About Us</h2>
                 <p class="text-gray-600 mb-8 leading-relaxed text-lg lg:text-2xl">
-                    Color of Indonesia aims to introduce the diversity of the archipelago's 
-                    culture to a global audience through festivals, art exchanges, and international collaborations. 
-                    As a cultural bridge, this initiative showcases an Indonesia that is inclusive, creative, and vibrant.
+                    Color of Indonesia is a dynamic initiative dedicated to celebrating and sharing the archipelago's 
+                    rich cultural diversity with audiences around the world. Through vibrant festivals, artistic exchanges, 
+                    and international collaborations, it seeks to connect people across borders and foster mutual 
+                    understanding. Acting as a cultural bridge, this program not only showcases Indonesia's traditional and 
+                    contemporary arts but also highlights the nation's inclusive, innovative, and creative spirit. By 
+                    bringing together artists, performers, and cultural enthusiasts from different regions and countries, Color 
+                    of Indonesia creates a platform where heritage meets modern expression, inspiring global audiences to appreciate, 
+                    learn, and engage with the richness of Indonesia's cultural tapestry.
                 </p>
                 <a href="{{ route('about') }}"
                     class="inline-block bg-gradient-to-r from-[#CD75FF] to-[#8949FF] text-white font-semibold py-3 px-8 rounded-full hover:opacity-90 transition-opacity">
@@ -157,7 +162,7 @@
         <section class="py-24 px-8">
             <div class="container mx-auto">
                 <h2 class="text-center text-4xl font-bold text-purple-700 mb-16">Testimonials</h2>
-                <swiper-container slides-per-view="1" loop="true" autoplay-delay="5000" effect="fade">
+                <swiper-container slides-per-view="1" loop="true" autoplay-delay="5000">
                     @foreach ($homeData['testimonials'] as $testimonial)
                         <swiper-slide>
                             <div class="flex flex-col md:flex-row items-center justify-center gap-12 max-w-4xl mx-auto">

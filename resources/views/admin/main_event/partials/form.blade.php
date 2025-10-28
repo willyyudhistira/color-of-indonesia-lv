@@ -37,5 +37,5 @@
     @if(isset($mainEvent) && $mainEvent->hero_image_url)
     <div class="mt-2"><img src="{{ asset('storage/' . $mainEvent->hero_image_url) }}" alt="Current Image" class="w-full h-48 object-cover rounded-md"></div>
     @endif
-    <input id="hero_image_url" name="hero_image_url" type="file" accept="image/*" class="mt-2 block w-full text-sm ...">
+    <input id="hero_image_url" name="hero_image_url" type="file" accept="image/*" class="mt-2 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-purple-50 file:text-purple-700 hover:file:bg-purple-100">
 </div>

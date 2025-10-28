@@ -23,7 +23,7 @@
                         <div id="logo-preview-container" class="mt-2 w-full h-32 hidden items-center justify-center bg-gray-100 rounded-lg overflow-hidden border border-dashed">
                             <img id="logo-preview" src="#" alt="Logo Preview" class="h-full object-contain p-2">
                         </div>
-                        <input id="logo_url_input" type="file" name="logo_url" accept="image/*" class="mt-2 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0" required>
+                        <input id="logo_url_input" type="file" name="logo_url" accept="image/*" class="mt-2 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-purple-50 file:text-purple-700 hover:file:bg-purple-100" required>
                     </div>
                     <div class="flex justify-end">
                         <button type="submit" class="flex items-center gap-2 bg-purple-700 text-white font-bold py-2 px-6 rounded-lg hover:bg-purple-800">
@@ -78,7 +78,7 @@
                         <div id="banner-preview-container" class="mt-2 w-full h-32 hidden items-center justify-center bg-gray-100 rounded-lg overflow-hidden border border-dashed">
                             <img id="banner-preview" src="#" alt="Banner Preview" class="h-full object-contain p-2">
                         </div>
-                        <input id="banner_image_input" type="file" name="image_url" accept="image/*" class="mt-2 block w-full text-sm ..." required>
+                        <input id="banner_image_input" type="file" name="image_url" accept="image/*" class="mt-2 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-purple-50 file:text-purple-700 hover:file:bg-purple-100" required>
                     </div>
                     <div class="flex justify-end">
                         <button type="submit" class="flex items-center gap-2 bg-purple-700 text-white font-bold py-2 px-6 rounded-lg hover:bg-purple-800">

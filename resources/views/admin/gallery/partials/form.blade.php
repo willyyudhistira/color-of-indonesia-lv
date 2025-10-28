@@ -8,7 +8,7 @@
 {{-- Judul Album --}}
 <div>
     <label for="title" class="block text-sm font-medium text-gray-700">Album Title</label>
-    <input type="text" id="title" name="title" value="{{ old('title', $album->title ?? '') }}" required class="mt-1 block w-full ...">
+    <input type="text" id="title" name="title" value="{{ old('title', $album->title ?? '') }}" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-purple-500 focus:border-purple-500">
 </div>
 
 {{-- Deskripsi Album --}}
@@ -28,7 +28,7 @@
     </div>
     
     {{-- ID unik ditambahkan ke input file --}}
-    <input id="cover_url_input" name="cover_url" type="file" accept="image/*" class="mt-2 block w-full text-sm ...">
+    <input id="cover_url_input" name="cover_url" type="file" accept="image/*" class="mt-2 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-purple-50 file:text-purple-700 hover:file:bg-purple-100">
 </div>
 
 {{-- Pengaturan Urutan dan Publikasi --}}

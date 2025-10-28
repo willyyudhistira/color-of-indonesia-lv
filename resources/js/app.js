@@ -229,16 +229,52 @@ document.addEventListener('DOMContentLoaded', function () {
     const galleryMenu = document.getElementById('gallery-dropdown-menu');
 
     if (galleryButton && galleryMenu) {
-        galleryButton.addEventListener('click', function(event) {
+        galleryButton.addEventListener('click', function (event) {
             event.stopPropagation();
             galleryMenu.classList.toggle('hidden');
         });
-        
+
         // Menutup dropdown saat klik di luar
-        window.addEventListener('click', function(event) {
+        window.addEventListener('click', function (event) {
             if (!galleryMenu.classList.contains('hidden') && !galleryButton.contains(event.target)) {
                 galleryMenu.classList.add('hidden');
             }
         });
     }
+    const exampleModal = document.getElementById('exampleModal');
+    const exampleModalText = document.getElementById('exampleModalText');
+    const openExampleButtons = document.querySelectorAll('.show-example-btn');
+    const closeExampleButtons = document.querySelectorAll('.js-close-example-modal');
+
+    // Fungsi untuk membuka modal contoh
+    function openExampleModal(exampleText) {
+        exampleModalText.textContent = exampleText; // Isi teks ke dalam modal
+        exampleModal.classList.remove('hidden'); // Tampilkan modal
+    }
+
+    // Fungsi untuk menutup modal contoh
+    function closeExampleModal() {
+        exampleModal.classList.add('hidden'); // Sembunyikan modal
+    }
+
+    // Tambahkan event listener ke setiap tombol "Show Example"
+    openExampleButtons.forEach(button => {
+        button.addEventListener('click', function () {
+            const text = this.dataset.example; // Ambil teks dari atribut data-example
+            openExampleModal(text);
+        });
+    });
+
+    // Tambahkan event listener ke setiap tombol penutup (X dan Close)
+    closeExampleButtons.forEach(button => {
+        button.addEventListener('click', closeExampleModal);
+    });
+
+    // Tutup modal jika klik di luar area konten modal
+    exampleModal.addEventListener('click', function (event) {
+        // Cek apakah yang diklik adalah latar belakang modal (bukan konten di dalamnya)
+        if (event.target === exampleModal) {
+            closeExampleModal();
+        }
+    });
 });

@@ -10,7 +10,7 @@
     {{-- Tampilan Saat Hover --}}
     <div class="absolute inset-0 bg-gradient-to-t from-purple-800 to-pink-500/80 p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-start text-left">
         <div class="flex-grow">
-            <h3 class="text-white text-2xl font-bold font-serif mb-2">{{ $event->title }}</h3>
+            <h3 class="text-white text-2xl font-bold font-serif mb-2">{{ $event->subtitle }}</h3>
             <p class="text-white/90 text-sm leading-relaxed">{{ Str::limit($event->description, 100) }}</p>
             @if($event->link_url)
             <a href="{{ $event->link_url }}" target="_blank" rel="noopener noreferrer" class="mt-4 inline-block self-start bg-white/30 text-white font-semibold text-xs py-2 px-4 rounded-full hover:bg-white hover:text-purple-800 transition-colors">

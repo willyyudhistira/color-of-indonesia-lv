@@ -21,8 +21,8 @@
             {{-- 2. Kolom Kiri: Deskripsi Event --}}
             <div class="lg:col-span-2">
                 <h2 class="text-3xl font-bold text-purple-700 mb-6">Event Overview</h2>
-                <div class="prose max-w-none text-gray-600 leading-relaxed">
-                    {!! $event->description !!} 
+                <div class="prose max-w-none text-gray-600 leading-relaxed whitespace-break-spaces">
+                    {!! $event->description !!}
                 </div>
             </div>
 
@@ -68,12 +68,6 @@
                             {{-- Jika event akan datang, tampilkan tombol Registrasi --}}
                             <a href="{{ $event->form_url }}" target="_blank" class="w-full block text-center bg-gradient-to-r from-[#CD75FF] to-[#8949FF] text-white font-bold py-3 px-6 rounded-lg transition-transform hover:scale-105">
                                 Register Now
-                            </a>
-                        @else
-                            {{-- Jika event sudah lewat, tampilkan tombol Galeri --}}
-                            {{-- PERBAIKAN: Typo 'rounded-l' dan kutip yang hilang (") diperbaiki --}}
-                            <a href="{{ route('gallery') }}" class="w-full block text-center bg-gradient-to-r from-[#CD75FF] to-[#8949FF] text-white font-bold py-3 px-6 rounded-lg transition-transform hover:scale-105">
-                                View Event Gallery
                             </a>
                         @endif
                     </div>

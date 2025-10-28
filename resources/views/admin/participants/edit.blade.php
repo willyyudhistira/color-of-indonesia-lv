@@ -51,7 +51,7 @@
                 </div>
                 <div>
                     <label for="category" class="block text-sm font-medium text-gray-700">Category</label>
-                    <input type="text" id="category" name="category" value="{{ old('category', 'category') }}" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+                    <input type="text" id="category" name="category" value="{{ old('category', $participant->category) }}" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
                 </div>
                 <div>
                     <label for="subcategory" class="block text-sm font-medium text-gray-700">Sub-Category</label>

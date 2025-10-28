@@ -13,7 +13,7 @@
     <label for="template_name" class="block text-lg font-medium text-gray-700">Template Name</label>
     <input type="text" name="template_name" id="template_name"
         value="{{ old('template_name', $template->template_name ?? '') }}" required
-        placeholder="Contoh: Template Lomba Tari 2025" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+        placeholder="Example: Template Lomba Tari 2025" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
 </div>
 
 <div>
@@ -23,7 +23,7 @@
             class="w-full h-auto object-contain rounded-md mt-2 border p-2">
     @endif
     <input type="file" name="background_image"
-        class="mt-2 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0">
+        class="mt-2 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-purple-50 file:text-purple-700 hover:file:bg-purple-100">
 </div>
 
 <div>
@@ -36,7 +36,7 @@
                     <img src="{{ asset('storage/' . $template->{'logo' . $i}) }}"
                         class="h-12 object-contain my-1 border p-1 rounded">
                 @endif
-                <input type="file" name="logo{{$i}}" class="block w-full text-xs ...">
+                <input type="file" name="logo{{$i}}" class="block w-full text-xs text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:font-semibold file:bg-purple-50 file:text-purple-700 hover:file:bg-purple-100">
             </div>
         @endfor
     </div>
@@ -46,8 +46,10 @@
     <label for="main_title" class="block text-lg font-medium text-gray-700">Certificate Main Title</label>
     <input type="text" id="main_title" name="main_title"
         value="{{ old('main_title', $template->main_title ?? 'Certificate of Participation') }}"
+        class="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
+        placeholder="Example: Certificate of Achievement, Certificate of Participation."
         class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
-    <p class="text-xs text-gray-500 mt-1">Example: Certificate of Achievement, Certificate of Participation.</p>
+    <!-- <p class="text-xs text-gray-500 mt-1">Example: Certificate of Achievement, Certificate of Participation.</p> -->
 </div>
 
 <div class="space-y-6 bg-gray-50 p-6 rounded-lg border border-gray-200 mt-8">
@@ -64,16 +66,22 @@
         <label for="body_text" class="block font-medium text-gray-700">Main Text (for all)</label>
         <textarea id="body_text" name="body_text" rows="3"
             class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">{{ old('body_text', $template->body_text ?? null) }}</textarea>
-        <p class="text-xs text-gray-500 mt-1">Example: In recognition of your participation in the event [event_title],
-            held on [event_date].</p>
+        {{-- TOMBOL BARU --}}
+        <button type="button" class="show-example-btn text-xs text-purple-700 hover:bg-purple-100 underline mt-1"
+            data-example="In recognition of your participation in the event [event_title], held on [event_date].">
+            Show Example
+        </button>
     </div>
 
     <div>
         <label for="winner_text" class="block font-medium text-gray-700">Additional Text For Winner (Winner)</label>
         <textarea id="winner_text" name="winner_text" rows="3"
             class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">{{ old('winner_text', $template->winner_text ?? null) }}</textarea>
-        <p class="text-xs text-gray-500 mt-1">Example: This award is given in recognition of your outstanding
-            achievement as the Winner in the [purpose] competition, [category] category.</p>
+        {{-- TOMBOL BARU --}}
+        <button type="button" class="show-example-btn text-xs text-purple-700 hover:bg-purple-100 underline mt-1"
+            data-example="This award is given in recognition of your outstanding achievement as the Winner in the [purpose] competition, [category] category.">
+            Show Example
+        </button>
     </div>
 
     <div>
@@ -81,8 +89,11 @@
             (Supporting)</label>
         <textarea id="supporting_text" name="supporting_text" rows="3"
             class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">{{ old('supporting_text', $template->supporting_text ?? null) }}</textarea>
-        <p class="text-xs text-gray-500 mt-1">Example: Your contribution in the role of Supporter for the [category] was
-            invaluable to the success of this event.</p>
+        {{-- TOMBOL BARU --}}
+        <button type="button" class="show-example-btn text-xs text-purple-700 hover:bg-purple-100 underline mt-1"
+            data-example="Your contribution in the role of Supporter for the [category] was invaluable to the success of this event.">
+            Show Example
+        </button>
     </div>
 
     <div>
@@ -90,8 +101,11 @@
             (Default)</label>
         <textarea id="participant_text" name="participant_text" rows="3"
             class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">{{ old('participant_text', $template->participant_text ?? null) }}</textarea>
-        <p class="text-xs text-gray-500 mt-1">Example: You have contributed to promoting understanding and friendship
-            among participants.</p>
+        {{-- TOMBOL BARU --}}
+        <button type="button" class="show-example-btn text-xs text-purple-700 hover:bg-purple-100 underline mt-1"
+            data-example="You have contributed to promoting understanding and friendship among participants.">
+            Show Example
+        </button>
     </div>
 </div>
 
@@ -116,7 +130,7 @@
                 <img src="{{ asset('storage/' . $template->signature1_image) }}"
                     class="h-16 object-contain my-1 border p-1 rounded">
             @endif
-            <input type="file" name="signature1_image" class="block w-full text-sm ...">
+            <input type="file" name="signature1_image" class="mt-2 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-purple-50 file:text-purple-700 hover:file:bg-purple-100">
         </div>
     </div>
     <div class="space-y-4">
@@ -139,7 +153,7 @@
                 <img src="{{ asset('storage/' . $template->signature2_image) }}"
                     class="h-16 object-contain my-1 border p-1 rounded">
             @endif
-            <input type="file" name="signature2_image" class="block w-full text-sm ...">
+            <input type="file" name="signature2_image" class="mt-2 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-purple-50 file:text-purple-700 hover:file:bg-purple-100">
         </div>
     </div>
     <div class="space-y-4">
@@ -162,15 +176,30 @@
                 <img src="{{ asset('storage/' . $template->signature3_image) }}"
                     class="h-16 object-contain my-1 border p-1 rounded">
             @endif
-            <input type="file" name="signature3_image" class="block w-full text-sm ...">
+            <input type="file" name="signature3_image" class="mt-2 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-purple-50 file:text-purple-700 hover:file:bg-purple-100">
         </div>
     </div>
 </div>
 
-<div>
-    <label class="block text-lg font-medium text-gray-700">Center Logo (between signatures)</label>
-    @if(isset($template) && $template->center_logo)
-        <img src="{{ asset('storage/' . $template->center_logo) }}" class="h-16 object-contain my-1 border p-1 rounded">
-    @endif
-    <input type="file" name="center_logo" class="mt-2 block w-full text-sm ...">
+{{-- ## TAMBAHKAN HTML MODAL CONTOH DI SINI ## --}}
+<div id="exampleModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+    <div class="bg-white p-6 rounded-lg shadow-xl w-full max-w-lg relative">
+        {{-- Tombol Close X --}}
+        <button type="button"
+            class="js-close-example-modal absolute top-3 right-3 text-gray-400 hover:text-gray-600 text-2xl leading-none">&times;</button>
+
+        <h3 class="text-lg font-bold mb-4 text-gray-800">Example Text</h3>
+
+        {{-- Area untuk menampilkan teks contoh --}}
+        <p id="exampleModalText"
+            class="text-gray-700 bg-gray-100 p-4 rounded border border-gray-200 whitespace-pre-wrap"></p>
+
+        {{-- Tombol Close Bawah --}}
+        <div class="mt-6 flex justify-end">
+            <button type="button"
+                class="js-close-example-modal px-4 py-2 rounded-lg border border-gray-300 bg-gray-100 text-gray-700 hover:bg-gray-200 font-medium">
+                Close
+            </button>
+        </div>
+    </div>
 </div>

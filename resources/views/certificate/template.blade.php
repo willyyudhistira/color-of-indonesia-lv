@@ -125,42 +125,54 @@
         }
 
         .main-title {
-            font-size: 22px;
-            letter-spacing: 2px;
-            color: #333;
+            font-size: 16px;
+            letter-spacing: 1px;
+            color: #8c461d;
+            font-weight: bold;
             text-transform: uppercase;
-            margin-bottom: 20px;
+            /* margin-bottom: 10px; */
+            margin: 15px 0 0 0;
         }
 
         .event-title {
-            font-size: 30px;
+            font-size: 36px;
             font-weight: bold;
-            /* color: #C13584; */
-            margin: 15px 0 5px 0;
+            /* color: #e0773a; */
+            /* margin-top: 1px; */
+            margin: 5px 0 5px 0;
         }
 
         .award {
             font-size: 32px;
-            margin: 20px 0 10px 0;
+            margin: 15px 0 15px 0;
+            font-weight: bold;
+            color: #bd2217;
+
         }
 
         .category {
+            font-size: 24px;
+            /* color: #555; */
+            margin: 0 0 0 0;
+        }
+
+        .subcategory {
             font-size: 16px;
-            color: #555;
-            margin: 0;
+            /* color: #555; */
+            /* margin: 15px 0 5px 0; */
         }
 
         .presented-to-label {
             font-size: 14px;
-            color: #666;
-            margin-top: 30px;
+            /* color: #666; */
+            /* margin-top: 20px; */
         }
 
         .participant-name {
-            font-size: 48px;
+            font-size: 42px;
             font-weight: bold;
             color: #333;
-            margin: 10px 0 10px 0;
+            margin: 5px 0 0 0;
             padding: 0 20px 5px 20px;
             border-bottom: 2px solid #555;
             display: inline-block;
@@ -180,7 +192,7 @@
         }
 
         .description {
-            font-size: 11px;
+            font-size: 12px;
             max-width: 750px;
             margin: 25px auto 0 auto;
             line-height: 1.5;
@@ -203,7 +215,7 @@
         }
 
         .signature-section {
-            width: 340px;
+            width: 500px;
             /* lebar kotak tanda tangan; ubah sesuai kebutuhan */
             margin: 0 auto;
             /* center pada halaman */
@@ -278,8 +290,8 @@
         <div class="content-wrapper">
             <p class="main-title">{{ $template->main_title ?? 'Certificate of Participation' }}</p>
             <h1 class="event-title">{{ $participant->event->title }}</h1>
+            <h2 class="subcategory">{{ $participant->subcategory }}</h2>
             <h2 class="category">{{ $participant->category }}</h2>
-            <h2 class="category">{{ $participant->subcategory }}</h2>
             <p class="award">{{ $participant->type }}</p>
 
             <p class="presented-to-label">Presented To</p>
@@ -311,6 +323,8 @@
                     {!! replace_placeholders($template->winner_text, $participant) !!}
                 @elseif(!empty($participant->type) && strtolower($participant->type) == 'supporting')
                     {!! replace_placeholders($template->supporting_text, $participant) !!}
+                @elseif(!empty($participant->category) && strtolower($participant->category) == '1st runner up')
+                    {!! replace_placeholders($template->winner_text, $participant) !!}
                 @else
                     {!! replace_placeholders($template->participant_text, $participant) !!}
                 @endif

@@ -40,7 +40,7 @@ class ParticipantController extends Controller
         $participants = $query->paginate(15)->withQueryString();
 
         // Ambil data events untuk dropdown filter
-        $events = Event::where('is_published', true)->orderBy('title')->get();
+        $events = Event::orderBy('title')->get();
 
         // Kirim data ke view
         return view('admin.participants.index', compact('participants', 'events'));
@@ -48,7 +48,7 @@ class ParticipantController extends Controller
 
     public function create()
     {
-        $events = Event::where('is_published', true)->orderBy('title')->get();
+        $events = Event::orderBy('title')->get();
         return view('admin.participants.create', compact('events'));
     }
 
@@ -119,7 +119,7 @@ class ParticipantController extends Controller
     public function edit(Participant $participant)
     {
         // Ambil data semua event untuk ditampilkan di dropdown
-        $events = Event::where('is_published', true)->orderBy('title')->get();
+        $events = Event::orderBy('title')->get();
         return view('admin.participants.edit', compact('participant', 'events'));
     }
 

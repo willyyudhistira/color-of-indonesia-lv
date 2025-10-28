@@ -35,9 +35,9 @@
                         <img id="photo-preview" src="#" class="w-full h-full object-contain p-2">
                     </div>
                     <div class="space-y-4">
-                        <input id="photo-upload-input" name="photo" type="file" accept="image/*" required class="block w-full text-sm text-gray-500 file:mr-4 ...">
+                        <input id="photo-upload-input" name="photo" type="file" accept="image/*" required class="mt-2 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-purple-50 file:text-purple-700 hover:file:bg-purple-100">
                         <input name="caption" type="text" placeholder="Photo caption (optional)" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
-                        <button type="submit" class="w-full flex items-center justify-center gap-2 bg-purple-700 text-white font-bold ...">
+                        <button type="submit" class="flex items-center gap-2 bg-purple-700 text-white font-bold py-2 px-6 rounded-lg hover:bg-purple-800">
                             <span class="iconify" data-icon="solar:upload-bold"></span>
                             <span>Upload Foto</span>
                         </button>

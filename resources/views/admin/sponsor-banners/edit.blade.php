@@ -23,7 +23,7 @@
                     <img id="edit-banner-preview" src="{{ $sponsorBanner->image_url ? asset('storage/' . $sponsorBanner->image_url) : '#' }}" alt="Banner Preview" class="h-full object-contain p-2">
                 </div>
                 {{-- PASTIKAN ID UNIK --}}
-                <input id="edit_banner_image_input" type="file" name="image_url" accept="image/*" class="mt-2 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0">
+                <input id="edit_banner_image_input" type="file" name="image_url" accept="image/*" class="mt-2 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-purple-50 file:text-purple-700 hover:file:bg-purple-100">
                 <p class="text-xs text-gray-500 mt-1">Upload a new image to replace the banner.</p>
             </div>
             

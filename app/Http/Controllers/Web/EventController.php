@@ -34,7 +34,9 @@ class EventController extends Controller
         }
     }
 
-    $pastEvents = $pastEventsQuery->orderBy('start_date', 'desc')->paginate(6);
+    $pastEvents = $pastEventsQuery->orderBy('is_featured', 'desc') // Prioritas 1: Featured (true) duluan
+                                      ->orderBy('start_date', 'desc') // Prioritas 2: Tanggal terbaru duluan
+                                      ->paginate(6);
     $pastEvents->appends($request->query());
 
     return view('pages.events', [
@@ -45,11 +47,15 @@ class EventController extends Controller
 }
     
     public function show($slug)
-    {
-        $event = Event::where('slug', $slug)->where('is_published', true)->firstOrFail();
-        
-        return view('pages.event-detail', [
-            'event' => $event
-        ]);
-    }
+{
+    // Tambahkan ->with('galleryAlbum')
+    $event = Event::where('slug', $slug)
+                  ->where('is_published', true)
+                //   ->with('galleryAlbum') // <-- Eager load relasi
+                  ->firstOrFail();
+
+    return view('pages.event-detail', [
+        'event' => $event
+    ]);
+}
 }
