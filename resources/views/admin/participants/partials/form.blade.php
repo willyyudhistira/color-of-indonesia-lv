@@ -19,6 +19,10 @@
         <label for="email" class="block text-sm font-medium text-gray-700">Email address</label>
         <input type="email" id="email" name="email" value="{{ old('email', $participant->email ?? '') }}" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
     </div>
+    <div>
+        <label for="phone_number" class="block text-sm font-medium text-gray-700">Phone Number</label>
+        <input type="tel" id="phone_number" name="phone_number" value="{{ old('phone_number', $participant->phone_number ?? '') }}" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+    </div>
 </div>
 
 {{-- Baris 2: Event & Group --}}

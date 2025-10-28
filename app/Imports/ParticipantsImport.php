@@ -43,6 +43,7 @@ class ParticipantsImport implements ToModel, WithHeadingRow
         $participant = new Participant([
             'name'     => $name,
             'email'    => $email,
+            'phone_number' => $this->findValue($row, ['phone number', 'nomor telepon', 'no hp', 'phone', 'phone_number']),
             'purpose'  => $this->findValue($row, ['purpose', 'tujuan']),
             'type'     => $this->findValue($row, ['type', 'tipe']),
             'category' => $this->findValue($row, ['category', 'kategori']),

@@ -64,10 +64,19 @@ Route::get('/contact', [ContactPageController::class, 'index'])->name('contact.i
 Route::post('/contact', [ContactPageController::class, 'store'])->name('contact.store');
 Route::get('/videos', [WebVideoController::class, 'index'])->name('videos.index');
 
-Route::get('/e-certificate', [ECertificateController::class, 'index'])->name('e-certificate.index');
-Route::post('/e-certificate', [ECertificateController::class, 'generate'])->name('e-certificate.generate');
-Route::get('/verify-certificate/{certificate_number}', [ECertificateController::class, 'verify'])->name('certificate.verify');
+// Route::get('/e-certificate', [ECertificateController::class, 'index'])->name('e-certificate.index');
+// Route::post('/e-certificate', [ECertificateController::class, 'generate'])->name('e-certificate.generate');
+// Route::get('/verify-certificate/{certificate_number}', [ECertificateController::class, 'verify'])->name('certificate.verify');
 // Route::get('/certificate-preview/{event}', [ECertificateController::class, 'preview'])->name('certificate.preview'); // <-- INI RUTE YANG BENAR
+
+Route::get('/e-certificate', [ECertificateController::class, 'index'])->name('e-certificate.index');
+
+// Rute 'POST' (.generate) tidak diperlukan lagi karena pencarian sekarang menggunakan 'GET' di .index
+// Route::post('/e-certificate', [ECertificateController::class, 'generate'])->name('e-certificate.generate'); 
+
+// TAMBAHKAN RUTE INI UNTUK TOMBOL DOWNLOAD
+Route::get('/e-certificate/download/{participant}', [ECertificateController::class, 'download'])->name('e-certificate.download');
+Route::get('/verify-certificate/{certificate_number}', [ECertificateController::class, 'verify'])->name('certificate.verify');
 
 // ===============================================
 // GRUP RUTE UNTUK ADMIN DASHBOARD

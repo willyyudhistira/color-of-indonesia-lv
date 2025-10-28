@@ -11,7 +11,7 @@ class Participant extends Model
 
     protected $fillable = [
         'event_id', 'name', 'email', 'certificate_number',
-        'purpose', 'type', 'category', 'group', 'subcategory', 'notes',
+        'purpose', 'type', 'category', 'group', 'subcategory', 'notes', 'phone_number',
     ];
 
     public function event()

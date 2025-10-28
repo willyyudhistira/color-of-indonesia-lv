@@ -57,6 +57,7 @@ class ParticipantController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email',
+            'phone_number' => 'nullable|string|max:20',
             'event_id' => 'required|exists:event_scheduled,id',
             'purpose' => 'nullable|string',
             'type' => 'nullable|string',
@@ -71,7 +72,7 @@ class ParticipantController extends Controller
         $participant = Participant::create($validated);
 
         // Kirim email notifikasi ke peserta
-        Mail::to($participant->email)->send(new CertificateNotification($participant));
+        // Mail::to($participant->email)->send(new CertificateNotification($participant));
 
         return redirect()->route('admin.participants.index')->with('success', 'Participant has been successfully added and an email notification has been sent.');
     }
@@ -131,6 +132,7 @@ class ParticipantController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email',
+            'phone_number' => 'nullable|string|max:20',
             'event_id' => 'required|exists:event_scheduled,id',
             'purpose' => 'nullable|string',
             'type' => 'nullable|string',
