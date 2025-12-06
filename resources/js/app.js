@@ -184,14 +184,14 @@ document.addEventListener('DOMContentLoaded', function () {
             const form = this.closest('form'); // Cari form terdekat
 
             Swal.fire({
-                title: 'Anda Yakin?',
-                text: "Data yang sudah dihapus tidak dapat dikembalikan!",
+                title: 'Are You Sure?',
+                text: "Deleted data cannot be restored!",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Ya, Hapus!',
-                cancelButtonText: 'Batal'
+                confirmButtonText: 'Yes, Delete!',
+                cancelButtonText: 'Cancel'
             }).then((result) => {
                 if (result.isConfirmed) {
                     form.submit(); // Jika dikonfirmasi, kirim form
@@ -208,14 +208,14 @@ document.addEventListener('DOMContentLoaded', function () {
             const form = this.closest('form');
 
             Swal.fire({
-                title: 'Anda Yakin Ingin Logout?',
-                text: "Sesi Anda akan diakhiri.",
+                title: 'Are You Sure You Want to Logout?',
+                text: "Your session will be ended.",
                 icon: 'question',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Ya, Logout!',
-                cancelButtonText: 'Batal'
+                confirmButtonText: 'Yes, Logout!',
+                cancelButtonText: 'Cancel'
             }).then((result) => {
                 if (result.isConfirmed) {
                     form.submit();

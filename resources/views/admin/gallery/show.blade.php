@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title', 'Kelola Album: ' . $album->title)
+@section('title', 'Manage Album: ' . $album->title)
 
 @section('content')
     <div class="space-y-8">
@@ -39,7 +39,7 @@
                         <input name="caption" type="text" placeholder="Photo caption (optional)" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
                         <button type="submit" class="flex items-center gap-2 bg-purple-700 text-white font-bold py-2 px-6 rounded-lg hover:bg-purple-800">
                             <span class="iconify" data-icon="solar:upload-bold"></span>
-                            <span>Upload Foto</span>
+                            <span>Upload Photo</span>
                         </button>
                     </div>
                 </div>
@@ -48,20 +48,20 @@
         
         {{-- Daftar Foto yang Sudah Ada --}}
         <div class="bg-white p-6 rounded-lg shadow-md">
-            <h3 class="text-xl font-bold text-gray-700 mb-4">Daftar Foto</h3>
+            <h3 class="text-xl font-bold text-gray-700 mb-4">Photo List</h3>
             <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
                 @forelse($album->photos as $photo)
                     <div class="relative group">
                         <img src="{{ asset('storage/' . $photo->image_url) }}" class="w-full h-40 object-cover rounded-lg">
                         <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
-                            <form action="{{ route('admin.gallery.photos.destroy', $photo) }}" method="POST" onsubmit="return confirm('Hapus foto ini?');">
+                            <form action="{{ route('admin.gallery.photos.destroy', $photo) }}" method="POST" onsubmit="return confirm('Delete this photo?');">
                                 @csrf @method('DELETE')
                                 <button type="submit" class="delete-confirm-button p-2 bg-red-500 text-white rounded-full"><span class="iconify" data-icon="solar:trash-bin-trash-bold"></span></button>
                             </form>
                         </div>
                     </div>
                 @empty
-                    <p class="col-span-full text-center text-gray-500">Belum ada foto di album ini.</p>
+                    <p class="col-span-full text-center text-gray-500">There are no photos in this album.</p>
                 @endforelse
             </div>
         </div>

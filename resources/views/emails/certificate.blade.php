@@ -39,12 +39,12 @@
                 
                 <table class="container" width="100%" border="0" cellpadding="0" cellspacing="0" style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
                     
-                    <tr>
+                    <!-- <tr>
                         <td align="center" style="padding: 30px 20px; border-bottom: 1px solid #eeeeee;">
                             {{-- Ganti 'URL_LOGO_ANDA' dengan URL logo perusahaan/event Anda --}}
-                            <img src="{{ asset('assets/images/logo_coi.png') }}" alt="Logo Event" style="max-width: 150px; height: auto;">
+                            <img src="{{ asset('assets/images/logo_coi.png') }}" alt="COI" style="max-width: 150px; height: auto;">
                         </td>
-                    </tr>
+                    </tr> -->
 
                     <tr>
                         <td class="content-cell" style="padding: 40px 30px;">
@@ -69,7 +69,10 @@
                             <table width="100%" border="0" cellpadding="0" cellspacing="0">
                                 <tr>
                                     <td align="center">
-                                        <a href="{{ route('e-certificate.index') }}" target="_blank" class="button" style="display: inline-block; background-color: #8a2be2; color: #ffffff; font-size: 16px; font-weight: bold; text-decoration: none; padding: 16px 32px; border-radius: 8px; transition: background-color 0.3s;">
+                                        <a href="{{ route('e-certificate.index', ['search' => $participant->certificate_number]) }}" 
+                                            target="_blank" 
+                                            class="button" 
+                                            style="display: inline-block; background-color: #8a2be2; color: #ffffff; font-size: 16px; font-weight: bold; text-decoration: none; padding: 16px 32px; border-radius: 8px; transition: background-color 0.3s;">
                                             Download E-Certificate Here
                                         </a>
                                     </td>

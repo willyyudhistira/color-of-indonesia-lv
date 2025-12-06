@@ -81,7 +81,7 @@
         {{-- ============================================= --}}
         {{-- ## 4. SECTION BARU: DOWNLOAD LEGALITAS ## --}}
         {{-- ============================================= --}}
-        <section class="text-center">
+        <!-- <section class="text-center">
             <div class="max-w-3xl mx-auto bg-white rounded-xl shadow-lg p-10 border border-gray-100">
                 <h2 class="text-3xl font-bold text-gray-800 mb-2">Documents & Legalities</h2>
                 <p class="text-gray-600 mb-6">Download our sponsorship proposal and legal documents for more information.</p>
@@ -89,7 +89,7 @@
                     Download Legal Documents
                 </a>
             </div>
-        </section>
+        </section> -->
 
         {{-- 5. Final Call to Action Section --}}
         <section class="text-center">

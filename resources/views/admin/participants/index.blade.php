@@ -11,6 +11,31 @@
         </a>
     </div>
 
+    @if(session('success'))
+        <div class="mb-4 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+            <span class="block sm:inline">{{ session('success') }}</span>
+        </div>
+    @endif
+
+    @if(session('error'))
+        <div class="mb-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+            <strong class="font-bold">Import Failed!</strong>
+            <span class="block sm:inline">{{ session('error') }}</span>
+        </div>
+    @endif
+
+    {{-- TAMPILKAN DETAIL ERROR VALIDASI DARI EXCEL --}}
+    @if ($errors->any())
+        <div class="mb-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+            <strong class="font-bold block">Details of Errors in Excel Data:</strong>
+            <ul class="list-disc pl-5 mt-2">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
     <div class="bg-white p-6 rounded-lg shadow-md mb-8">
         <h3 class="text-xl font-bold text-gray-700 mb-4">Import Participants from Excel</h3>
         <form action="{{ route('admin.participants.import') }}" method="POST" enctype="multipart/form-data">
@@ -137,13 +162,14 @@
                                     </a>
 
                                     {{-- TOMBOL HAPUS --}}
-                                    <button type="button"
-                                        class="open-delete-modal-btn p-2 bg-red-500 text-white rounded-md hover:bg-red-600"
-                                        title="Delete" data-participant-name="{{ e($participant->name) }}"
-                                        data-delete-url="{{ route('admin.participants.destroy', $participant) }}">
-                                        <span class="iconify" data-icon="solar:trash-bin-trash-bold"></span>
-                                    </button>
-
+                                    <form action="{{ route('admin.participants.destroy', $participant) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="button" class="delete-confirm-button p-2 mt-3.5 bg-red-500 text-white rounded-md hover:bg-red-600"
+                                            title="Delete Participant">
+                                            <span class="iconify" data-icon="solar:trash-bin-trash-bold"></span>
+                                        </button>
+                                    </form>
                                 </div>
                             </td>
                         </tr>
@@ -187,49 +213,13 @@
     </div>
 </div>
 
-<div id="deleteModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
-    <div class="bg-white p-6 rounded-lg shadow-xl w-full max-w-lg">
-        <!-- Header -->
-        <div class="flex items-center justify-between border-b pb-3">
-            <h3 class="text-lg font-bold text-gray-900">Delete Confirmation</h3>
-            <button type="button" class="js-close-delete-modal text-gray-400 hover:text-gray-600 transition-colors">
-                ✕
-            </button>
-        </div>
-
-        <!-- Body -->
-        <div class="mt-">
-            <p class="text-gray-700">
-                Are you sure you want to delete this participant?
-            </p>
-            <p class="mt-2 text-lg font-semibold text-red-600" id="deleteParticipantName"></p>
-            <p class="mt-3 text-sm text-gray-500">
-                This action is <span class="font-semibold text-red-600">permanent</span> and cannot be undone.
-            </p>
-        </div>
-
-        <!-- Footer -->
-        <div class="mt-6 flex justify-end space-x-4">
-            <button type="button" class="js-close-delete-modal py-2 px-4 rounded-lg border border-gray-300 bg-gray-100 text-gray-700 hover:bg-gray-200 font-medium">
-                Cancel
-            </button>
-
-            {{-- Form hapus --}}
-            <form id="deleteForm" method="POST">
-                @csrf
-                @method('DELETE')
-                <button type="submit"
-                    class="px-6 py-2 rounded-lg bg-red-600 text-white font-bold hover:bg-red-700 shadow-md">
-                    Delete
-                </button>
-            </form>
-        </div>
-    </div>
-</div>
-
+@push('scripts')
+{{-- Pastikan script SweetAlert2 sudah diload di layouts.admin --}}
+{{-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> --}}
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
+        // --- 1. LOGIKA UNTUK MODAL NOTES (TIDAK BERUBAH) ---
         const modal = document.getElementById('notesModal');
         const openModalButtons = document.querySelectorAll('.open-notes-modal-btn');
         const closeModalBtn = document.getElementById('closeNotesModalBtn');
@@ -237,73 +227,53 @@
         const notesTextarea = document.getElementById('notesTextarea');
         const participantNameSpan = document.getElementById('participantNameSpan');
 
-        // Fungsi untuk membuka modal
         openModalButtons.forEach(button => {
             button.addEventListener('click', function () {
-                // Ambil data dari tombol yang diklik
                 const name = this.dataset.participantName;
                 const notes = this.dataset.currentNotes;
                 const url = this.dataset.updateUrl;
 
-                // Isi modal dengan data yang sesuai
                 participantNameSpan.textContent = name;
                 notesTextarea.value = notes;
                 notesForm.action = url;
-
-                // Tampilkan modal
                 modal.classList.remove('hidden');
             });
         });
 
-        // Fungsi untuk menutup modal
         function closeModal() {
             modal.classList.add('hidden');
         }
 
         closeModalBtn.addEventListener('click', closeModal);
-
-        // Tutup modal jika klik di luar area konten
         modal.addEventListener('click', function (event) {
             if (event.target === modal) {
                 closeModal();
             }
         });
 
-        const deleteModal = document.getElementById('deleteModal');
-        const openDeleteModalButtons = document.querySelectorAll('.open-delete-modal-btn');
-        const closeDeleteModalButtons = document.querySelectorAll('.js-close-delete-modal');
-        const deleteForm = document.getElementById('deleteForm');
-        const deleteParticipantName = document.getElementById('deleteParticipantName');
-
-        // Fungsi untuk membuka modal hapus
-        openDeleteModalButtons.forEach(button => {
-            button.addEventListener('click', function () {
-                const name = this.dataset.participantName;
-                const url = this.dataset.deleteUrl;
-
-                // Isi modal dengan data yang sesuai
-                deleteParticipantName.textContent = name;
-                deleteForm.action = url;
-
-                // Tampilkan modal
-                deleteModal.classList.remove('hidden');
+        // --- 2. LOGIKA UNTUK DELETE DENGAN SWEETALERT2 ---
+        const deleteButtons = document.querySelectorAll('.delete-confirm-button');
+        
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', function (event) {
+                event.preventDefault();
+                const form = this.closest('form');
+                
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this! The participant will be permanently deleted.",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.submit();
+                    }
+                })
             });
-        });
-
-        // Fungsi untuk menutup modal hapus
-        function closeDeleteModal() {
-            deleteModal.classList.add('hidden');
-        }
-
-        closeDeleteModalButtons.forEach(button => {
-            button.addEventListener('click', closeDeleteModal);
-        });
-
-        // Tutup modal jika klik di luar area konten
-        deleteModal.addEventListener('click', function (event) {
-            if (event.target === deleteModal) {
-                closeDeleteModal();
-            }
         });
     });
 </script>
+@endpush

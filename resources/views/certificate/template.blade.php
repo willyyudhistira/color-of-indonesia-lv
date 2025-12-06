@@ -96,7 +96,6 @@
             padding: 40px;
             background-size: cover;
             background-repeat: no-repeat;
-            /* box-sizing: border-box; */
             text-align: center;
             position: relative;
         }
@@ -117,11 +116,19 @@
         }
 
         .content-wrapper {
-            /* Wrapper untuk konten utama agar bisa diatur posisinya */
-            padding-top: 80px;
-            /* Jarak dari atas untuk header */
-            padding-bottom: 150px;
-            /* Jarak dari bawah untuk footer */
+            /* padding-top: 80px;
+            padding-bottom: 150px; */
+            position: absolute;
+    top: 130px;  /* Mulai di bawah header (sesuaikan jika header lebih tinggi) */
+    left: 40px;  /* Sesuaikan dengan padding page-container */
+    right: 40px; /* Sesuaikan dengan padding page-container */
+    height: 400px; /* Tinggi area tengah yang tersedia (713px - header - footer) */
+    
+    /* Hapus padding lama */
+    padding: 0; 
+    
+    /* Opsional: nyalakan border ini untuk melihat kotak area tengah saat debugging */
+    /* border: 1px solid red; */
         }
 
         .main-title {
@@ -288,47 +295,55 @@
 
 
         <div class="content-wrapper">
-            <p class="main-title">{{ $template->main_title ?? 'Certificate of Participation' }}</p>
-            <h1 class="event-title">{{ $participant->event->title }}</h1>
-            <h2 class="subcategory">{{ $participant->subcategory }}</h2>
-            <h2 class="category">{{ $participant->category }}</h2>
-            <p class="award">{{ $participant->type }}</p>
+            <table width="100%" style="height: 100%; border-collapse: collapse; border: none;">
+                <tr>
+                    <td valign="middle" align="center" style="padding: 0;">
 
-            <p class="presented-to-label">Presented To</p>
-            <h1 class="participant-name" style="font-size: {{ $fontSize }}; letter-spacing: {{ $letterSpacing }};">
-                {{ $participant->name }}
-            </h1>
-            <p class="group-name">{{ $participant->group }}</p>
+                        <p class="main-title">{{ $template->main_title ?? 'Certificate of Participation' }}</p>
+                        <h1 class="event-title">{{ $participant->event->title }}</h1>
+                        <h2 class="subcategory">{{ $participant->subcategory }}</h2>
+                        <h2 class="category">{{ $participant->category }}</h2>
+                        <p class="award">{{ $participant->type }}</p>
+            
+                        <p class="presented-to-label">Presented To</p>
+                        <h1 class="participant-name" style="font-size: {{ $fontSize }}; letter-spacing: {{ $letterSpacing }};">
+                            {{ $participant->name }}
+                        </h1>
+                        <p class="group-name">{{ $participant->group }}</p>
+            
+                        <!-- <p class="description">
+                            In recognition of your participation in the event
+                            <strong>{{ $participant->event->title }}</strong>,
+                            held on
+                            <strong>{{ $participant->event->start_date->format('d F Y') }}</strong>.
+                            @if(!empty($participant->type) && strtolower($participant->type) == 'winner')
+                                This award is given in recognition of your outstanding achievement as the
+                                <strong>Winner</strong> in the <strong>{{ $participant->purpose }}</strong> competition,
+                                <strong>{{ $participant->category }}</strong> category.
+                            @elseif(!empty($participant->type) && strtolower($participant->type) == 'supporting')
+                                Your contribution in the role of <strong>Supporter</strong> for the
+                                <strong>{{ $participant->category }}</strong> was invaluable to the success of this event.
+                            @else
+                                You have contributed to promoting understanding and friendship among participants.
+                            @endif
+                        </p> -->
+                        <p class="description">
+                            {!! replace_placeholders($template->body_text, $participant) !!}
+            
+                            @if(!empty($participant->type) && strtolower($participant->type) == 'winner')
+                                {!! replace_placeholders($template->winner_text, $participant) !!}
+                            @elseif(!empty($participant->type) && strtolower($participant->type) == 'supporting')
+                                {!! replace_placeholders($template->supporting_text, $participant) !!}
+                            @elseif(!empty($participant->category) && strtolower($participant->category) == '1st runner up')
+                                {!! replace_placeholders($template->winner_text, $participant) !!}
+                            @else
+                                {!! replace_placeholders($template->participant_text, $participant) !!}
+                            @endif
+                        </p>
+                    </td>
+                </tr>
 
-            <!-- <p class="description">
-                In recognition of your participation in the event
-                <strong>{{ $participant->event->title }}</strong>,
-                held on
-                <strong>{{ $participant->event->start_date->format('d F Y') }}</strong>.
-                @if(!empty($participant->type) && strtolower($participant->type) == 'winner')
-                    This award is given in recognition of your outstanding achievement as the
-                    <strong>Winner</strong> in the <strong>{{ $participant->purpose }}</strong> competition,
-                    <strong>{{ $participant->category }}</strong> category.
-                @elseif(!empty($participant->type) && strtolower($participant->type) == 'supporting')
-                    Your contribution in the role of <strong>Supporter</strong> for the
-                    <strong>{{ $participant->category }}</strong> was invaluable to the success of this event.
-                @else
-                    You have contributed to promoting understanding and friendship among participants.
-                @endif
-            </p> -->
-            <p class="description">
-                {!! replace_placeholders($template->body_text, $participant) !!}
-
-                @if(!empty($participant->type) && strtolower($participant->type) == 'winner')
-                    {!! replace_placeholders($template->winner_text, $participant) !!}
-                @elseif(!empty($participant->type) && strtolower($participant->type) == 'supporting')
-                    {!! replace_placeholders($template->supporting_text, $participant) !!}
-                @elseif(!empty($participant->category) && strtolower($participant->category) == '1st runner up')
-                    {!! replace_placeholders($template->winner_text, $participant) !!}
-                @else
-                    {!! replace_placeholders($template->participant_text, $participant) !!}
-                @endif
-            </p>
+            </table>
         </div>
 
         <!-- <div class="footer">

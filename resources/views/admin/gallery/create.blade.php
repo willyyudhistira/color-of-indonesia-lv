@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title', 'Tambah Album Baru')
+@section('title', 'Add a New Gallery Album')
 
 @section('content')
     <div class="bg-white p-8 rounded-lg shadow-md max-w-3xl mx-auto">

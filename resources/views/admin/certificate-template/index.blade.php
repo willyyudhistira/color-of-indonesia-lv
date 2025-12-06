@@ -43,10 +43,11 @@
                                     <a href="{{ route('admin.certificate-templates.edit', $template) }}" class="p-2 bg-yellow-500 text-white rounded-md hover:bg-yellow-600" title="Edit Template">
                                         <span class="iconify" data-icon="solar:pen-bold"></span>
                                     </a>
-                                    <form action="{{ route('admin.certificate-templates.destroy', $template) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this template??');">
+                                    <form action="{{ route('admin.certificate-templates.destroy', $template) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="p-2 bg-red-500 text-white rounded-md hover:bg-red-600" title="Delete Templates">
+                                        <button type="button" class="delete-confirm-button p-2 bg-red-500 text-white rounded-md hover:bg-red-600"
+                                            title="Delete Template">
                                             <span class="iconify" data-icon="solar:trash-bin-trash-bold"></span>
                                         </button>
                                     </form>
@@ -69,4 +70,38 @@
             {{ $templates->links() }}
         </div>
     </div>
+
+    @push('scripts')
+        {{-- Pastikan script SweetAlert2 sudah diload di layouts.admin (CDN atau npm) --}}
+        {{-- Jika belum, tambahkan: <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> --}}
+        
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const deleteButtons = document.querySelectorAll('.delete-confirm-button');
+                
+                deleteButtons.forEach(button => {
+                    button.addEventListener('click', function (event) {
+                        event.preventDefault();
+                        const form = this.closest('form');
+                        
+                        Swal.fire({
+                            title: 'Anda yakin?',
+                            text: "Template ini akan dihapus secara permanen! Event yang menggunakan template ini akan dilepaskan (detached).",
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#d33', // Merah untuk bahaya
+                            cancelButtonColor: '#3085d6', // Biru/Abu untuk batal
+                            confirmButtonText: 'Ya, hapus!',
+                            cancelButtonText: 'Batal'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                form.submit();
+                            }
+                        })
+                    });
+                });
+            });
+        </script>
+    @endpush
 @endsection
+

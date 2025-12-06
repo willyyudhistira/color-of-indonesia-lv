@@ -1,6 +1,6 @@
 {{-- resources/views/admin/news/create.blade.php --}}
 @extends('layouts.admin')
-@section('title', 'Add New News')
+@section('title', 'Add News')
 @section('content')
     <div class="bg-white p-8 rounded-lg shadow-md max-w-4xl mx-auto">
         <h2 class="text-2xl font-bold text-gray-800 mb-6">Add New News</h2>

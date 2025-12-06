@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title', 'Kelola Template Sertifikat')
+@section('title', 'Manage Certificate Template')
 
 @section('content')
     <div class="bg-white p-8 rounded-lg shadow-md max-w-4xl mx-auto">

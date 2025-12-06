@@ -20,9 +20,9 @@
                 <img src="{{ $album->cover_url ? asset('storage/' . $album->cover_url) : 'https://via.placeholder.com/400x300' }}" alt="{{ $album->title }}" class="w-full h-48 object-cover">
                 <div class="p-4">
                     <h3 class="text-lg font-bold">{{ $album->title }}</h3>
-                    <p class="text-sm text-gray-500">{{ $album->photos_count }} foto</p>
+                    <p class="text-sm text-gray-500">{{ $album->photos_count }} photos</p>
                     <div class="mt-4 flex justify-end gap-2">
-                        <a href="{{ route('admin.gallery.show', $album) }}" class="text-sm bg-blue-500 text-white py-2 px-4 rounded-lg">Kelola Foto</a>
+                        <a href="{{ route('admin.gallery.show', $album) }}" class="text-sm bg-blue-500 text-white py-2 px-4 rounded-lg">Manage Photos</a>
                         <a href="{{ route('admin.gallery.edit', $album) }}" class="text-sm bg-yellow-500 text-white py-2 px-4 rounded-lg">Edit</a>
                         <form action="{{ route('admin.gallery.destroy', $album) }}" method="POST" onsubmit="return confirm('Deleting this album will delete ALL its photos. Are you sure??');">
                             @csrf @method('DELETE')

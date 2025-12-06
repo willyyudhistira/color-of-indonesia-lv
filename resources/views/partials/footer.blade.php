@@ -77,7 +77,7 @@
             </div>
 
             <!-- Kolom 4: Subscribe & Visitor Counter -->
-            <div class="lg:col-span-3">
+            <!-- <div class="lg:col-span-3">
                 <h3 class="font-bold text-lg mb-4">Subscribe Newsletter</h3>
                 <div class="flex items-center mb-6">
                     <input type="email" placeholder="Your Email"
@@ -89,7 +89,7 @@
                     <p class="font-numeric font-bold text-xl text-center">{{ $visitorCount ?? '0' }}</p>
                     <p class="text-sm">visitor</p>
                 </div>
-            </div>
+            </div> -->
         </div>
 
         <div class="flex justify-center mt-8">

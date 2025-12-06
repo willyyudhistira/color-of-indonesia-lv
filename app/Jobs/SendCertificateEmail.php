@@ -16,6 +16,7 @@ class SendCertificateEmail implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     protected $participant;
+    public $tries = 3;
 
     /**
      * Create a new job instance.
@@ -30,7 +31,9 @@ class SendCertificateEmail implements ShouldQueue
      */
     public function handle(): void
     {
-        // Logika pengiriman email dipindahkan ke sini
+        sleep(10);
         Mail::to($this->participant->email)->send(new CertificateNotification($this->participant));
+        // Logika pengiriman email dipindahkan ke sini
+        // Mail::to($this->participant->email)->send(new CertificateNotification($this->participant));
     }
 }

@@ -1,10 +1,10 @@
 @extends('layouts.admin')
-@section('title', 'Edit Template Sertifikat: ' . $event->title)
+@section('title', 'Edit Certificate Template: ' . $event->title)
 
 @section('content')
     <div class="bg-white p-8 rounded-lg shadow-md max-w-4xl mx-auto">
         <div class="mb-6 pb-4 border-b">
-            <h2 class="text-2xl font-bold text-gray-800">Pengaturan Template Sertifikat</h2>
+            <h2 class="text-2xl font-bold text-gray-800">Certificate Template Settings</h2>
             <p class="text-gray-500">Sesuaikan tampilan sertifikat untuk event: <strong class="text-purple-700">{{ $event->title }}</strong></p>
         </div>
         
@@ -24,7 +24,7 @@
 
             {{-- Logos --}}
             <div>
-                <label class="block text-lg font-medium text-gray-700">Logo Header</label>
+                <label class="block text-lg font-medium text-gray-700">Header Logo</label>
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-2">
                     @for ($i = 1; $i <= 7; $i++)
                     <div>
@@ -42,17 +42,17 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 pt-6 border-t">
                 {{-- Signature 1 --}}
                 <div class="space-y-4">
-                    <h3 class="font-semibold text-gray-800">Tanda Tangan 1 (Kiri)</h3>
+                    <h3 class="font-semibold text-gray-800">Signatire 1</h3>
                     <div>
-                        <label class="block text-sm">Nama</label>
+                        <label class="block text-sm">Name</label>
                         <input type="text" name="certificate_signature1_name" value="{{ old('certificate_signature1_name', $event->certificate_signature1_name) }}" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
                     </div>
                     <div>
-                        <label class="block text-sm">Jabatan</label>
+                        <label class="block text-sm">Position</label>
                         <input type="text" name="certificate_signature1_title" value="{{ old('certificate_signature1_title', $event->certificate_signature1_title) }}" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
                     </div>
                     <div>
-                        <label class="block text-sm">Gambar Tanda Tangan</label>
+                        <label class="block text-sm">Signature Image</label>
                         @if($event->certificate_signature1_image) 
                             <img src="{{ asset('storage/' . $event->certificate_signature1_image) }}" class="h-16 object-contain my-1 border p-1 rounded"> 
                         @endif

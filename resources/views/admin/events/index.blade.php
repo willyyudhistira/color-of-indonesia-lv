@@ -2,29 +2,6 @@
 @section('title', 'Events Management')
 
 @section('content')
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-        {{-- Card Event Terlaksana --}}
-        <div class="bg-white p-6 rounded-lg shadow-md flex items-center gap-4">
-            <div class="bg-red-100 p-3 rounded-full">
-                <span class="iconify w-8 h-8 text-red-600" data-icon="solar:calendar-mark-bold"></span>
-            </div>
-            <div>
-                <p class="text-3xl font-bold text-gray-800">{{ $pastEventsCount }}</p>
-                <p class="text-gray-500">Event Done</p>
-            </div>
-        </div>
-
-        {{-- Card Event Mendatang --}}
-        <div class="bg-white p-6 rounded-lg shadow-md flex items-center gap-4">
-            <div class="bg-green-100 p-3 rounded-full">
-                <span class="iconify w-8 h-8 text-green-600" data-icon="solar:calendar-bold"></span>
-            </div>
-            <div>
-                <p class="text-3xl font-bold text-gray-800">{{ $upcomingEventsCount }}</p>
-                <p class="text-gray-500">Upcoming Events</p>
-            </div>
-        </div>
-    </div>
 
     {{-- Judul dan Tombol Tambah Event (kode ini sudah ada sebelumnya) --}}
     <div class="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
@@ -62,12 +39,6 @@
                 class="w-full sm:w-auto bg-purple-700 text-white font-bold py-2 px-4 rounded-lg hover:bg-purple-800 transition-colors flex items-center justify-center gap-2">
                 <span class="iconify" data-icon="solar:add-circle-bold"></span>
                 <span>Add Event</span>
-            </a>
-            <!-- Tombol Download Report -->
-            <a href="{{ route('admin.events.export') }}"
-                class="w-full sm:w-auto bg-green-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-green-700 transition-colors flex items-center justify-center gap-2">
-                <span class="iconify" data-icon="solar:file-download-bold"></span>
-                <span>Report</span>
             </a>
         </div>
     </div>
