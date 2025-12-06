@@ -11,11 +11,17 @@ class Participant extends Model
 
     protected $fillable = [
         'event_id', 'name', 'email', 'certificate_number',
+        'certificate_template_id',
         'purpose', 'type', 'category', 'group', 'subcategory', 'notes', 'phone_number',
     ];
 
     public function event()
     {
         return $this->belongsTo(Event::class, 'event_id');
+    }
+
+    public function certificateTemplate()
+    {
+        return $this->belongsTo(CertificateTemplate::class, 'certificate_template_id');
     }
 }

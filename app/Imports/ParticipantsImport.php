@@ -13,10 +13,12 @@ use App\Jobs\SendCertificateEmail;
 class ParticipantsImport implements ToModel, WithHeadingRow
 {
     private $eventId;
+    private $templateId;
 
-    public function __construct(int $eventId)
+    public function __construct(int $eventId, int $templateId)
     {
         $this->eventId = $eventId;
+        $this->templateId = $templateId;
     }
 
     /**
@@ -26,36 +28,32 @@ class ParticipantsImport implements ToModel, WithHeadingRow
      */
     public function model(array $row)
     {
-        // 1. Mengubah semua kunci header menjadi huruf kecil untuk pencarian yang konsisten.
         $row = array_change_key_case($row, CASE_LOWER);
 
-        // 2. Mencari nilai 'nama' dan 'email' dengan beberapa kemungkinan nama kolom.
         $name = $this->findValue($row, ['nama', 'nama peserta', 'nama lengkap', 'name']);
         $email = $this->findValue($row, ['email', 'email peserta', 'alamat email']);
 
-        // 3. Lewati baris ini jika nama atau email tidak ditemukan.
-        // Ini adalah alasan utama mengapa data Anda sebelumnya tidak masuk.
         if (empty($name) || empty($email)) {
             return null; 
         }
 
-        // 4. Buat objek Participant dengan data yang sudah ditemukan.
         $participant = new Participant([
             'name'     => $name,
             'email'    => $email,
-            'phone_number' => $this->findValue($row, ['phone number', 'nomor telepon', 'no hp', 'phone', 'phone_number']),
+            'phone_number' => $this->findValue($row, ['phone number', 'nomor telepon', 'no hp', 'phone']),
             'purpose'  => $this->findValue($row, ['purpose', 'tujuan']),
             'type'     => $this->findValue($row, ['type', 'tipe']),
             'category' => $this->findValue($row, ['category', 'kategori']),
             'subcategory' => $this->findValue($row, ['subcategory', 'sub kategori']),
             'group'    => $this->findValue($row, ['group', 'grup', 'instansi']),
             'event_id' => $this->eventId,
+            'certificate_template_id' => $this->templateId, // Simpan template ID di sini
             'certificate_number' => 'COI-' . $this->eventId . '-' . strtoupper(Str::random(8)),
         ]);
 
         $participant->save();
 
-        SendCertificateEmail::dispatch($participant);
+        // SendCertificateEmail::dispatch($participant);
 
         return $participant;
     }

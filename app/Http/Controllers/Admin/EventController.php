@@ -85,7 +85,6 @@ class EventController extends Controller
             'hero_image_url' => 'nullable|image|max:4096',
             'is_featured' => 'required|boolean', // Diubah menjadi required
             'is_published' => 'required|boolean', // Diubah menjadi required
-            'certificate_template_id' => 'nullable|exists:certificate_templates,id',
         ], [
             'title.unique' => 'This event title has already been used. Please use a different title.'
         ]);

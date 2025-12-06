@@ -23,25 +23,40 @@
         <label for="phone_number" class="block text-sm font-medium text-gray-700">Phone Number</label>
         <input type="tel" id="phone_number" name="phone_number" value="{{ old('phone_number', $participant->phone_number ?? '') }}" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
     </div>
-</div>
-
-{{-- Baris 2: Event & Group --}}
-<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-    <div>
-        <label for="event_id" class="block text-sm font-medium text-gray-700">Select Events</label>
-        <select id="event_id" name="event_id" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
-            <option value="">-- Select one --</option>
-            @foreach($events as $event)
-                <option value="{{ $event->id }}" @selected(old('event_id', $participant->event_id ?? '') == $event->id)>
-                    {{ $event->title }}
-                </option>
-            @endforeach
-        </select>
-    </div>
     <div>
         <label for="group" class="block text-sm font-medium text-gray-700">Group / Institution (Optional)</label>
         <input type="text" id="group" name="group" value="{{ old('group', $participant->group ?? '') }}" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
     </div>
+</div>
+
+{{-- Baris 2: Event & Group --}}
+<!-- <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    </div> -->
+<div>
+    <label for="event_id" class="block text-sm font-medium text-gray-700">Select Events</label>
+    <select id="event_id" name="event_id" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+        <option value="">-- Select one --</option>
+        @foreach($events as $event)
+            <option value="{{ $event->id }}" @selected(old('event_id', $participant->event_id ?? '') == $event->id)>
+                {{ $event->title }}
+            </option>
+        @endforeach
+    </select>
+</div>
+    
+<div>
+    <label for="certificate_template_id" class="block text-sm font-medium text-gray-700">Select Certificate Template</label>
+    <select id="certificate_template_id" name="certificate_template_id" required 
+            class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-purple-500 focus:ring-purple-500">
+        <option value="">-- Choose Template --</option>
+        @foreach($templates as $template)
+            <option value="{{ $template->id }}" 
+                {{ (old('certificate_template_id', $participant->certificate_template_id ?? '') == $template->id) ? 'selected' : '' }}>
+                {{ $template->template_name }}
+            </option>
+        @endforeach
+    </select>
+    <!-- <p class="text-xs text-gray-500 mt-1">E-Sertifikat akan digenerate menggunakan template ini.</p> -->
 </div>
 
 {{-- Baris 3: Purpose, Type, Category --}}

@@ -64,7 +64,7 @@
         <label for="is_featured">Make it Featured</label>
     </div>
 </div>
-<div>
+<!-- <div>
     <label for="certificate_template_id" class="block text-sm font-medium text-gray-700">Select Certificate Template (Optional)</label>
     <select id="certificate_template_id" name="certificate_template_id" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
         <option value="">-- None / Default --</option>
@@ -74,4 +74,4 @@
             </option>
         @endforeach
     </select>
-</div>
+</div> -->

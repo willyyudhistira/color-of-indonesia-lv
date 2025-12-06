@@ -9,6 +9,7 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Mail;
+use App\Models\CertificateTemplate;
 use App\Mail\CertificateNotification;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\ParticipantsImport;
@@ -16,40 +17,51 @@ use App\Imports\ParticipantsImport;
 
 class ParticipantController extends Controller
 {
-    public function index(Request $request) // <-- Tambahkan Request $request
-    {
-        // Memulai query dasar untuk peserta dengan relasi event
-        $query = Participant::with('event')->latest();
+    public function index(Request $request)
+{
+    // 1. Eager load 'event' dan 'certificateTemplate'
+    $query = Participant::with(['event', 'certificateTemplate'])->latest();
 
-        // 1. Terapkan filter berdasarkan Event jika ada
-        if ($request->filled('event_id')) {
-            $query->where('event_id', $request->event_id);
-        }
-
-        // 2. Terapkan filter pencarian (search) jika ada
-        if ($request->filled('search')) {
-            $searchTerm = '%' . $request->search . '%';
-            $query->where(function ($q) use ($searchTerm) {
-                $q->where('name', 'like', $searchTerm)
-                    ->orWhere('email', 'like', $searchTerm)
-                    ->orWhere('certificate_number', 'like', $searchTerm);
-            });
-        }
-
-        // Eksekusi query dengan paginasi
-        $participants = $query->paginate(15)->withQueryString();
-
-        // Ambil data events untuk dropdown filter
-        $events = Event::where('is_published', true)->orderBy('title')->get();
-
-        // Kirim data ke view
-        return view('admin.participants.index', compact('participants', 'events'));
+    // 2. Filter Event (Sudah ada)
+    if ($request->filled('event_id')) {
+        $query->where('event_id', $request->event_id);
     }
+
+    // 3. Filter Template (BARU)
+    if ($request->filled('certificate_template_id')) {
+        $query->where('certificate_template_id', $request->certificate_template_id);
+    }
+
+    // 4. Search Logic (Sudah ada)
+    if ($request->filled('search')) {
+        $searchTerm = '%' . $request->search . '%';
+        $query->where(function ($q) use ($searchTerm) {
+            $q->where('name', 'like', $searchTerm)
+                ->orWhere('email', 'like', $searchTerm)
+                ->orWhere('certificate_number', 'like', $searchTerm);
+        });
+    }
+
+    $participants = $query->paginate(15)->withQueryString();
+    
+    // Ambil data untuk dropdown
+    $events = Event::where('is_published', true)->orderBy('title')->get();
+    
+    // Ambil data templates untuk dropdown (BARU)
+    $templates = CertificateTemplate::orderBy('template_name')->get(); 
+
+    // Jangan lupa kirim 'templates' ke view
+    return view('admin.participants.index', compact('participants', 'events', 'templates'));
+}
 
     public function create()
     {
         $events = Event::where('is_published', true)->orderBy('title')->get();
-        return view('admin.participants.create', compact('events'));
+        
+        // Ambil data template untuk dropdown
+        $templates = CertificateTemplate::orderBy('template_name')->get(); 
+
+        return view('admin.participants.create', compact('events', 'templates'));
     }
 
     public function store(Request $request)
@@ -59,6 +71,7 @@ class ParticipantController extends Controller
             'email' => 'required|email',
             'phone_number' => 'nullable|string|max:20',
             'event_id' => 'required|exists:event_scheduled,id',
+            'certificate_template_id' => 'required|exists:certificate_templates,id', // Validasi baru
             'purpose' => 'nullable|string',
             'type' => 'nullable|string',
             'category' => 'nullable|string',
@@ -66,46 +79,44 @@ class ParticipantController extends Controller
             'group' => 'nullable|string',
         ]);
 
-        // Generate nomor sertifikat unik
+        // Generate nomor sertifikat
         $validated['certificate_number'] = 'COI-' . $validated['event_id'] . '-' . strtoupper(Str::random(8));
 
-        $participant = Participant::create($validated);
+        Participant::create($validated);
 
-        // Kirim email notifikasi ke peserta
-        // Mail::to($participant->email)->send(new CertificateNotification($participant));
-
-        return redirect()->route('admin.participants.index')->with('success', 'Participant has been successfully added and an email notification has been sent.');
+        return redirect()->route('admin.participants.index')->with('success', 'Participant added successfully with linked certificate.');
     }
 
     public function import(Request $request)
     {
         $request->validate([
             'event_id' => 'required|exists:event_scheduled,id',
+            'certificate_template_id' => 'required|exists:certificate_templates,id', // Harus pilih template saat import
             'excel_file' => 'required|mimes:xlsx,csv'
         ]);
 
-        Excel::import(new ParticipantsImport($request->event_id), $request->file('excel_file'));
+        // Kirim event_id DAN template_id ke Class Import
+        Excel::import(new ParticipantsImport($request->event_id, $request->certificate_template_id), $request->file('excel_file'));
 
-        return redirect()->route('admin.participants.index')->with('success', 'Participant data has been successfully imported.');
+        return redirect()->route('admin.participants.index')->with('success', 'Participants imported successfully.');
     }
 
     public function downloadCertificate(Participant $participant)
     {
-        // Memuat relasi event dan template sertifikatnya
-        $participant->load('event.certificateTemplate');
+        // Load relasi template LANGSUNG dari participant, bukan via event lagi
+        $participant->load(['event', 'certificateTemplate']);
 
-        // Cek jika peserta tidak ada ATAU event-nya tidak memiliki template
-        if (!$participant->event || !$participant->event->certificateTemplate) {
-            return redirect()->back()->with('error', 'The certificate template for this event has not been set. Unable to download.');
+        // Cek apakah participant memiliki template
+        if (!$participant->certificateTemplate) {
+            return redirect()->back()->with('error', 'No certificate template linked to this participant.');
         }
 
-        // Render PDF menggunakan view 'certificate.template'
+        // Render PDF
         $pdf = Pdf::loadView('certificate.template', [
             'participant' => $participant,
-            'is_preview' => false // Penting agar DomPDF menggunakan path file lokal
+            'is_preview' => false
         ])->setPaper('a4', 'landscape');
 
-        // Buat nama file yang akan diunduh
         $fileName = 'sertifikat-' . Str::slug($participant->name) . '.pdf';
 
         return $pdf->download($fileName);
@@ -119,9 +130,10 @@ class ParticipantController extends Controller
 
     public function edit(Participant $participant)
     {
-        // Ambil data semua event untuk ditampilkan di dropdown
         $events = Event::where('is_published', true)->orderBy('title')->get();
-        return view('admin.participants.edit', compact('participant', 'events'));
+        $templates = CertificateTemplate::orderBy('template_name')->get(); // Ambil template
+
+        return view('admin.participants.edit', compact('participant', 'events', 'templates'));
     }
 
     /**
@@ -134,27 +146,26 @@ class ParticipantController extends Controller
             'email' => 'required|email',
             'phone_number' => 'nullable|string|max:20',
             'event_id' => 'required|exists:event_scheduled,id',
+            'certificate_template_id' => 'required|exists:certificate_templates,id', // Validasi baru
             'purpose' => 'nullable|string',
             'type' => 'nullable|string',
             'category' => 'nullable|string',
             'subcategory' => 'nullable|string',
             'group' => 'nullable|string',
-            // Kita tidak memvalidasi certificate_number karena tidak diubah di sini
         ]);
 
         $participant->update($validated);
 
-        return redirect()->route('admin.participants.index')->with('success', 'Participant data has been successfully updated.');
+        return redirect()->route('admin.participants.index')->with('success', 'Participant updated successfully.');
     }
 
     public function printCertificate(Participant $participant)
     {
-        // Cek jika event atau template tidak ada (sama seperti fungsi download)
-        if (!$participant->event || !$participant->event->certificateTemplate) {
-            return redirect()->back()->with('error', 'The certificate template for this event has not been set. Unable to print.');
+         // Cek template langsung di participant
+        if (!$participant->certificateTemplate) {
+            return redirect()->back()->with('error', 'No certificate template linked to this participant.');
         }
 
-        // Tampilkan view khusus untuk print
         return view('admin.participants.print', compact('participant'));
     }
 

@@ -1,6 +1,6 @@
 @php
     // Ambil data template dari relasi event yang terhubung dengan peserta
-    $template = $participant->event->certificateTemplate ?? null;
+    $template = $participant->certificateTemplate ?? null;
 
     // Lokasi background — jika preview gunakan asset(); jika live (PDF) gunakan public_path()
     function image_to_base64($path)
